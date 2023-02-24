@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,500;1,600&display=swap');
+
+:root{
+    --main-color: white;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+.model{
+    display: none;
+    visibility: hidden;
+}
+body{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(255, 255, 255);;
+}
+
+/* MENU */
+
+.header{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.topics{
+    display: flex;
+    flex-direction: column;
+}
+
+.topics > span{
+    padding: 10px;
+}
+.items{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+hr{
+    border: 1px solid black;
+}
+
+.title > img{
+    width: 12vw;
+}
+/* FIM MENU */
+
+/* OVERVIEW */
+.container_vision{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.title_container_vision{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+.title_container_vision > span{
+    font-size: 23px;
+    color: rgb(87, 48, 4)
+}
+
+.container_geral{
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.container_geral > div{
+    padding: 10px;
+    margin: 2%;
+    width: 13vw;
+    height: 10vh;
+    display: flex;
+    border-radius: 2px;
+    background-color: rgb(255, 255, 255);
+    border:1px solid #C0C0C0;
+}
+.geral{
+    display: flex;
+    flex-direction: column;
+}
+
+.geral > p > i{
+    margin-left: 10px;
+    font-size: 20px;
+}
+.geral > p{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.geral > span{
+    font-size: 30px;
+}
+
+/* FIM DA OVERVIEW */
+
+/* TABELA */
+.table{
+    width: 98%;
+    border:1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding:10px;
+    margin: 1%;
+    background-color: white;
+}
+.table th {
+    border-bottom:1px solid #C0C0C0;
+    padding:10px;
+    overflow: auto;
+    font-weight: 400;
+
+}
+.table td {
+    text-align: center;
+    border-bottom:1px solid #C0C0C0;
+    padding:10px 5px;
+}
+
+th{
+    padding: 10px;
+}
+/* FIM DA TABELA */
+
+/* DISTRIBUINDO O TAMANHO DOS CONTAINERS NA TELA */
+
+header{
+    width: 15vw;
+}
+
+main{
+    background-color: rgb(204, 204, 204);
+    width: 37vw;
+    height: 90vh;
+}
+
+footer{
+    width: 37vw;
+}
+
+.last_container{
+    width: 11vw;
+}
+
+main, footer, .last_container{
+    margin-top: 2%;
+}
+
+/* CONTAINER COM AS INFORMAÇÕES */
+.infos{
+    box-shadow:  10px 10px 50px -4px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    margin: 10%;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    width: 80%;
+}
+
+.container_image > img{
+    width: 8vw;
+
+}
+.container_image{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.description{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.btn{
+    margin-top: 5%;
+
+}
+.done, .close{
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 1%;
+    width: 100%;
+}
+
+.done{
+    background-color: green;
+    color: white;
+}
+.close{
+    background-color: red;
+    color: white;
+}

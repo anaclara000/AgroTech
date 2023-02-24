@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>AgroTech | Home</title>
+</head>
+
+<body onload="carregar()">
+    <header>
+        <div class="header">
+            <div class="title items">
+                <img src="../../assets/logo.png" alt="">
+            </div>
+            <div class="topics items">
+                <span class="home">Home
+                    <hr>
+                </span>
+                <span>Manutenção</span>
+                <span>Frota</span>
+                <span>Operação</span>
+                <span>DashBoard</span>
+            </div>
+            <div class="user items">
+                <span>Sair <i class='bx bxs-log-out'></i></span>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="container_vision">
+            <div class="title_container_vision">
+                <span>Visão geral</span>
+                <p>Acompanhamento em tempo real das operações</p>
+            </div>
+            <div class="container_geral">
+                <div class="driver geral" onClick="abrirModalMotorista()">
+                    <p>Motorista <i class='bx bxs-user-circle'></i></p>
+                    <span>3</span>
+                </div>
+                <div class="maintenance geral" onclick="abrirModalManutencao()">
+                    <p>Manutenção <i class='bx bxs-car-mechanic'></i></p>
+                    <span>6</span>
+                </div>
+                <div class="operation geral" onclick="abrirModalOperacao()">
+                    <p>Operação <i class='bx bxs-truck'></i></p>
+                    <span>6</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="driver_list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNH</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody_list">
+                    <tr class="list model">
+                        <td id="nome">José</td>
+                        <td id="CNH">764905</td>
+                        <td id="status">BVS-6547</td>
+                        <td><i class='bx bxs-show'></i></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="manitence_list model">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data Inicio</th>
+                        <th>Data Fim</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody_list_manitence">
+                    <tr class="list_manitence model">
+                        <td id="dataI"></td>
+                        <td id="dataF"></td>
+                        <td id="valor"></td>
+                        <td><i class='bx bxs-show'></i></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="operation_list model">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Motorista</th>
+                        <th>Data Inicio</th>
+                        <th>Data Fim</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody_list_operation">
+                    <tr class="list_operation model">
+                        <td id="idMotorista"></td>
+                        <td id="dataInicio"></td>
+                        <td id="dataFim"></td>
+                        <td><i class='bx bxs-show'></i></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="infos">
+            <span>Viagem de: Carga</span>
+            <div class="container_image">
+                <div class="description">
+                    <span>Data de inicio da operação: 12-02-2023</span>
+                    <span>Descrição: Levando trigo em Sorocaba </span>
+                    <div class="btn">
+                        <button class="done">Finalizar operação</button>
+                        <button class="close">Fechar</button>
+                    </div>
+                   
+                </div>
+
+                <img src="../../assets/caminhao.png" alt="">
+            </div>
+           
+        </div>
+    </footer>
+
+    <div class="last_container">
+        <span>aa</span>
+
+    </div>
+
+
+</body>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="script.js"></script>
+
+</html>
