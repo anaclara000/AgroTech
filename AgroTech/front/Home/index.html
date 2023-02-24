@@ -11,141 +11,177 @@
 </head>
 
 <body onload="carregar()">
-    <header>
-        <div class="header">
-            <div class="title items">
-                <img src="../../assets/logo.png" alt="">
-            </div>
-            <div class="topics items">
-                <span class="home">Home
-                    <hr>
-                </span>
-                <span>Manutenção</span>
-                <span>Frota</span>
-                <span>Operação</span>
-                <span>DashBoard</span>
-            </div>
-            <div class="user items">
-                <span>Sair <i class='bx bxs-log-out'></i></span>
-
-            </div>
-        </div>
-    </header>
-
-    <main>
-
-        <div class="container_vision">
-            <div class="title_container_vision">
-                <span>Visão geral</span>
-                <p>Acompanhamento em tempo real das operações</p>
-            </div>
-            <div class="container_geral">
-                <div class="driver geral" onClick="abrirModalMotorista()">
-                    <p>Motorista <i class='bx bxs-user-circle'></i></p>
-                    <span>3</span>
+        <div class="general_container">
+            <header>
+                <div class="header">
+                    <div class="title items">
+                        <span>AgroTech</span>
+                    </div>
+                    <div class="topics items">
+                        <span class="home">Home</span>
+                        <span>Manutenção</span>
+                        <span>Frota</span>
+                        <span>Operação</span>
+                        <span>DashBoard</span>
+                    </div>
+                    <div class="logOut items">
+                        <i class='bx bxs-log-out-circle'></i><span>Sair </span>
+                    </div>
                 </div>
-                <div class="maintenance geral" onclick="abrirModalManutencao()">
-                    <p>Manutenção <i class='bx bxs-car-mechanic'></i></p>
-                    <span>6</span>
+            </header>
+        
+            <main>
+        
+                <div class="container_vision">
+                    <div class="title_container_vision">
+                        <span>Visão geral</span>
+                        <p>Acompanhamento em tempo real das operações</p>
+                    </div>
+                    <div class="container_geral">
+                        <div class="driver geral" onClick="abrirModalMotorista()">
+                            <p>Motorista <i class='bx bxs-user-circle'></i></p>
+                            <span>3</span>
+                        </div>
+                        <div class="maintenance geral" onclick="abrirModalManutencao()">
+                            <p>Manutenção <i class='bx bxs-car-mechanic'></i></p>
+                            <span>6</span>
+                        </div>
+                        <div class="operation geral" onclick="abrirModalOperacao()">
+                            <p>Operação <i class='bx bxs-truck'></i></p>
+                            <span>6</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="operation geral" onclick="abrirModalOperacao()">
-                    <p>Operação <i class='bx bxs-truck'></i></p>
-                    <span>6</span>
+        
+                <div class="driver_list">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CNH</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody_list">
+                            <tr class="list model">
+                                <td id="nome">José</td>
+                                <td id="CNH">764905</td>
+                                <td id="status">BVS-6547</td>
+                                <td><i class='bx bxs-show'></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+        
                 </div>
-            </div>
-        </div>
-
-        <div class="driver_list">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CNH</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody_list">
-                    <tr class="list model">
-                        <td id="nome">José</td>
-                        <td id="CNH">764905</td>
-                        <td id="status">BVS-6547</td>
-                        <td><i class='bx bxs-show'></i></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-        <div class="manitence_list model">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Data Inicio</th>
-                        <th>Data Fim</th>
-                        <th>Valor</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody_list_manitence">
-                    <tr class="list_manitence model">
-                        <td id="dataI"></td>
-                        <td id="dataF"></td>
-                        <td id="valor"></td>
-                        <td><i class='bx bxs-show'></i></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-        <div class="operation_list model">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Motorista</th>
-                        <th>Data Inicio</th>
-                        <th>Data Fim</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody_list_operation">
-                    <tr class="list_operation model">
-                        <td id="idMotorista"></td>
-                        <td id="dataInicio"></td>
-                        <td id="dataFim"></td>
-                        <td><i class='bx bxs-show'></i></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-    </main>
-
-    <footer>
-        <div class="infos">
-            <span>Viagem de: Carga</span>
-            <div class="container_image">
-                <div class="description">
-                    <span>Data de inicio da operação: 12-02-2023</span>
-                    <span>Descrição: Levando trigo em Sorocaba </span>
-                    <div class="btn">
-                        <button class="done">Finalizar operação</button>
-                        <button class="close">Fechar</button>
+        
+                <div class="manitence_list model">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Data Inicio</th>
+                                <th>Data Fim</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody_list_manitence">
+                            <tr class="list_manitence model">
+                                <td id="dataI"></td>
+                                <td id="dataF"></td>
+                                <td id="valor"></td>
+                                <td><i class='bx bxs-show'></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+        
+                </div>
+        
+                <div class="operation_list model">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Motorista</th>
+                                <th>Data Inicio</th>
+                                <th>Data Fim</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody_list_operation">
+                            <tr class="list_operation model">
+                                <td id="idMotorista"></td>
+                                <td id="dataInicio"></td>
+                                <td id="dataFim"></td>
+                                <td><i class='bx bxs-show'></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+        
+                </div>
+            </main>
+        
+            <footer>
+                <div class="infos">
+                    
+                    <div class="container_image">
+                        <div class="description">
+                            <span>Motorista: José</span>
+                            <span>Viagem de: Carga</span>
+                            <span>Placa do Veiculo: OEW-7843</span>
+                            <span>Data de inicio: 12-02-2023</span>
+                            <span>Descrição: Levando trigo em Sorocaba </span>
+                            <div class="btn">
+                                <button class="done">Finalizar operação</button>
+                                <button class="close">Fechar</button>
+                            </div>
+                           
+                        </div>
+        
+                        <img src="../../assets/caminhao.png" alt="">
                     </div>
                    
                 </div>
-
-                <img src="../../assets/caminhao.png" alt="">
+                <div class="infosManitence">
+                    <span></span>
+                    <div class="container_image_manitence">
+                        <div class="description_manitence">
+                            <span>Veiculo de: Carga</span>
+                            <span>Placa: VHS-6712</span>
+                            <span>Data de inicio: 12-02-2023</span>
+                            <span>Descrição: Vidro Quebrado </span>
+                            
+                            <div class="btn">
+                                <button class="done">Finalizar manutenção</button>
+                                <button class="close">Fechar</button>
+                            </div>
+                           
+                        </div>
+        
+                        <img src="../../assets/manutencao.png" alt="">
+                    </div>
+                   
+                </div>
+            </footer>
+        
+            <div class="last_container">
+                <div class="items_last">
+                    <div class="user">
+                        <i class='bx bxs-user-circle'></i>
+                        <span>Ana, bem vindo de volta!</span>
+                    </div>
+                </div>
+                <div class="subtitle">
+                    <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
+                </div>
+               
+                <div>
+                    <i class='bx bxs-plus-circle' ></i>
+                </div>
             </div>
-           
         </div>
-    </footer>
-
-    <div class="last_container">
-        <span>aa</span>
-
-    </div>
+ 
+    
+    
 
 
 </body>
