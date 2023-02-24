@@ -67,6 +67,7 @@ body{
    background-color: #da9732;
    border-radius: 0px 30px 30px 0px;
    color: white;
+
 }
 
 .logOut{
@@ -75,6 +76,10 @@ body{
     font-size: 18px;
     align-items: center;
 }
+
+
+
+
 /* FIM MENU */
 
 /* OVERVIEW */
@@ -117,6 +122,7 @@ body{
 .geral{
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .geral > p > i{
