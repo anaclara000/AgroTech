@@ -1,27 +1,27 @@
-function carregar(){
+function carregar() {
     const options = { method: 'GET' };
     fetch('http://localhost:3000/Motorista', options)
-    .then(response => response.json())
-    .then(resp => {
-        motorista = resp;
-        listarMotorista();
-    });
+        .then(response => response.json())
+        .then(resp => {
+            motorista = resp;
+            listarMotorista();
+        });
 
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Manutencao', options2)
-    .then(response => response.json())
-    .then(resp => {
-        manutencao = resp;
-        listarManutencao();
-    });
+        .then(response => response.json())
+        .then(resp => {
+            manutencao = resp;
+            listarManutencao();
+        });
 
     const options3 = { method: 'GET' };
     fetch('http://localhost:3000/Operacao', options3)
-    .then(response => response.json())
-    .then(resp => {
-        operacao = resp;
-        listarOperacao();
-    });
+        .then(response => response.json())
+        .then(resp => {
+            operacao = resp;
+            listarOperacao();
+        });
 
 }
 
@@ -38,31 +38,58 @@ var motorista = []
 
 function listarMotorista() {
     motorista.forEach(info => {
-        if(info.disponivel == "Indisponível"){
+        if (info.disponivel == "Indisponível") {
             var lista = list.cloneNode(true);
             lista.classList.remove('model')
+            lista.querySelector("#id").innerHTML = info.id;
             lista.querySelector("#nome").innerHTML = info.nome;
             lista.querySelector("#CNH").innerHTML = info.CNH;
             lista.querySelector("#status").innerHTML = info.disponivel;
             tbody.appendChild(lista)
         }
-       
+
     })
 }
 var modalManutencao = document.querySelector(".manitence_list");
 var modalMotorista = document.querySelector(".driver_list");
 var modalOperacao = document.querySelector(".operation_list");
 
-function abrirModalMotorista(){
+function abrirModalMotorista() {
     modalMotorista.classList.remove("model");
     modalManutencao.classList.add("model");
     modalOperacao.classList.add("model");
 }
 
 
-function exibirInfoMotorista(){
+function exibirInfoMotorista(e) {
+    var idMotorista = e.parentNode.parentNode.querySelector('#id').innerHTML
+    console.log(idMotorista)
     
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/Motorista/idUm/' + idMotorista, options)
+        .then(response => response.json())
+        .then(resp => {
+            data = resp.operacao;
+            data.forEach(r => {
+                var info = document.querySelector(".description").cloneNode(true)
+                info.classList.remove("model");
+                info.querySelector(".descricaoOp").innerHTML = r.descricao;
+                console.log(r.descricao)
+
+                document.querySelector(".container_image").appendChild(info)
+
+            })
+        })
+
+        var teste = document.querySelector(".a")
+        teste.classList.add("model")
+
 }
+
+
+
 // FIM DOS MOTORISTAS
 
 
@@ -79,21 +106,21 @@ var manutencao = []
 
 function listarManutencao() {
     manutencao.forEach(info => {
-        if(info.data_fim == null){
+        if (info.data_fim == null) {
             var lista = listManutencao.cloneNode(true);
             lista.classList.remove('model')
-            lista.querySelector("#dataI").innerHTML = info.data_inicio.slice(0,10);
-            if(info.data_fim != null){
-                lista.querySelector("#dataF").innerHTML = info.data_fim.slice(0,10);
-               
-            } else if(info.data_fim == null){
+            lista.querySelector("#dataI").innerHTML = info.data_inicio.slice(0, 10);
+            if (info.data_fim != null) {
+                lista.querySelector("#dataF").innerHTML = info.data_fim.slice(0, 10);
+
+            } else if (info.data_fim == null) {
                 lista.querySelector("#dataF").innerHTML = "Em manutenção";
-             }
-            
+            }
+
             lista.querySelector("#valor").innerHTML = "R$" + info.valor;
             tbodyManutencao.appendChild(lista)
         }
-        
+
     })
 }
 
@@ -101,7 +128,7 @@ var modalManutencao = document.querySelector(".manitence_list");
 var modalMotorista = document.querySelector(".driver_list");
 var modalOperacao = document.querySelector(".operation_list");
 
-function abrirModalManutencao(){
+function abrirModalManutencao() {
     modalManutencao.classList.remove("model");
     modalMotorista.classList.add("model");
     modalOperacao.classList.add("model");
@@ -127,26 +154,26 @@ var operacao = []
 
 
 function listarOperacao() {
-    
+
     operacao.forEach(info => {
-        if(info.dataFim == null){
+        if (info.dataFim == null) {
             var lista = listOperacao.cloneNode(true);
             lista.classList.remove('model')
             lista.querySelector("#idMotorista").innerHTML = info.id_Motorista;
-            lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0,10);
-    
-            if(info.dataFim != null){
-                lista.querySelector("#dataFim").innerHTML = info.dataFim.slice(0,10);
-               
-            } else if(info.dataFim == null){
-                lista.querySelector("#dataFim").innerHTML = "Em operação";
-             }
-             tbodyOperacao.appendChild(lista)
-        }
-       
+            lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
 
-        
-        
+            if (info.dataFim != null) {
+                lista.querySelector("#dataFim").innerHTML = info.dataFim.slice(0, 10);
+
+            } else if (info.dataFim == null) {
+                lista.querySelector("#dataFim").innerHTML = "Em operação";
+            }
+            tbodyOperacao.appendChild(lista)
+        }
+
+
+
+
     })
 }
 
@@ -154,11 +181,11 @@ var modalManutencao = document.querySelector(".manitence_list");
 var modalMotorista = document.querySelector(".driver_list");
 var modalOperacao = document.querySelector(".operation_list");
 
-function abrirModalOperacao(){
+function abrirModalOperacao() {
     modalManutencao.classList.add("model");
     modalMotorista.classList.add("model");
     modalOperacao.classList.remove("model");
-    
+
 }
 
 // FIM DA OPERACAO

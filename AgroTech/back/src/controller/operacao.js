@@ -15,7 +15,7 @@ const createItems = async (req, res) => {
         data: [
             {
                 id_Motorista: 1, 
-                idVeiculo: 1,
+                idVeiculo: 2,
                 descricao: "Levando trigo em Sorocaba",  
             },
             {
@@ -26,7 +26,7 @@ const createItems = async (req, res) => {
             },
             {
                 id_Motorista: 3, 
-                idVeiculo: 2,
+                idVeiculo: 3,
                 descricao: "Levando milho em Jundiaí",  
             },
 

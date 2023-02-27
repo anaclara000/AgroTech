@@ -11,6 +11,15 @@
     font-family: 'Poppins';
 }
 
+#id{
+    display:none;
+    visibility: hidden;
+}
+
+.btnteste{
+    display:none;
+    visibility: hidden;
+}
 .model{
     display: none;
     visibility: hidden;
@@ -18,7 +27,7 @@
 
 .general_container{
     border-radius: 15px;
-    margin-top: 1.5%;
+    margin-top: 2.5%;
     height: 95vh;
     width: 90%;
     background-color: white;
@@ -33,6 +42,7 @@ body{
     background-image: url("../../assets/fundo.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 /* MENU */

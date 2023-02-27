@@ -65,10 +65,11 @@
                         </thead>
                         <tbody class="tbody_list">
                             <tr class="list model">
+                                <td id="id"></td>
                                 <td id="nome">José</td>
                                 <td id="CNH">764905</td>
                                 <td id="status">BVS-6547</td>
-                                <td><i class='bx bxs-show'></i></td>
+                                <td><i class='bx bxs-show' id="btnDriver" onClick="exibirInfoMotorista(this)"></i></td>
                             </tr>
                         </tbody>
                     </table>
@@ -125,11 +126,11 @@
                     
                     <div class="container_image">
                         <div class="description">
-                            <span>Motorista: José</span>
+                            <span class="nomeMotorista"></span>
                             <span>Viagem de: Carga</span>
                             <span>Placa do Veiculo: OEW-7843</span>
                             <span>Data de inicio: 12-02-2023</span>
-                            <span>Descrição: Levando trigo em Sorocaba </span>
+                            <span class="descricaoOp"></span>
                             <div class="btn">
                                 <button class="done">Finalizar operação</button>
                                 <button class="close">Fechar</button>
@@ -170,9 +171,9 @@
                         <span>Ana, bem vindo de volta!</span>
                     </div>
                 </div>
-                <div class="subtitle">
+                <!-- <div class="subtitle">
                     <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
-                </div>
+                </div> -->
                
                 <div>
                     <i class='bx bxs-plus-circle' ></i>

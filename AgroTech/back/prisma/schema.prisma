@@ -55,6 +55,5 @@ model Operacao{
   motorista Motorista @relation(fields: [id_Motorista], references: [id])
   idVeiculo Int
   veiculos Veiculos @relation(fields: [idVeiculo], references: [id])
-  tipoVeiculo String
   descricao String
 }
