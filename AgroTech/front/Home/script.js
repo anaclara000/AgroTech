@@ -26,10 +26,6 @@ function carregar() {
 }
 
 
-
-
-
-
 //LISTAR MOTORISTAS E VISUALIZAR
 const list = document.querySelector(".list");
 const tbody = document.querySelector(".tbody_list");
@@ -62,9 +58,10 @@ function abrirModalMotorista() {
 
 
 function exibirInfoMotorista(e) {
+    var veiculo = []
     var idMotorista = e.parentNode.parentNode.querySelector('#id').innerHTML
-    console.log(idMotorista)
-    
+    var nomeMotorista = e.parentNode.parentNode.querySelector("#nome").innerHTML
+
 
     const options = { method: 'GET' };
 
@@ -73,26 +70,90 @@ function exibirInfoMotorista(e) {
         .then(resp => {
             data = resp.operacao;
             data.forEach(r => {
-                var info = document.querySelector(".description").cloneNode(true)
-                info.classList.remove("model");
-                info.querySelector(".descricaoOp").innerHTML = r.descricao;
-                console.log(r.descricao)
+                var info = document.querySelector(".select_info")
+                var model = document.querySelector(".btn")
+                model.classList.remove("model")
+                info.classList.add("model")
+                document.querySelector('#idOperacao').innerHTML = r.id
+                console.log(r.id)
+                document.querySelector('.nameDriver').innerHTML = "Motorista: " + nomeMotorista
+                document.querySelector('.descricaoOp').innerHTML = "Descrição: " + r.descricao;
+                document.querySelector('.data').innerHTML = "Data: " + r.dataInicio.slice(0, 10)
 
-                document.querySelector(".container_image").appendChild(info)
+                const options2 = { method: 'GET' };
+
+                fetch('http://localhost:3000/Veiculos/idUm/' + r.idVeiculo, options2)
+                    .then(response => response.json())
+                    .then(response => {
+                        if (response.tipo == "Carga") {
+                            document.querySelector('.caminhaoImage').src = "../../assets/caminhao.png"
+                            document.querySelector('.caminhaoImage').style.width = "8vw"
+                        } else if (response.tipo == "Visita") {
+                            document.querySelector('.caminhaoImage').src = "../../assets/caminhonete.png"
+                            document.querySelector('.caminhaoImage').style.width = "6vw"
+                        } else {
+                            document.querySelector('.caminhaoImage').src = "../../assets/venda.png"
+                        }
+
+
+                        document.querySelector('.tipo').innerHTML = "Veiculo de: " + response.tipo
+                        document.querySelector('.placa').innerHTML = "Placa: " + response.placa
+
+                    })
+
+
 
             })
         })
 
-        var teste = document.querySelector(".a")
-        teste.classList.add("model")
+
+}
+
+function finalizar(e) {
+
+    var id = e.parentNode.parentNode.parentNode.parentNode.querySelector('#idOperacao').innerHTML
+    console.log(id)
+    const event = new Date();
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/Operacao/idUm/' + id, options)
+        .then(response => response.json())
+        .then(resp => {
+
+            let data = JSON.stringify({
+                "dataInicio": resp.dataInicio,
+                "dataFim": event.toISOString(),
+                "id_Motorista": resp.id_Motorista,
+                "idVeiculo": resp.idVeiculo,
+                "descricao": resp.descricao,
+            }) 
+
+            console.log(data)
+              
+        fetch('http://localhost:3000/Operacao/idUp/' + id, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": data
+        })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp.status === 200) {
+                    alert("sucesso")
+                }
+            })
+        })
+
+
+
+
 
 }
 
 
-
 // FIM DOS MOTORISTAS
-
-
 
 
 
@@ -109,6 +170,7 @@ function listarManutencao() {
         if (info.data_fim == null) {
             var lista = listManutencao.cloneNode(true);
             lista.classList.remove('model')
+            lista.querySelector('#id').innerHTML = info.id
             lista.querySelector("#dataI").innerHTML = info.data_inicio.slice(0, 10);
             if (info.data_fim != null) {
                 lista.querySelector("#dataF").innerHTML = info.data_fim.slice(0, 10);
@@ -120,6 +182,7 @@ function listarManutencao() {
             lista.querySelector("#valor").innerHTML = "R$" + info.valor;
             tbodyManutencao.appendChild(lista)
         }
+
 
     })
 }
@@ -133,14 +196,39 @@ function abrirModalManutencao() {
     modalMotorista.classList.add("model");
     modalOperacao.classList.add("model");
 }
+
+function exibirInfoManutencao(e) {
+    var idManutencao = e.parentNode.parentNode.querySelector("#id").innerHTML;
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/Manutencao/idUm/' + idManutencao, options)
+        .then(response => response.json())
+        .then(response => {
+            var btn = document.querySelector(".btn_manitence")
+            var info = document.querySelector(".select_info_manitence")
+            info.classList.add('model')
+            btn.classList.remove('model')
+            document.querySelector(".data_manitence").innerHTML = "Data: " + response.data_inicio.slice(0, 10);
+            document.querySelector(".descManitance").innerHTML = "Descrição: " + response.descricao;
+            document.querySelector('.image_manitence').src = "../../assets/manutencao.png"
+            document.querySelector('.image_manitence').style.width = "9vw"
+            const options2 = { method: 'GET' };
+
+            fetch('http://localhost:3000/Veiculos/idUm/' + response.id_Veiculo, options2)
+                .then(response => response.json())
+                .then(resp => {
+                    document.querySelector(".tipo_manitence").innerHTML = "Veiculo de: " + resp.tipo;
+                    document.querySelector(".placa_manitence").innerHTML = "Placa: " + resp.placa;
+                })
+
+
+        })
+
+
+
+}
 // FIM DA MANUTENCAO
-
-
-
-
-
-
-
 
 
 
@@ -159,7 +247,8 @@ function listarOperacao() {
         if (info.dataFim == null) {
             var lista = listOperacao.cloneNode(true);
             lista.classList.remove('model')
-            lista.querySelector("#idMotorista").innerHTML = info.id_Motorista;
+
+            lista.querySelector("#id").innerHTML = info.id_Motorista
             lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
 
             if (info.dataFim != null) {
@@ -170,6 +259,14 @@ function listarOperacao() {
             }
             tbodyOperacao.appendChild(lista)
         }
+
+        const options = { method: 'GET' };
+
+        fetch('http://localhost:3000/Motorista/idUm/' + info.id_Motorista, options)
+            .then(response => response.json())
+            .then(response => {
+                lista.querySelector("#idMotorista").innerHTML = response.nome;
+            })
 
 
 
@@ -185,6 +282,56 @@ function abrirModalOperacao() {
     modalManutencao.classList.add("model");
     modalMotorista.classList.add("model");
     modalOperacao.classList.remove("model");
+
+}
+
+function exibirInfoOperacao(e) {
+    var id_Motorista = e.parentNode.parentNode.querySelector('#id').innerHTML
+    var nomeMotorista = e.parentNode.parentNode.querySelector("#idMotorista").innerHTML
+
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/Motorista/idUm/' + id_Motorista, options)
+        .then(response => response.json())
+        .then(resp => {
+            data = resp.operacao;
+            data.forEach(r => {
+                var info = document.querySelector(".select_info")
+                var model = document.querySelector(".btn")
+                model.classList.remove("model")
+                info.classList.add("model")
+                document.querySelector
+                document.querySelector('.nameDriver').innerHTML = "Motorista: " + nomeMotorista
+                document.querySelector('.descricaoOp').innerHTML = "Descrição: " + r.descricao;
+                document.querySelector('.data').innerHTML = "Data: " + r.dataInicio.slice(0, 10)
+
+                const options2 = { method: 'GET' };
+
+                fetch('http://localhost:3000/Veiculos/idUm/' + r.idVeiculo, options2)
+                    .then(response => response.json())
+                    .then(response => {
+                        if (response.tipo == "Carga") {
+                            document.querySelector('.caminhaoImage').src = "../../assets/caminhao.png"
+                            document.querySelector('.caminhaoImage').style.width = "8vw"
+                        } else if (response.tipo == "Visita") {
+                            document.querySelector('.caminhaoImage').src = "../../assets/caminhonete.png"
+                            document.querySelector('.caminhaoImage').style.width = "6vw"
+                        } else {
+                            document.querySelector('.caminhaoImage').src = "../../assets/venda.png"
+                        }
+
+
+                        document.querySelector('.tipo').innerHTML = "Veiculo de: " + response.tipo
+                        document.querySelector('.placa').innerHTML = "Placa: " + response.placa
+
+                    })
+
+
+
+            })
+        })
+
 
 }
 

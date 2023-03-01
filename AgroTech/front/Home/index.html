@@ -88,10 +88,11 @@
                         </thead>
                         <tbody class="tbody_list_manitence">
                             <tr class="list_manitence model">
+                                <td id="id"></td>
                                 <td id="dataI"></td>
                                 <td id="dataF"></td>
                                 <td id="valor"></td>
-                                <td><i class='bx bxs-show'></i></td>
+                                <td><i class='bx bxs-show' onclick="exibirInfoManutencao(this)"></i></td>
                             </tr>
                         </tbody>
                     </table>
@@ -110,10 +111,11 @@
                         </thead>
                         <tbody class="tbody_list_operation">
                             <tr class="list_operation model">
+                                <td id="id"></td>
                                 <td id="idMotorista"></td>
                                 <td id="dataInicio"></td>
                                 <td id="dataFim"></td>
-                                <td><i class='bx bxs-show'></i></td>
+                                <td><i class='bx bxs-show' onclick="exibirInfoOperacao(this)"></i></td>
                             </tr>
                         </tbody>
                     </table>
@@ -125,40 +127,42 @@
                 <div class="infos">
                     
                     <div class="container_image">
-                        <div class="description">
-                            <span class="nomeMotorista"></span>
-                            <span>Viagem de: Carga</span>
-                            <span>Placa do Veiculo: OEW-7843</span>
-                            <span>Data de inicio: 12-02-2023</span>
+                        <span class="select_info">Selecionar informações</span>
+                         <div class="description">
+                            <span id="idOperacao"></span>
+                            <span class="nameDriver"></span>
+                            <span class="tipo"></span>
+                            <span class="placa"></span>
+                            <span class="data"></span>
                             <span class="descricaoOp"></span>
-                            <div class="btn">
-                                <button class="done">Finalizar operação</button>
-                                <button class="close">Fechar</button>
+                            <div class="btn model">
+                                <button class="done" onClick="finalizar(this)">Finalizar operação</button>
                             </div>
                            
                         </div>
         
-                        <img src="../../assets/caminhao.png" alt="">
+                        <img class="caminhaoImage" src="" alt="">
+
+                       
                     </div>
                    
                 </div>
                 <div class="infosManitence">
-                    <span></span>
+                    <span class="select_info_manitence">Selecionar informações</span>
                     <div class="container_image_manitence">
                         <div class="description_manitence">
-                            <span>Veiculo de: Carga</span>
-                            <span>Placa: VHS-6712</span>
-                            <span>Data de inicio: 12-02-2023</span>
-                            <span>Descrição: Vidro Quebrado </span>
+                            <span class="tipo_manitence"></span>
+                            <span class="placa_manitence"></span>
+                            <span class="data_manitence"></span>
+                            <span class="descManitance"></span>
                             
-                            <div class="btn">
+                            <div class="btn_manitence model">
                                 <button class="done">Finalizar manutenção</button>
-                                <button class="close">Fechar</button>
                             </div>
-                           
+                            
                         </div>
         
-                        <img src="../../assets/manutencao.png" alt="">
+                        <img class="image_manitence" src="" alt="">
                     </div>
                    
                 </div>
