@@ -19,7 +19,6 @@ const createItems = async (req, res) => {
                 descricao: "Levando trigo em Sorocaba",  
             },
             {
-                dataFim: "2023-02-27T06:00:00.000Z",
                 id_Motorista: 2, 
                 idVeiculo: 4,
                 descricao: "Visita a empresa",  

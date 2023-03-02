@@ -26,7 +26,7 @@ const createItems = async (req, res) => {
             {
                 nome: "Luciano Hulk",
                 CNH: 08279424413,
-                disponivel: "Disponível",
+                disponivel: "Indisponível",
             },
 
         ],

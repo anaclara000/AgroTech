@@ -27,7 +27,7 @@
 
 .general_container{
     border-radius: 15px;
-    margin-top: 2.5%;
+    margin-top: 1.2%;
     height: 95vh;
     width: 90%;
     background-color: white;
@@ -206,6 +206,8 @@ main, footer, .last_container{
 }
 
 /* CONTAINER COM AS INFORMAÇÕES */
+
+
 .infos, .infosManitence{
     box-shadow:  10px 10px 50px -4px rgba(0,0,0,0.2);
     border-radius: 20px;
@@ -217,6 +219,7 @@ main, footer, .last_container{
     padding: 2%;
     width: 80%;
     background-color: white;
+    height: 34vh;
 }
 
 .container_image > img{
@@ -232,12 +235,14 @@ main, footer, .last_container{
 .description_manitence{
     margin-left: 1%;
 }
-.container_image, .container_image_manitence{
+ .container_image_manitence{
+
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: center;
+    text-align: center;
 }
 
 .description, .description_manitence{
@@ -247,22 +252,33 @@ main, footer, .last_container{
     text-align: center;
 }
 
-.btn{
-    margin-top: 5%;
-
+.description_manitence > span{
+    margin: 1%;
 }
-.done, .close{
-    border: none;
-    padding: 5px;
-    border-radius: 10px;
-    margin-top: 1%;
-    width: 100%;
+
+.description >span{
+    margin: 0.3%;
 }
 
 .done{
+    border: 2px solid #da9732;;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10%;
+    width: 100%;
+    background-color: white;
+    color: #da9732;
+    font-weight: bold;
+    font-size: 14px;
+    
+}
+
+.done:hover{
     background-color: #da9732;
     color: white;
+    cursor: pointer;
 }
+
 .close{
     background-color: red;
     color: white;
@@ -311,6 +327,13 @@ main, footer, .last_container{
     font-size: 25px;
     color: #da9732;
 }
+
+.bxs-hide{
+    font-size: 25px;
+}
+
+
 i{
     color: #da9732;
+    cursor: pointer;
 }

@@ -32,7 +32,7 @@ const createItems = async (req, res) => {
                 tipo: "Carga",
             },
             {
-                placa: "AJV-3745",
+                placa: "AHY-6798",
                 modelo: "Carro",
                 marca: "Honda",
                 tipo: "Visita",

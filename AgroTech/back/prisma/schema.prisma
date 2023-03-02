@@ -22,7 +22,7 @@ model Usuario{
 model Motorista{
   id Int @id @default (autoincrement())
   nome String
-  CNH Int @unique
+  CNH Int 
   disponivel String
   operacao Operacao[]
 }

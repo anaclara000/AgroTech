@@ -1,10 +1,11 @@
 function carregar() {
-    const options = { method: 'GET' };
-    fetch('http://localhost:3000/Motorista', options)
+   
+    const options1 = { method: 'GET' };
+    fetch('http://localhost:3000/Operacao', options1)
         .then(response => response.json())
         .then(resp => {
-            motorista = resp;
-            listarMotorista();
+            operacao = resp;
+            listarOperacao();
         });
 
     const options2 = { method: 'GET' };
@@ -15,26 +16,134 @@ function carregar() {
             listarManutencao();
         });
 
-    const options3 = { method: 'GET' };
-    fetch('http://localhost:3000/Operacao', options3)
-        .then(response => response.json())
-        .then(resp => {
-            operacao = resp;
-            listarOperacao();
-        });
+  
+
+        const options3 = { method: 'GET' };
+        fetch('http://localhost:3000/Motorista', options3)
+            .then(response => response.json())
+            .then(resp => {
+                motorista = resp;
+                listarMotorista();
+            });
 
 }
 
+// LISTAR OPERACAO E VISUALIZAR
+const listOperacao = document.querySelector(".list_operation");
+const tbodyOperacao = document.querySelector(".tbody_list_operation");
+var operacao = []
+
+var soma3 = 0
+function listarOperacao() {
+
+    operacao.forEach(info => {
+        if (info.dataFim == null) {
+            soma3 += 1
+            var lista = listOperacao.cloneNode(true);
+            lista.classList.remove('model')
+
+            lista.querySelector("#id").innerHTML = info.id_Motorista
+            lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
+
+            if (info.dataFim != null) {
+                lista.querySelector("#dataFim").innerHTML = info.dataFim.slice(0, 10);
+
+            } else if (info.dataFim == null) {
+                lista.querySelector("#dataFim").innerHTML = "Em operação";
+            }
+            tbodyOperacao.appendChild(lista)
+        }
+
+        const options = { method: 'GET' };
+
+        fetch('http://localhost:3000/Motorista/idUm/' + info.id_Motorista, options)
+            .then(response => response.json())
+            .then(response => {
+                lista.querySelector('#idMotorista').innerHTML = response.nome;
+            })
+
+
+            document.querySelector('#qtd_operation').innerHTML = soma3 + "/" + operacao.length
+
+    })
+}
+
+var modalManutencao = document.querySelector(".manitence_list");
+var modalMotorista = document.querySelector(".driver_list");
+var modalOperacao = document.querySelector(".operation_list");
+
+function abrirModalOperacao() {
+    modalManutencao.classList.add("model");
+    modalMotorista.classList.add("model");
+    modalOperacao.classList.remove("model");
+
+}
+
+function exibirInfoOperacao(e) {
+    var id_Motorista = e.parentNode.parentNode.querySelector('#id').innerHTML
+    var nomeMotorista = e.parentNode.parentNode.querySelector("#idMotorista").innerHTML
+
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/Motorista/idUm/' + id_Motorista, options)
+        .then(response => response.json())
+        .then(resp => {
+            data = resp.operacao;
+            data.forEach(r => {
+                var info = document.querySelector(".select_info")
+                var model = document.querySelector(".btn")
+                model.classList.remove("model")
+                info.classList.add("model")
+                document.querySelector('#idOperacao').innerHTML = r.id
+                document.querySelector('.nameDriver').innerHTML = "Motorista: " + nomeMotorista
+                document.querySelector('.descricaoOp').innerHTML = "Descrição: " + r.descricao;
+                document.querySelector('.data').innerHTML = "Data: " + r.dataInicio.slice(0, 10)
+
+                const options2 = { method: 'GET' };
+
+                fetch('http://localhost:3000/Veiculos/idUm/' + r.idVeiculo, options2)
+                    .then(response => response.json())
+                    .then(response => {
+                        if (response.tipo == "Carga") {
+                            document.querySelector('.caminhaoImage').src = "../../assets/caminhao.png"
+                            document.querySelector('.caminhaoImage').style.width = "8vw"
+                        } else if (response.tipo == "Visita") {
+                            document.querySelector('.caminhaoImage').src = "../../assets/caminhonete.png"
+                            document.querySelector('.caminhaoImage').style.width = "6vw"
+                        } else {
+                            document.querySelector('.caminhaoImage').src = "../../assets/venda.png"
+                        }
+
+
+                        document.querySelector('.tipo').innerHTML = "Veiculo de: " + response.tipo
+                        document.querySelector('.placa').innerHTML = "Placa: " + response.placa
+
+                    })
+
+
+
+            })
+        })
+
+
+}
+
+// FIM DA OPERACAO
 
 //LISTAR MOTORISTAS E VISUALIZAR
 const list = document.querySelector(".list");
 const tbody = document.querySelector(".tbody_list");
 var motorista = []
 
-
+var soma = 0;
 function listarMotorista() {
+
+
+    console.log(motorista.length)
     motorista.forEach(info => {
         if (info.disponivel == "Indisponível") {
+            soma += 1
             var lista = list.cloneNode(true);
             lista.classList.remove('model')
             lista.querySelector("#id").innerHTML = info.id;
@@ -45,6 +154,8 @@ function listarMotorista() {
         }
 
     })
+    document.querySelector('#qtd_driver').innerHTML = soma + "/" + motorista.length
+
 }
 var modalManutencao = document.querySelector(".manitence_list");
 var modalMotorista = document.querySelector(".driver_list");
@@ -111,7 +222,7 @@ function exibirInfoMotorista(e) {
 
 function finalizar(e) {
 
-    var id = e.parentNode.parentNode.parentNode.parentNode.querySelector('#idOperacao').innerHTML
+    var id = e.parentNode.parentNode.parentNode.querySelector('#idOperacao').innerHTML
     console.log(id)
     const event = new Date();
 
@@ -127,23 +238,50 @@ function finalizar(e) {
                 "id_Motorista": resp.id_Motorista,
                 "idVeiculo": resp.idVeiculo,
                 "descricao": resp.descricao,
-            }) 
+            })
+
+            const options = { method: 'GET' };
+
+            fetch('http://localhost:3000/Motorista/idUm/' + resp.id_Motorista, options)
+                .then(response => response.json())
+                .then(motorista => {
+
+                    let info = JSON.stringify({
+                        "nome": motorista.nome,
+                        "CNH": motorista.CNH,
+                        "disponivel": "Disponível"
+                    })
+
+                    fetch('http://localhost:3000/Motorista/idUp/' + resp.id_Motorista, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": info
+                    })
+                })
 
             console.log(data)
-              
-        fetch('http://localhost:3000/Operacao/idUp/' + id, {
-            "method": "PUT",
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": data
-        })
-            .then(response => response.json())
-            .then(resp => {
-                if(resp.status === 200) {
-                    alert("sucesso")
-                }
+
+
+            fetch('http://localhost:3000/Operacao/idUp/' + id, {
+                "method": "PUT",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": data
             })
+                .then(response => response.json())
+                .then(resp => {
+                    
+                        window.location.reload()
+                    
+                })
+
+
+
+
+
         })
 
 
@@ -151,8 +289,6 @@ function finalizar(e) {
 
 
 }
-
-
 // FIM DOS MOTORISTAS
 
 
@@ -164,10 +300,11 @@ const listManutencao = document.querySelector(".list_manitence");
 const tbodyManutencao = document.querySelector(".tbody_list_manitence");
 var manutencao = []
 
-
+var soma2 = 0;
 function listarManutencao() {
     manutencao.forEach(info => {
         if (info.data_fim == null) {
+            soma2 += 1
             var lista = listManutencao.cloneNode(true);
             lista.classList.remove('model')
             lista.querySelector('#id').innerHTML = info.id
@@ -183,7 +320,7 @@ function listarManutencao() {
             tbodyManutencao.appendChild(lista)
         }
 
-
+        document.querySelector('#qtd_maintenance').innerHTML = soma2 + "/" + manutencao.length
     })
 }
 
@@ -235,107 +372,14 @@ function exibirInfoManutencao(e) {
 
 
 
-// LISTAR OPERACAO E VISUALIZAR
-const listOperacao = document.querySelector(".list_operation");
-const tbodyOperacao = document.querySelector(".tbody_list_operation");
-var operacao = []
-
-
-function listarOperacao() {
-
-    operacao.forEach(info => {
-        if (info.dataFim == null) {
-            var lista = listOperacao.cloneNode(true);
-            lista.classList.remove('model')
-
-            lista.querySelector("#id").innerHTML = info.id_Motorista
-            lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
-
-            if (info.dataFim != null) {
-                lista.querySelector("#dataFim").innerHTML = info.dataFim.slice(0, 10);
-
-            } else if (info.dataFim == null) {
-                lista.querySelector("#dataFim").innerHTML = "Em operação";
-            }
-            tbodyOperacao.appendChild(lista)
-        }
-
-        const options = { method: 'GET' };
-
-        fetch('http://localhost:3000/Motorista/idUm/' + info.id_Motorista, options)
-            .then(response => response.json())
-            .then(response => {
-                lista.querySelector("#idMotorista").innerHTML = response.nome;
-            })
 
 
 
+// INFOS DO USUARIO 
+const nome = document.querySelector(".nameUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
 
-    })
-}
-
-var modalManutencao = document.querySelector(".manitence_list");
-var modalMotorista = document.querySelector(".driver_list");
-var modalOperacao = document.querySelector(".operation_list");
-
-function abrirModalOperacao() {
-    modalManutencao.classList.add("model");
-    modalMotorista.classList.add("model");
-    modalOperacao.classList.remove("model");
-
-}
-
-function exibirInfoOperacao(e) {
-    var id_Motorista = e.parentNode.parentNode.querySelector('#id').innerHTML
-    var nomeMotorista = e.parentNode.parentNode.querySelector("#idMotorista").innerHTML
-
-
-    const options = { method: 'GET' };
-
-    fetch('http://localhost:3000/Motorista/idUm/' + id_Motorista, options)
-        .then(response => response.json())
-        .then(resp => {
-            data = resp.operacao;
-            data.forEach(r => {
-                var info = document.querySelector(".select_info")
-                var model = document.querySelector(".btn")
-                model.classList.remove("model")
-                info.classList.add("model")
-                document.querySelector
-                document.querySelector('.nameDriver').innerHTML = "Motorista: " + nomeMotorista
-                document.querySelector('.descricaoOp').innerHTML = "Descrição: " + r.descricao;
-                document.querySelector('.data').innerHTML = "Data: " + r.dataInicio.slice(0, 10)
-
-                const options2 = { method: 'GET' };
-
-                fetch('http://localhost:3000/Veiculos/idUm/' + r.idVeiculo, options2)
-                    .then(response => response.json())
-                    .then(response => {
-                        if (response.tipo == "Carga") {
-                            document.querySelector('.caminhaoImage').src = "../../assets/caminhao.png"
-                            document.querySelector('.caminhaoImage').style.width = "8vw"
-                        } else if (response.tipo == "Visita") {
-                            document.querySelector('.caminhaoImage').src = "../../assets/caminhonete.png"
-                            document.querySelector('.caminhaoImage').style.width = "6vw"
-                        } else {
-                            document.querySelector('.caminhaoImage').src = "../../assets/venda.png"
-                        }
-
-
-                        document.querySelector('.tipo').innerHTML = "Veiculo de: " + response.tipo
-                        document.querySelector('.placa').innerHTML = "Placa: " + response.placa
-
-                    })
-
-
-
-            })
-        })
-
-
-}
-
-// FIM DA OPERACAO
+nome.innerHTML = userinfo.name;
 
 
 
