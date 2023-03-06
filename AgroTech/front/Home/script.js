@@ -1,5 +1,5 @@
 function carregar() {
-   
+
     const options1 = { method: 'GET' };
     fetch('http://localhost:3000/Operacao', options1)
         .then(response => response.json())
@@ -16,15 +16,15 @@ function carregar() {
             listarManutencao();
         });
 
-  
 
-        const options3 = { method: 'GET' };
-        fetch('http://localhost:3000/Motorista', options3)
-            .then(response => response.json())
-            .then(resp => {
-                motorista = resp;
-                listarMotorista();
-            });
+
+    const options3 = { method: 'GET' };
+    fetch('http://localhost:3000/Motorista', options3)
+        .then(response => response.json())
+        .then(resp => {
+            motorista = resp;
+            listarMotorista();
+        });
 
 }
 
@@ -63,7 +63,7 @@ function listarOperacao() {
             })
 
 
-            document.querySelector('#qtd_operation').innerHTML = soma3 + "/" + operacao.length
+        document.querySelector('#qtd_operation').innerHTML = soma3 + "/" + operacao.length
 
     })
 }
@@ -259,23 +259,33 @@ function finalizar(e) {
                         },
                         "body": info
                     })
-                })
+                        .then(response => response.json())
+                        .then(resp => {
 
-            console.log(data)
+                            console.log(info)
+                        })
 
 
-            fetch('http://localhost:3000/Operacao/idUp/' + id, {
-                "method": "PUT",
-                "headers": {
-                    "Content-Type": "application/json"
-                },
-                "body": data
-            })
-                .then(response => response.json())
-                .then(resp => {
-                    
-                        window.location.reload()
-                    
+
+
+                    fetch('http://localhost:3000/Operacao/idUp/' + id, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": data
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+
+                            window.location.reload()
+
+                        })
+
+
+
+
+
                 })
 
 
@@ -283,12 +293,8 @@ function finalizar(e) {
 
 
         })
-
-
-
-
-
 }
+
 // FIM DOS MOTORISTAS
 
 
@@ -368,10 +374,51 @@ function exibirInfoManutencao(e) {
 // FIM DA MANUTENCAO
 
 
+function abrirModalCreate() {
+    var modalCreate = document.querySelector('.painel')
+    modalCreate.classList.toggle('model')
+    
+    var modalteste = document.querySelector('.teste')
+    modalteste.classList.add('model')
+}
+
+function abrirModelOperacao(){
+    var modalteste = document.querySelector('.teste')
+    modalteste.classList.remove('model')
+    
+}
+
+function teste(){
+    var select_items = document.querySelector(".select_items")
+    let seleStatus = select_items.options[select_items.selectedIndex].value;
+
+    if(seleStatus == 'select_infos'){
+        let inpMotorista = document.querySelector(".painel_driver")
+        inpMotorista.disabled = false
+
+        let inpValor = document.querySelector(".painel_value")
+        inpValor.disabled = false
+    }
+    if (seleStatus == 'manitence') {
+        let inpMotorista = document.querySelector(".painel_driver")
+        inpMotorista.disabled = true
+
+        let inpValor = document.querySelector(".painel_value")
+        inpValor.disabled = false
 
 
+        
+    } 
+    
+    if(seleStatus == 'operation'){
+        let inpMotorista = document.querySelector(".painel_driver")
+        inpMotorista.disabled = false
 
+        let inpValor = document.querySelector(".painel_value")
+        inpValor.disabled = true
+    }
 
+}
 
 
 

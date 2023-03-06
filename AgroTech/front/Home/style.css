@@ -337,3 +337,47 @@ i{
     color: #da9732;
     cursor: pointer;
 }
+
+/* 
+PAINEL DE CRIAÇÃO  */
+
+.painel{
+    background-color: #fafafa80;
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.items_painel{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    background-color: #da9732;
+    width: 40vw;
+    height: 40vh;
+    border-radius: 20px;
+}
+
+.objects{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.items_painel > button{
+    background-color: white;
+    padding: 5px 10px;
+    border: none;
+}
+
+.bx-plus{
+    color: black;
+}
