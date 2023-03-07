@@ -33,6 +33,7 @@ model Veiculos{
   modelo String
   marca String
   tipo String
+  status String
   operacao Operacao[]
   manutencao Manutencao[]
 }

@@ -18,24 +18,28 @@ const createItems = async (req, res) => {
                 modelo: "Truck",
                 marca: "Hyundai",
                 tipo: "Venda",
+                status: "Indisponível",
             },
             {
                 placa: "IBY-9612",
                 modelo: "Truck",
                 marca: "Iveco",
                 tipo: "Carga",
+                status: "Indisponível",
             },
             {
                 placa: "AJV-3745",
                 modelo: "Truck",
                 marca: "Iveco",
                 tipo: "Carga",
+                status: "Indisponível",
             },
             {
                 placa: "AHY-6798",
                 modelo: "Carro",
                 marca: "Honda",
                 tipo: "Visita",
+                status: "Indisponível",
             },
 
         ],

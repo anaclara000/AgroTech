@@ -328,9 +328,10 @@ main, footer, .last_container{
     color: #da9732;
 }
 
-.bxs-hide{
+.bxs-hide, .bxs-show{
     font-size: 25px;
 }
+
 
 
 i{
@@ -359,8 +360,8 @@ PAINEL DE CRIAÇÃO  */
     display: flex;
     align-items: center;
     background-color: #da9732;
-    width: 40vw;
-    height: 40vh;
+    width: 20vw;
+    height: 75vh;
     border-radius: 20px;
 }
 
@@ -372,12 +373,65 @@ PAINEL DE CRIAÇÃO  */
 }
 
 
-.items_painel > button{
+.objects > button{
     background-color: white;
     padding: 5px 10px;
     border: none;
 }
 
+
+.objects > button:hover{
+    background-color: green;
+    cursor: pointer;
+    color: white;
+
+}
+
 .bx-plus{
     color: black;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  select{
+    width: 16vw;
+  }
+  input , .painel_driver , .select_veiculo, select{
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  #title{
+    margin-bottom: 10%;
+    font-size: 18px;
+    color: white;
+  }
+
+  .bx-x{
+    background-color: white;
+    display: flex;
+    flex-direction: flex-end !important;
+    color: black;
+    font-size:30px;
+    border-radius: 50%;
+    padding:5px;
+    margin-bottom: 2%;
+  }

@@ -25,7 +25,23 @@ function carregar() {
             motorista = resp;
             listarMotorista();
         });
+    const options4 = { method: 'GET' };
+    fetch('http://localhost:3000/Veiculos', options4)
+        .then(response => response.json())
+        .then(resp => {
+            veiculo = resp;
+            listarVeiculo();
+        });
 
+    var hoje = new Date();
+    var hora = hoje.getHours();
+    var minutos = hoje.getMinutes();
+    var segundos = hoje.getSeconds();
+    horaAtual = hora + ':' + minutos + ":" + segundos;
+    document.querySelector('#data').value = horaAtual
+
+    let inptData = document.querySelector('#data')
+    inptData.disabled = true
 }
 
 // LISTAR OPERACAO E VISUALIZAR
@@ -80,6 +96,7 @@ function abrirModalOperacao() {
 }
 
 function exibirInfoOperacao(e) {
+
     var id_Motorista = e.parentNode.parentNode.querySelector('#id').innerHTML
     var nomeMotorista = e.parentNode.parentNode.querySelector("#idMotorista").innerHTML
 
@@ -151,7 +168,15 @@ function listarMotorista() {
             lista.querySelector("#CNH").innerHTML = info.CNH;
             lista.querySelector("#status").innerHTML = info.disponivel;
             tbody.appendChild(lista)
+        } else {
+            var op = document.createElement("option")
+            op.innerHTML = info.nome
+            op.value = info.id
+            document.querySelector("#select_driver").appendChild(op)
         }
+
+
+
 
     })
     document.querySelector('#qtd_driver').innerHTML = soma + "/" + motorista.length
@@ -262,7 +287,7 @@ function finalizar(e) {
                         .then(response => response.json())
                         .then(resp => {
 
-                            console.log(info)
+                        
                         })
 
 
@@ -278,7 +303,7 @@ function finalizar(e) {
                         .then(response => response.json())
                         .then(resp => {
 
-                            window.location.reload()
+                           
 
                         })
 
@@ -289,6 +314,33 @@ function finalizar(e) {
                 })
 
 
+            fetch('http://localhost:3000/Veiculos/idUm/' + resp.idVeiculo, options)
+                .then(response => response.json())
+                .then(veiculo => {
+
+                    let infoVeiculo = JSON.stringify({
+                        "id": veiculo.id,
+                        "placa": veiculo.placa,
+                        "modelo": veiculo.modelo,
+                        "marca": veiculo.marca,
+                        "tipo": veiculo.tipo,
+                        "status": "Disponível"
+                    })
+
+                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": infoVeiculo
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+                            window.location.reload()
+                        })
+                    
+
+                })
 
 
 
@@ -373,26 +425,46 @@ function exibirInfoManutencao(e) {
 }
 // FIM DA MANUTENCAO
 
+// LISTAR VEICULOS
+
+var veiculo = []
+
+function listarVeiculo() {
+
+    veiculo.forEach(veiculo => {
+        if (veiculo.status == "Disponível") {
+            var op = document.createElement("option")
+            op.innerHTML = veiculo.tipo + " | " + veiculo.placa
+            op.value = veiculo.id
+            document.querySelector(".select_veiculo").appendChild(op)
+        }
+
+
+    })
+
+}
 
 function abrirModalCreate() {
     var modalCreate = document.querySelector('.painel')
     modalCreate.classList.toggle('model')
-    
-    var modalteste = document.querySelector('.teste')
-    modalteste.classList.add('model')
+
+
 }
 
-function abrirModelOperacao(){
+function abrirModelOperacao() {
     var modalteste = document.querySelector('.teste')
     modalteste.classList.remove('model')
-    
+
 }
 
-function teste(){
+
+function teste() {
+
+
     var select_items = document.querySelector(".select_items")
     let seleStatus = select_items.options[select_items.selectedIndex].value;
 
-    if(seleStatus == 'select_infos'){
+    if (seleStatus == 'select_infos') {
         let inpMotorista = document.querySelector(".painel_driver")
         inpMotorista.disabled = false
 
@@ -406,20 +478,178 @@ function teste(){
         let inpValor = document.querySelector(".painel_value")
         inpValor.disabled = false
 
+    }
 
-        
-    } 
-    
-    if(seleStatus == 'operation'){
+    if (seleStatus == 'operation') {
         let inpMotorista = document.querySelector(".painel_driver")
         inpMotorista.disabled = false
 
         let inpValor = document.querySelector(".painel_value")
         inpValor.disabled = true
+
+        document.querySelector(".painel_value").value = ""
+        document.querySelector('#veiculo').value = ""
+        document.querySelector('.painel_value').value = ""
+
     }
+
+
 
 }
 
+
+function cad() {
+
+
+    const event = new Date()
+
+
+    let inputVeiculo = document.querySelector('#veiculo').value
+    let inputDesc = document.querySelector('#desc').value
+    let inputValor = document.querySelector('.painel_value').value
+    let inputMotorista = document.querySelector('.painel_driver').value
+
+    var select_items = document.querySelector(".select_items")
+    let seleStatus = select_items.options[select_items.selectedIndex].value;
+
+    if (seleStatus == 'manitence') {
+
+        let info = JSON.stringify({
+            "data_inicio": event.toISOString(),
+            "data_fim": null,
+            "descricao": inputDesc,
+            "valor": parseFloat(inputValor),
+            "id_Veiculo": parseInt(inputVeiculo)
+        })
+
+        fetch('http://localhost:3000/Manutencao', {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+            .then(response => response.json())
+            .then(resp => {
+                const options = { method: 'GET' };
+                fetch('http://localhost:3000/Veiculos/idUm/' + resp.id_Veiculo, options)
+                .then(response => response.json())
+                .then(veiculo => {
+    
+                    let infoVeiculo = JSON.stringify({
+                        "id": veiculo.id,
+                        "placa": veiculo.placa,
+                        "modelo": veiculo.modelo,
+                        "marca": veiculo.marca,
+                        "tipo": veiculo.tipo,
+                        "status": "Indisponível"
+                    })
+    
+                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": infoVeiculo
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+                            alert("foi")
+                            window.location.reload()
+                        })
+                    
+    
+                })
+
+               
+
+            })
+
+
+
+
+    }
+    if (seleStatus == 'operation') {
+        let data = JSON.stringify({
+            "dataInicio": event.toISOString(),
+            "dataFim": null,
+            "id_Motorista": parseInt(inputMotorista),
+            "idVeiculo": parseInt(inputVeiculo),
+            "descricao": inputDesc
+        })
+        fetch('http://localhost:3000/Operacao', {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": data
+        })
+            .then(response => response.json())
+            .then(resp => {
+                const options = { method: 'GET' };
+                fetch('http://localhost:3000/Veiculos/idUm/' + resp.idVeiculo, options)
+                .then(response => response.json())
+                .then(veiculo => {
+    
+                    let infoVeiculo = JSON.stringify({
+                        "id": veiculo.id,
+                        "placa": veiculo.placa,
+                        "modelo": veiculo.modelo,
+                        "marca": veiculo.marca,
+                        "tipo": veiculo.tipo,
+                        "status": "Indisponível"
+                    })
+    
+                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": infoVeiculo
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+                            
+                        })
+                    
+    
+                })
+    
+                fetch('http://localhost:3000/Motorista/idUm/' + resp.id_Motorista, options)
+                .then(response => response.json())
+                .then(motorista => {
+
+                    let info = JSON.stringify({
+                        "nome": motorista.nome,
+                        "CNH": motorista.CNH,
+                        "disponivel": "Indisponível"
+                    })
+
+                    fetch('http://localhost:3000/Motorista/idUp/' + resp.id_Motorista, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": info
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+
+                            alert("foi")
+                            window.location.reload()
+                        })
+
+                    })
+
+            })
+
+           
+    }
+
+
+
+
+}
 
 
 // INFOS DO USUARIO 
@@ -427,6 +657,8 @@ const nome = document.querySelector(".nameUser");
 var userinfo = JSON.parse(localStorage.getItem("info"));
 
 nome.innerHTML = userinfo.name;
+
+
 
 
 

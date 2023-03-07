@@ -13,21 +13,9 @@ const createItems = async (req, res) => {
     let manutencao = await prisma.manutencao.createMany({
         data: [
             {
-
                 descricao: "Quebrou a porta",
                 valor: 1200.90,
                 id_Veiculo: 1
-            },
-            {
-                data_fim: "2023-02-25T09:00:00.000Z",
-                descricao: "Trincou o vidro",
-                valor: 890.80,
-                id_Veiculo: 2
-            },
-            {
-                descricao: "Queimou o farol",
-                valor: 500.67,
-                id_Veiculo: 3
             },
 
         ],

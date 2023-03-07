@@ -19,7 +19,7 @@
                 </div>
                 <div class="topics items">
                     <span class="menu">Home</span>
-                    <span class="menu">Manutenção</span>
+                    <a href="../Manutenção/index.html"><span class="menu">Manutenção</span></a>
                     <span class="menu">Frota</span>
                     <span class="menu">Operação</span>
                     <span class="menu">DashBoard</span>
@@ -123,8 +123,8 @@
                             <td id="nome">José</td>
                             <td id="CNH">764905</td>
                             <td id="status">BVS-6547</td>
-                            <td><i class='bx bxs-hide' id="btnDriver" onClick="exibirInfoMotorista(this)"></i></td>
-
+                            <td><i class='bx bxs-hide' id="btnDriver" onClick="exibirInfoMotorista(this)"></i> </td>
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -193,9 +193,9 @@
                     <div class="cont_user_name"><span class="nameUser"></span><span>, bem vindo de volta!</span></div>
                 </div>
             </div>
-            <!-- <div class="subtitle">
+            <div class="subtitle">
                     <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
-                </div> -->
+                </div>
 
             <div>
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
@@ -206,30 +206,47 @@
 
     <div class="painel model">
         <div class="items_painel">
+            
             <div class="objects">
-<span> AA</span>
+                <i class='bx bx-x' onClick="abrirModalCreate()"></i>
+                    <span id="title">Seleciona o que deseja cadastrar</span>
                 <select class="select_items" name="" id="" onClick="teste()">
                     <option value="select_infos">Selecione uma opção</option>
                     <option value="manitence">Manutenção</option>
                     <option value="operation">Operação</option>
                 </select>
-                
-                <label for="">Veículo</label>
-                <input type="text">
-                <label for="">Descrição</label>
-                <input type="text">
-                <label  for="">Valor</label>
-                <input class="painel_value" type="text">
-                <label for="">Motorista</label>
-                <input class="painel_driver" type="text">
+
+                <form>
+                    <label for="">Data</label>
+                    <input type="text" id="data">
+
+                    <label for="">Veículo</label>
+                    <select class="select_veiculo" name="" id="veiculo">
+                        
+                    </select>
+
+
+                    <label for="">Descrição</label>
+                    <input type="text" id="desc">
+
+                    <label for="">Valor</label>
+                    <input class="painel_value" type="text">
+
+                    <label for="">Motorista</label>
+                    <select class="painel_driver" name="" id="select_driver">
+                        
+                    </select>
+
+                </form>
+                <button onClick="cad()">Cadastrar</button>
 
             </div>
-          
+
             <!-- <button onClick="abrirModalCreate()">fechar</button> -->
         </div>
     </div>
 
-   
+
 
 
 </body>

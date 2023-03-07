@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,500;1,600&display=swap');
+
+:root{
+    --main-color: white;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+.general_container{
+    border-radius: 15px;
+    margin-top: 1.2%;
+    height: 95vh;
+    width: 90%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+.model{
+    display: none;
+    visibility: hidden;
+}
+
+.general_container{
+    border-radius: 15px;
+    margin-top: 1.2%;
+    height: 95vh;
+    width: 90%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url("../../assets/fundoManutencao.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+
+/* MENU */
+
+.header{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.topics{
+    display: flex;
+    flex-direction: column;
+}
+
+.topics > span{
+    padding: 10px;
+}
+.items{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+
+.title{
+   font-size: 25px;
+   background-color: #da9732;
+   border-radius: 0px 30px 30px 0px;
+   color: white;
+
+}
+
+.logOut{
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    align-items: center;
+}
+
+
+
+
+/* FIM MENU */
+
+
+/* LAST CONTAINER */
+.last_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2%;
+}
+
+.items_last{
+    margin: 10px;
+}
+
+.last_container > div > i{
+    font-size: 50px;
+}
+.items_last > p{
+    font-style: italic;
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+}
+
+.user > i, .bxs-plus-circle{
+    font-size: 80px;
+    color: #da9732;
+}
+
+.bxs-log-out-circle{
+    font-size: 40px;
+    color: #da9732;
+}
+
+.subtitle{
+    display: flex;
+    font-style: italic;
+    align-items: center;
+}
+.bxs-heart-circle{
+    font-size: 25px;
+    color: #da9732;
+}
+
+/* DISTRIBUINDO O TAMANHO DOS CONTAINERS NA TELA */
+
+header{
+    width: 15vw;
+}
+
+main{
+    background: rgb(255, 255, 255);
+    width: 30vw;
+    height: 90vh;
+}
+
+footer{
+    width: 40vw;
+    
+}
+
+.last_container{
+    width: 15vw;
+}
+
+main, footer, .last_container{
+    margin-top: 2%;
+}
+
+/* CONTAINER COM AS INFORMAÇÕES */
