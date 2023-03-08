@@ -28,6 +28,11 @@ const createItems = async (req, res) => {
                 CNH: 08279424413,
                 disponivel: "Indisponível",
             },
+            {
+                nome: "Robert Pertenson",
+                CNH: 05354335223,
+                disponivel: "Indisponível",
+            },
 
         ],
         skipDuplicates: true, // Skip 'Bobo'

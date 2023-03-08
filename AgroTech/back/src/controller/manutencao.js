@@ -47,6 +47,15 @@ const readOne = async (req, res) => {
 
 const read = async (req, res) => {
     let manutencaos = await prisma.manutencao.findMany({
+        select: {
+            id: true,
+            data_inicio: true,
+            data_fim: true,
+            descricao: true,
+            valor: true,
+            id_Veiculo: true,
+            veiculos: true
+        }
     });
 
     //SELECT email, nome FROM manutencao WHERE email = ''

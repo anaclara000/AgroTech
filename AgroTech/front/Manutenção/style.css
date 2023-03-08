@@ -147,14 +147,10 @@ header{
 
 main{
     background: rgb(255, 255, 255);
-    width: 30vw;
+    width: 60vw;
     height: 90vh;
 }
 
-footer{
-    width: 40vw;
-    
-}
 
 .last_container{
     width: 15vw;
@@ -165,3 +161,83 @@ main, footer, .last_container{
 }
 
 /* CONTAINER COM AS INFORMAÇÕES */
+
+
+/* TABELA */
+.table{
+    width: 100%;
+    border:1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding:10px;
+    margin: 1%;
+    background-color: white;
+}
+.table th {
+    border-bottom:1px solid #C0C0C0;
+    padding:10px;
+    overflow: auto;
+    font-weight: 400;
+
+}
+.table td {
+    text-align: center;
+    align-items: center;
+    border-bottom:1px solid #C0C0C0;
+    padding:10px 5px;
+}
+
+th{
+    padding: 10px;
+}
+
+.img_icon{
+    width: 1.5vw;
+}
+/* FIM DA TABELA */
+
+
+/* FILTRO */
+.filter{
+    margin-left: 8%;
+    width: 30vw;
+    border:2px solid  #da9732;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 10px;
+    
+}
+
+.search{
+    padding: 7px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+}
+
+.bx-search{
+    color: #da9732;
+    font-size: 25px;
+}
+
+/* GRAFICO */
+
+.grafico{
+
+    width:100%;
+}
+
+.graf-container{
+    width: 100%;
+}
+
+.grafico > span{
+    font-size: 20px;
+}
+
+#myChart{
+    border: 1px solid black;
+    padding: 10px;
+    
+}

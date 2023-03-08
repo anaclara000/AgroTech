@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
     <title>Manutenção</title>
 </head>
-<body>
+<body onLoad="carregar()">
     <div class="general_container">
         <header>
             <div class="header">
@@ -29,13 +30,48 @@
         </header>
 
         <main>
-            <span>aaa</span>
+            <div class="filter">
+               <input type="text" class="search">
+               <i class='bx bx-search' id="btn-filter"></i>
+            </div>
+            <div class="manitence_list">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>ID</th>
+                            <th>Data Inicio</th>
+                            <th>Data Fim</th>
+                            <th>Valor</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody_list_manitence">
+                        <tr class="list_manitence model">
+                            <td> <img class="img_icon" src="" alt=""></td>
+                            <td id="id"></td>
+                            <td id="dataI"></td>
+                            <td id="dataF"></td>
+                            <td id="valor"></td>
+                            <td id="descricao"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                
+            </div>
+            <div class="grafico">
+                <span>Gráficos</span>
+                <div class="graf-container">
+                    <canvas id="myChart"></canvas>
+                    <canvas id="myGrafic"></canvas>
+                </div>
+            </div>
         </main>
 
 
-        <footer>
-            <span>aaa</span>
-        </footer>
+
+
         <div class="last_container">
             <div class="items_last">
                 <div class="user">
@@ -54,6 +90,7 @@
     </div>
    
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script src="script.js"></script>
 </html>

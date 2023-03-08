@@ -41,6 +41,13 @@ const createItems = async (req, res) => {
                 tipo: "Visita",
                 status: "Indisponível",
             },
+            {
+                placa: "HYA-1235",
+                modelo: "Carro",
+                marca: "Fiat",
+                tipo: "Visita",
+                status: "Disponível",
+            },
 
         ],
         skipDuplicates: true, // Skip 'Bobo'
