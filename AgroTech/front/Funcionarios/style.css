@@ -180,7 +180,6 @@ main, footer, .last_container{
     overflow: auto;
     font-weight: 400;
 
-
 }
 .table td {
     text-align: center;
@@ -199,12 +198,8 @@ th{
 
 .manitence_list{
     height: 40vh;
-
-    overflow-y: scroll; 
-    overflow-x: hidden;
 }
 /* FIM DA TABELA */
-
 
 
 /* FILTRO */
@@ -216,15 +211,14 @@ th{
     justify-content: center;
     display: flex;
     border-radius: 10px;
+    
 }
-
 
 .search{
     padding: 7px;
     outline: none;
     border: none;
     width: 100%;
-    height: 100;
     background-color: transparent;
 }
 
@@ -232,122 +226,3 @@ th{
     color: #da9732;
     font-size: 25px;
 }
-
-
-
-
-/* GRAFICO */
-.grafico > span{
-    font-size: 20px;
-}
-.graf-container{
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.grafic1{
-    width: 35vw;
-}
-
-.grafic2{
-    width: 18vw;
-}
-
-/* 
-PAINEL DE CRIAÇÃO  */
-
-.painel{
-    background-color: #fafafa80;
-    position: absolute;
-    top: 0;
-    left:0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.items_painel{
-    justify-content: center;
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-    background-color: #da9732;
-    width: 20vw;
-    height: 60vh;
-    border-radius: 20px;
-}
-
-.objects{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.objects > button{
-    background-color: white;
-    padding: 5px 10px;
-    border: none;
-}
-
-
-.objects > button:hover{
-    background-color: green;
-    cursor: pointer;
-    color: white;
-
-}
-
-.bx-plus{
-    color: black;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: 0 auto;
-  }
-  
-  label {
-    margin-bottom: 5px;
-  }
-  
-  select{
-    width: 16vw;
-  }
-form > input, .painel_driver , .select_veiculo, select{
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-  }
-  
-  input:focus, select:focus {
-    outline: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  #title{
-    margin-bottom: 10%;
-    font-size: 18px;
-    color: white;
-  }
-
-  .bx-x{
-    background-color: white;
-    display: flex;
-    flex-direction: flex-end !important;
-    color: black;
-    font-size:30px;
-    border-radius: 50%;
-    padding:5px;
-    margin-bottom: 2%;
-  }

@@ -11,14 +11,14 @@
     font-family: 'Poppins';
 }
 
-#id, #idOperacao{
-    display:none;
-    visibility: hidden;
-}
-
-.btnteste{
-    display:none;
-    visibility: hidden;
+.general_container{
+    border-radius: 15px;
+    margin-top: 1.2%;
+    height: 95vh;
+    width: 90%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
 }
 .model{
     display: none;
@@ -39,11 +39,12 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url("../../assets/fundo.jpg");
+    background-image: url("../../assets/fundoManutencao.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
 }
+
 
 /* MENU */
 
@@ -59,7 +60,6 @@ body{
     display: flex;
     flex-direction: column;
 }
-
 .topics > a{
     padding: 10px;
     text-decoration: none;
@@ -92,201 +92,10 @@ body{
 
 
 
-
 /* FIM MENU */
 
-/* OVERVIEW */
-.container_vision{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 
-}
-
-.title_container_vision{
-    display: flex;
-    flex-direction: column;
-    margin-top: 3%;
-    margin-left: 3%;
-}
-
-.title_container_vision > span{
-    font-size: 23px;
-    color: #da9732;
-    font-weight: bold;
-}
-
-.container_geral{
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
-.container_geral > div{
-    padding: 10px;
-    margin: 2%;
-    width: 13vw;
-    height: 10vh;
-    display: flex;
-    border-radius: 2px;
-    background-color: rgb(255, 255, 255);
-    border:1px solid #C0C0C0;
-}
-.geral{
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.geral > p > i{
-    margin-left: 10px;
-    font-size: 20px;
-}
-.geral > p{
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    font-size: 15px;
-}
-
-.geral > span{
-    font-size: 30px;
-}
-
-/* FIM DA OVERVIEW */
-
-/* TABELA */
-.table{
-    width: 98%;
-    border:1px solid #C0C0C0;
-    border-collapse: collapse;
-    padding:10px;
-    margin: 1%;
-    background-color: white;
-}
-.table th {
-    border-bottom:1px solid #C0C0C0;
-    padding:10px;
-    overflow: auto;
-    font-weight: 400;
-
-}
-.table td {
-    text-align: center;
-    border-bottom:1px solid #C0C0C0;
-    padding:10px 5px;
-}
-
-th{
-    padding: 10px;
-}
-/* FIM DA TABELA */
-
-/* DISTRIBUINDO O TAMANHO DOS CONTAINERS NA TELA */
-
-header{
-    width: 15vw;
-}
-
-main{
-    background: rgb(255, 255, 255);
-    width: 30vw;
-    height: 90vh;
-}
-
-footer{
-    width: 40vw;
-    
-}
-
-.last_container{
-    width: 15vw;
-}
-
-main, footer, .last_container{
-    margin-top: 2%;
-}
-
-/* CONTAINER COM AS INFORMAÇÕES */
-
-
-.infos, .infosManitence{
-    box-shadow:  10px 10px 50px -4px rgba(0,0,0,0.2);
-    border-radius: 20px;
-    margin: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2%;
-    width: 80%;
-    background-color: white;
-    height: 34vh;
-}
-
-.container_image > img{
-    width: 8vw;
-
-}
-.container_image_manitence > img{
-    margin-right: -5%;
-    width: 10vw;
-
-
-}
-.description_manitence{
-    margin-left: 1%;
-}
- .container_image_manitence{
-
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-}
-
-.description, .description_manitence{
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-
-.description_manitence > span{
-    margin: 1%;
-}
-
-.description >span{
-    margin: 0.3%;
-}
-
-.done{
-    border: 2px solid #da9732;;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10%;
-    width: 100%;
-    background-color: white;
-    color: #da9732;
-    font-weight: bold;
-    font-size: 14px;
-    
-}
-
-.done:hover{
-    background-color: #da9732;
-    color: white;
-    cursor: pointer;
-}
-
-.close{
-    background-color: red;
-    color: white;
-}
-
+/* LAST CONTAINER */
 .last_container{
     display: flex;
     flex-direction: column;
@@ -331,15 +140,92 @@ main, footer, .last_container{
     color: #da9732;
 }
 
-.bxs-hide, .bxs-show{
-    font-size: 25px;
+/* DISTRIBUINDO O TAMANHO DOS CONTAINERS NA TELA */
+
+header{
+    width: 15vw;
+}
+
+main{
+    background: rgb(255, 255, 255);
+    width: 60vw;
+    height: 90vh;
 }
 
 
+.last_container{
+    width: 15vw;
+}
 
-i{
+main, footer, .last_container{
+    margin-top: 2%;
+}
+
+/* CONTAINER COM AS INFORMAÇÕES */
+
+
+/* TABELA */
+.table{
+    width: 100%;
+    border:1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding:10px;
+    margin: 1%;
+    background-color: white;
+}
+.table th {
+    border-bottom:1px solid #C0C0C0;
+    padding:10px;
+    overflow: auto;
+    font-weight: 400;
+
+}
+.table td {
+    text-align: center;
+    align-items: center;
+    border-bottom:1px solid #C0C0C0;
+    padding:10px 5px;
+}
+
+th{
+    padding: 10px;
+}
+
+.img_icon{
+    width: 1.5vw;
+}
+
+.veiculos_list{
+    height: 40vh;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+}
+/* FIM DA TABELA */
+
+
+/* FILTRO */
+.filter{
+    margin-left: 8%;
+    width: 50vw;
+    border:2px solid  #da9732;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 10px;
+    
+}
+
+.search{
+    padding: 7px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+}
+
+.bx-search{
     color: #da9732;
-    cursor: pointer;
+    font-size: 25px;
 }
 
 /* 
@@ -364,7 +250,7 @@ PAINEL DE CRIAÇÃO  */
     align-items: center;
     background-color: #da9732;
     width: 20vw;
-    height: 75vh;
+    height: 60vh;
     border-radius: 20px;
 }
 
@@ -406,9 +292,10 @@ form {
   }
   
   select{
+    margin-top: 5%;
     width: 16vw;
   }
-  input , .painel_driver , .select_veiculo, select{
+  form > input , .painel_driver , .select_veiculo, select{
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 5px;
@@ -437,4 +324,23 @@ form {
     border-radius: 50%;
     padding:5px;
     margin-bottom: 2%;
+  }
+  
+  .msg{
+    color: red;
+  }
+  .qtd_veiculo{
+    background-color: #da9732;
+    padding: 1% 3%;
+    border-radius: 10px;
+    color: white;
+  }
+
+  /* GRAFICO */
+
+  .graf-container{
+    margin-top: 2%;
+  }
+  .grafic1{
+    width: 25vw;
   }

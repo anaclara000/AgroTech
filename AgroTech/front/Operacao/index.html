@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-    <title>Manutenção</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Operação</title>
 </head>
+
 <body onLoad="carregar()">
     <div class="general_container">
         <header>
@@ -19,7 +20,7 @@
                 <div class="topics items">
                     <a href="../Home/index.html"><span class="menu">Home</span></a>
                     <a href="../Manutenção/index.html"><span class="menu">Manutenção</span></a>
-                    <a href="../Frota/index.html"><span class="menu">Frota</span></a> 
+                    <a href="../Frota/index.html"><span class="menu">Frota</span></a>
                     <a href="../Operacao/index.html"><span class="menu">Operação</span></a>
                     <a href="../Funcionarios/index.html"><span class="menu">Funcionarios</span></a>
                     <a href="../Dashboard/index.html"><span class="menu">DashBoard</span></a>
@@ -34,35 +35,51 @@
             <div class="filter">
                 <input type="text" class="search">
                 <i class='bx bx-search' id="btn-filter"></i>
-             </div>
-
-
-            <div class="manitence_list" >
+            </div>
+            <div class="legend">
+                <div>
+                    <img src="../../assets/Camarelo.png" alt="">
+                    <span>Em operação</span>
+                </div>
+                <div>
+                    <img src="../../assets/Cverde.png" alt="">
+                    <span>Operação finalizada</span>
+                </div>
+                <div>
+                    <img src="../../assets/Cvermelho.png" alt="">
+                    <span>Operação cancelada</span>
+                </div>
+            </div>
+            <div class="operation_list">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Status</th>
-                            <th>ID</th>
+                            <th>ID operação</th>
+                            <th>Motorista</th>
+                            <th>Veiculo</th>
+                            <th>Descrição</th>
                             <th>Data Inicio</th>
                             <th>Data Fim</th>
-                            <th>Valor</th>
-                            <th>Descrição</th>
+
                         </tr>
                     </thead>
-                    <tbody class="tbody_list_manitence">
-                        <tr class="list_manitence model">
-                            <td> <img class="img_icon" src="" alt=""></td>
+                    <tbody class="tbody_list_operation">
+                        <tr class="list_operation model">
+                            <td><img class="img_icon" src="" alt=""></td>
                             <td id="id"></td>
-                            <td id="dataI"></td>
-                            <td id="dataF"></td>
-                            <td id="valor"></td>
-                            <td id="descricao"></td>
+                            <td id="idMotorista"></td>
+                            <td id="veiculos"></td>
+                            <td id="desc"></td>
+                            <td id="dataInicio"></td>
+                            <td id="dataFim"></td>
+
                         </tr>
                     </tbody>
                 </table>
 
-                
             </div>
+
             <div class="grafico">
                 <span>Gráficos</span>
                 <div class="graf-container">
@@ -72,9 +89,9 @@
                     <div class="grafic2">
                         <canvas id="myGrafic"></canvas>
                     </div>
-                    
-                   
-                   
+
+
+
                 </div>
             </div>
         </main>
@@ -89,9 +106,6 @@
                     <div class="cont_user_name"><span class="nameUser"></span><span>, bem vindo de volta!</span></div>
                 </div>
             </div>
-            <div class="valorTotal">
-                <span>Valor total de gastos: R$ 3450,00</span>
-            </div>
             <!-- <div class="subtitle">
                     <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
                 </div> -->
@@ -101,15 +115,14 @@
             </div>
         </div>
 
-
         <div class="painel model">
             <div class="items_painel">
                 
                 <div class="objects">
                     <i class='bx bx-x' onClick="abrirModalCreate()"></i>
-                        <span id="title">Cadastro de manutenção</span>
     
                     <form>
+                        <span>Cadastrar operação</span>
                         <label for="">Data</label>
                         <input type="text" id="data">
     
@@ -118,13 +131,13 @@
                             
                         </select>
     
-    
                         <label for="">Descrição</label>
                         <input type="text" id="desc">
     
-                        <label for="">Valor</label>
-                        <input class="painel_value" type="text">
-    
+                        <label for="">Motorista</label>
+                        <select class="painel_driver" name="" id="select_driver">
+                            
+                        </select>
     
                     </form>
                     <button onClick="cad()">Cadastrar</button>
@@ -134,10 +147,11 @@
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
         </div>
+
     </div>
-   
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script src="script.js"></script>
+
 </html>

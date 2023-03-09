@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-    <title>Manutenção</title>
+    <link rel="stylesheet" href="style.css">
+    <title>FROTA</title>
 </head>
 <body onLoad="carregar()">
     <div class="general_container">
@@ -32,31 +31,29 @@
 
         <main>
             <div class="filter">
-                <input type="text" class="search">
-                <i class='bx bx-search' id="btn-filter"></i>
-             </div>
-
-
-            <div class="manitence_list" >
+               <input type="text" class="search">
+               <i class='bx bx-search' id="btn-filter"></i>
+            </div>
+            <div class="veiculos_list">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Status</th>
                             <th>ID</th>
-                            <th>Data Inicio</th>
-                            <th>Data Fim</th>
-                            <th>Valor</th>
-                            <th>Descrição</th>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Marca</th>
+                            <th>Tipo</th>
                         </tr>
                     </thead>
-                    <tbody class="tbody_list_manitence">
-                        <tr class="list_manitence model">
+                    <tbody class="tbody_list_veiculos">
+                        <tr class="list_veiculos model">
                             <td> <img class="img_icon" src="" alt=""></td>
                             <td id="id"></td>
-                            <td id="dataI"></td>
-                            <td id="dataF"></td>
-                            <td id="valor"></td>
-                            <td id="descricao"></td>
+                            <td id="placa"></td>
+                            <td id="modelo"></td>
+                            <td id="marca"></td>
+                            <td id="tipo"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -64,17 +61,12 @@
                 
             </div>
             <div class="grafico">
-                <span>Gráficos</span>
+
                 <div class="graf-container">
                     <div class="grafic1">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                    <div class="grafic2">
                         <canvas id="myGrafic"></canvas>
                     </div>
-                    
-                   
-                   
+
                 </div>
             </div>
         </main>
@@ -89,12 +81,9 @@
                     <div class="cont_user_name"><span class="nameUser"></span><span>, bem vindo de volta!</span></div>
                 </div>
             </div>
-            <div class="valorTotal">
-                <span>Valor total de gastos: R$ 3450,00</span>
-            </div>
-            <!-- <div class="subtitle">
-                    <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
-                </div> -->
+            <div class="subtitle">
+                    <span>Veiculos cadastrados no sistema: <span class="qtd_veiculo"></span> 
+                </div>
 
             <div>
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
@@ -107,24 +96,27 @@
                 
                 <div class="objects">
                     <i class='bx bx-x' onClick="abrirModalCreate()"></i>
-                        <span id="title">Cadastro de manutenção</span>
+                        <span id="title">Cadastro de veiculo</span>
+
     
                     <form>
-                        <label for="">Data</label>
-                        <input type="text" id="data">
+                        <label for="">Placa</label>
+                        <input type="text" id="placaCad">
     
-                        <label for="">Veículo</label>
-                        <select class="select_veiculo" name="" id="veiculo">
-                            
+                        <label for="">Modelo</label>
+                        <input type="text" id="modeloCad">
+    
+    
+                        <label for="">Marca</label>
+                        <input type="text" id="marcaCad">
+    
+                        <span class="msg model">Campo obrigatório</span>
+                        <select class="tipoCad" name="" id="">
+                            <option value="select_infos">Selecione o tipo</option>
+                            <option value="carga">Carga</option>
+                            <option value="visita">Visita</option>
+                            <option value="venda">Venda</option>
                         </select>
-    
-    
-                        <label for="">Descrição</label>
-                        <input type="text" id="desc">
-    
-                        <label for="">Valor</label>
-                        <input class="painel_value" type="text">
-    
     
                     </form>
                     <button onClick="cad()">Cadastrar</button>
@@ -134,8 +126,8 @@
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
         </div>
+
     </div>
-   
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>

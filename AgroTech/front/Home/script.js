@@ -378,7 +378,7 @@ function listarManutencao() {
             tbodyManutencao.appendChild(lista)
         }
 
-        document.querySelector('#qtd_maintenance').innerHTML = soma2 + "/" + manutencao.length
+      
     })
 }
 
@@ -429,17 +429,19 @@ function exibirInfoManutencao(e) {
 
 var veiculo = []
 
+somaVeiculo = 0
 function listarVeiculo() {
 
-    veiculo.forEach(veiculo => {
-        if (veiculo.status == "Disponível") {
+    veiculo.forEach(v => {
+        if (v.status == "Disponível") {
             var op = document.createElement("option")
-            op.innerHTML = veiculo.tipo + " | " + veiculo.placa
-            op.value = veiculo.id
+            op.innerHTML = v.tipo + " | " + v.placa
+            op.value = v.id
             document.querySelector(".select_veiculo").appendChild(op)
         }
 
-
+        document.querySelector('#qtd_maintenance').innerHTML = soma2 + "/" + veiculo.length
+        document.querySelector('#qtd_operation').innerHTML = soma3 + "/" + veiculo.length
     })
 
 }
@@ -569,6 +571,8 @@ function cad() {
 
 
     }
+
+    
     if (seleStatus == 'operation') {
         let data = JSON.stringify({
             "dataInicio": event.toISOString(),

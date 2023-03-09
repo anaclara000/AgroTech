@@ -1,21 +1,6 @@
 
 var veiculo = []
-var disponivel = [0, 0];
-function listarVeiculo() {
 
-    veiculo.forEach(veiculo => {
-        if (veiculo.status == "Disponível") {
-            disponivel[0]++
-        } else {
-            disponivel[1]++
-        }
-
-
-    })
-
-
-
-}
 
 
 
@@ -36,6 +21,38 @@ function carregar() {
             listarVeiculo();
         });
 
+
+
+        var hoje = new Date();
+        var hora = hoje.getHours();
+        var minutos = hoje.getMinutes();
+        var segundos = hoje.getSeconds();
+        horaAtual = hora + ':' + minutos + ":" + segundos;
+        document.querySelector('#data').value = horaAtual
+    
+        let inptData = document.querySelector('#data')
+        inptData.disabled = true
+   
+
+        var ctx = document.getElementById('myGrafic').getContext('2d');
+        var myDoughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    data: [30, 50, 20],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ]
+                }]
+            },
+            options: {
+                cutoutPercentage: 50
+            }
+        });
+    
 }
 
 
@@ -72,11 +89,15 @@ function listarManutencao() {
         lista.querySelector("#descricao").innerHTML = info.descricao;
         tbodyManutencao.appendChild(lista)
 
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
+        
+
+    })
+
+    var ctx2 = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx2, {
             type: 'line',
             data: {
-                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 datasets: [
                     {
                         label: 'Carga',
@@ -113,49 +134,7 @@ function listarManutencao() {
             }
         });
 
-
-        // Selecione o elemento canvas
-    //     var ctx = document.getElementById('meuGraficoDoughnut').getContext('2d');
-
-    //     // Crie um objeto de dados para o gráfico
-    //     var data = {
-    //         labels: ['Red', 'Blue', 'Yellow'],
-    //         datasets: [{
-    //             label: 'My First Dataset',
-    //             data: [300, 50, 100],
-    //             backgroundColor: [
-    //                 'rgb(255, 99, 132)',
-    //                 'rgb(54, 162, 235)',
-    //                 'rgb(255, 205, 86)'
-    //             ],
-    //             hoverOffset: 4
-    //         }]
-    //     };
-
-    //     // Crie as opções para o gráfico
-    //     var options = {
-    //         responsive: true,
-    //         maintainAspectRatio: false,
-    //         plugins: {
-    //             legend: {
-    //                 position: 'top',
-    //             },
-    //             title: {
-    //                 display: true,
-    //                 text: 'Exemplo de gráfico de Doughnut'
-    //             }
-    //         }
-    //     };
-
-    //     // Crie o gráfico
-    //     var myChart = new Chart(ctx, {
-    //         type: 'doughnut',
-    //         data: data,
-    //         options: options
-    //     });
-
-
-    })
+    
 }
 
 function contarManutencoesPorMes(listaDeManutencoes, tipoDeVeiculo) {
@@ -198,6 +177,97 @@ search_btn.addEventListener('click', () => {
     }
 })
 
+
+
+function abrirModalCreate() {
+    var modalCreate = document.querySelector('.painel')
+    modalCreate.classList.toggle('model')
+
+
+}
+
+var veiculo = []
+
+function listarVeiculo() {
+
+    veiculo.forEach(veiculo => {
+        if (veiculo.status == "Disponível") {
+            var op = document.createElement("option")
+            op.innerHTML = veiculo.tipo + " | " + veiculo.placa
+            op.value = veiculo.id
+            document.querySelector(".select_veiculo").appendChild(op)
+        }
+
+
+    })
+
+}
+
+function cad(){
+    const event = new Date()
+
+
+    let inputVeiculo = document.querySelector('#veiculo').value
+    let inputDesc = document.querySelector('#desc').value
+    let inputValor = document.querySelector('.painel_value').value
+
+        let info = JSON.stringify({
+            "data_inicio": event.toISOString(),
+            "data_fim": null,
+            "descricao": inputDesc,
+            "valor": parseFloat(inputValor),
+            "id_Veiculo": parseInt(inputVeiculo)
+        })
+
+        fetch('http://localhost:3000/Manutencao', {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+            .then(response => response.json())
+            .then(resp => {
+                const options = { method: 'GET' };
+                fetch('http://localhost:3000/Veiculos/idUm/' + resp.id_Veiculo, options)
+                .then(response => response.json())
+                .then(veiculo => {
+    
+                    let infoVeiculo = JSON.stringify({
+                        "id": veiculo.id,
+                        "placa": veiculo.placa,
+                        "modelo": veiculo.modelo,
+                        "marca": veiculo.marca,
+                        "tipo": veiculo.tipo,
+                        "status": "Indisponível"
+                    })
+    
+                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": infoVeiculo
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+                            alert("foi")
+                            window.location.reload()
+                        })
+                    
+    
+                })
+
+               
+
+            })
+
+
+
+
+    
+
+}
 // GRAFICOS
 
 
