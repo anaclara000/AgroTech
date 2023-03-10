@@ -29,6 +29,7 @@ CREATE TABLE `Veiculos` (
     `modelo` VARCHAR(191) NOT NULL,
     `marca` VARCHAR(191) NOT NULL,
     `tipo` VARCHAR(191) NOT NULL,
+    `status` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `Veiculos_placa_key`(`placa`),
     PRIMARY KEY (`id`)

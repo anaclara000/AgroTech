@@ -15,7 +15,8 @@ const createItems = async (req, res) => {
             {
                 descricao: "Quebrou a porta",
                 valor: 1200.90,
-                id_Veiculo: 1
+                id_Veiculo: 1,
+                status : "Em manutenção"
             },
 
         ],
@@ -36,7 +37,8 @@ const readOne = async (req, res) => {
             data_fim: true,
             descricao: true,
             valor: true,
-            id_Veiculo: true
+            id_Veiculo: true,
+            status: true
         }
     });
 
@@ -54,6 +56,7 @@ const read = async (req, res) => {
             descricao: true,
             valor: true,
             id_Veiculo: true,
+            status: true,
             veiculos: true
         }
     });

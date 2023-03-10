@@ -44,6 +44,7 @@ model Manutencao{
   data_fim DateTime?
   descricao String
   valor Float
+  status String
   id_Veiculo Int
   veiculos Veiculos @relation(fields: [id_Veiculo], references: [id])
 }

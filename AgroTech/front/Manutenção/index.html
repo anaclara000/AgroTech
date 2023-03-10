@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <title>Manutenção</title>
 </head>
+
 <body onLoad="carregar()">
     <div class="general_container">
         <header>
@@ -19,7 +21,7 @@
                 <div class="topics items">
                     <a href="../Home/index.html"><span class="menu">Home</span></a>
                     <a href="../Manutenção/index.html"><span class="menu">Manutenção</span></a>
-                    <a href="../Frota/index.html"><span class="menu">Frota</span></a> 
+                    <a href="../Frota/index.html"><span class="menu">Frota</span></a>
                     <a href="../Operacao/index.html"><span class="menu">Operação</span></a>
                     <a href="../Funcionarios/index.html"><span class="menu">Funcionarios</span></a>
                     <a href="../Dashboard/index.html"><span class="menu">DashBoard</span></a>
@@ -34,8 +36,8 @@
             <div class="filter">
                 <input type="text" class="search">
                 <i class='bx bx-search' id="btn-filter"></i>
-             </div>
-             <div class="legend">
+            </div>
+            <div class="legend">
                 <div>
                     <img src="../../assets/Camarelo.png" alt="">
                     <span>Em manutenção</span>
@@ -50,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="manitence_list" >
+            <div class="manitence_list">
                 <table class="table">
                     <thead>
                         <tr>
@@ -67,6 +69,8 @@
                         <tr class="list_manitence model">
                             <td> <img class="img_icon" src="" alt=""></td>
                             <td id="id"></td>
+                            <td id="placa"></td>
+                            <td id="situacao"></td>
                             <td id="dataI"></td>
                             <td id="dataF"></td>
                             <td id="valor"></td>
@@ -76,10 +80,10 @@
                     </tbody>
                 </table>
 
-                
+
             </div>
             <div class="grafico">
-                <span>Gráficos</span>
+               
                 <div class="graf-container">
                     <div class="grafic1">
                         <canvas id="myChart"></canvas>
@@ -87,9 +91,9 @@
                     <div class="grafic2">
                         <canvas id="myGrafic"></canvas>
                     </div>
-                    
-                   
-                   
+
+
+
                 </div>
             </div>
         </main>
@@ -119,33 +123,33 @@
 
         <div class="painel model">
             <div class="items_painel">
-                
+
                 <div class="objects">
                     <i class='bx bx-x' onClick="abrirModalCreate()"></i>
-                        <span id="title">Cadastro de manutenção</span>
-    
+                    <span id="title">Cadastro de manutenção</span>
+
                     <form>
                         <label for="">Data</label>
                         <input type="text" id="data">
-    
+
                         <label for="">Veículo</label>
                         <select class="select_veiculo" name="" id="veiculo">
-                            
+
                         </select>
-    
-    
+
+
                         <label for="">Descrição</label>
                         <input type="text" id="desc">
-    
+
                         <label for="">Valor</label>
                         <input class="painel_value" type="text">
-    
-    
+
+
                     </form>
                     <button onClick="cad()">Cadastrar</button>
-    
+
                 </div>
-    
+
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
         </div>
@@ -155,42 +159,64 @@
             <div class="items_acao">
                 <div class="objects">
                     <i class='bx bx-x' onClick="abrirModalAcao()"></i>
-                        <span id="title">Seleciona a ação</span>
-                    <select class="select_items" name="" id="" onclick="escolher()" >
+                    <span id="title">Seleciona a ação</span>
+                    <select class="select_items" name="" id="" onclick="escolher()">
                         <option value="select_infos">Selecione uma opção</option>
                         <option value="finalizar">Finalizar</option>
                         <option value="att">Atualizar</option>
                         <option value="cancel">Cancelar</option>
                     </select>
 
-                    <!-- <label for="">Veículo</label>
-                    <select class="select_veiculo" name="" id="veiculo">
-                        
-                    </select> -->
-                    <label for="">Id</label>
-                    <input type="text" id="idAcao">
 
-                    <label for="">Status</label>
-                    <input type="text" id="data_acao">
+                    <form action="">
+                        <label for="">Id</label>
+                        <input type="text" id="idAcao">
 
-                    <label for="">Descrição</label>
-                    <input type="text" id="desc_acao">
+                        <label for="">Status</label>
+                        <input type="text" id="data_acao">
 
-                    <label for="">Valor</label>
-                    <input id="value_acao" type="text">
+                        <label for="">Veiculo</label>
+                        <input type="text" id="veiculo_acao">
 
-                    <span class="aviso model">Não é possível alterar um veiculo em manutenção.</span>
-                    <span class="aviso2 model">Não é possível cancelar uma manutenção finalizada.</span>
-                    <span class="aviso3 model">Não é possível finalizar uma manutenção finalizada.</span>
+
+                        <select class="select_veiculo2 model" name="">
+                            <option class="veiculoAtual"></option>
+                        </select>
+
+
+
+
+
+                        <label for="">Descrição</label>
+                        <input type="text" id="desc_acao">
+
+                        <label for="">Valor</label>
+                        <input id="value_acao" type="text">
+                        <span class="aviso model">Não é possível alterar um veiculo em manutenção.</span>
+                        <span class="aviso2 model">Não é possível cancelar uma manutenção finalizada.</span>
+                        <span class="aviso3 model">Não é possível finalizar uma manutenção finalizada.</span>
+                    </form>
+
+
+
+                    <button onClick="atualizar()" class="btnAcao">Salvar</button>
                 </div>
-                <button onClick="atualizar()" class="btnAcao">Salvar</button>
+
             </div>
 
         </div>
+
+      <div class="situacao2 model">
+        <span>Esta manutenção está <b>cancelada </b>, não é possível realizar nenhuma mudança</span>
+        <button onclick="fecharModalAviso()">Voltar</button>
+      </div>
+            
+        
     </div>
-   
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script src="script.js"></script>
+
 </html>

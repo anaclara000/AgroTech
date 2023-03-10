@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-around;
 }
-.model{
+.model, #placa, #situacao{
     display: none;
     visibility: hidden;
 }
@@ -280,7 +280,7 @@ th{
 /* 
 PAINEL DE CRIAÇÃO  */
 
-.painel{
+.painel, .painel_acao{
     background-color: #fafafa80;
     position: absolute;
     top: 0;
@@ -292,17 +292,19 @@ PAINEL DE CRIAÇÃO  */
     justify-content: center;
 }
 
-.items_painel{
+.items_painel, .items_acao{
     justify-content: center;
     flex-direction: row;
     display: flex;
     align-items: center;
     background-color: #da9732;
     width: 20vw;
-    height: 60vh;
+    height: 63vh;
     border-radius: 20px;
 }
-
+.items_acao{
+    height: 80vh;
+}
 .objects{
     display: flex;
     flex-direction: column;
@@ -315,6 +317,7 @@ PAINEL DE CRIAÇÃO  */
     background-color: white;
     padding: 5px 10px;
     border: none;
+    color: black;
 }
 
 
@@ -372,4 +375,46 @@ form > input, .painel_driver , .select_veiculo, select{
     border-radius: 50%;
     padding:5px;
     margin-bottom: 2%;
+  }
+
+  .aviso, .aviso2, .aviso3{
+    color: red;
+    font-weight:  bold;
+    margin-bottom: 2%;
+  }
+
+
+  /* FIM DO PAINEL */
+  .veiculoAtual{
+    color: black;
+  }
+
+  .situacao2{
+    background-color: #eeecec;
+    padding: 3%;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 30vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .situacao2 > button{
+    padding:5px 15px;
+    background-color: #da9732;
+    border-radius: 10px;
+    border: none;
+    color: white;
+  }
+
+  .situacao2 > button:hover{
+    cursor: pointer;
+    background-color: #e7b05d;
+  }
+  b{
+    color: red;
   }

@@ -181,6 +181,13 @@ body{
 th{
     padding: 10px;
 }
+
+.operation_list, .manitence_list, .driver_list{
+    height: 67vh;
+
+    overflow-y: scroll; 
+    overflow-x: hidden;
+}
 /* FIM DA TABELA */
 
 /* DISTRIBUINDO O TAMANHO DOS CONTAINERS NA TELA */

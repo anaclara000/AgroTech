@@ -521,7 +521,8 @@ function cad() {
             "data_fim": null,
             "descricao": inputDesc,
             "valor": parseFloat(inputValor),
-            "id_Veiculo": parseInt(inputVeiculo)
+            "id_Veiculo": parseInt(inputVeiculo),
+            "status": "Em manutenção"
         })
 
         fetch('http://localhost:3000/Manutencao', {
