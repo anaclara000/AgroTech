@@ -78,11 +78,11 @@ function listarManutencao() {
         lista.querySelector("#dataI").innerHTML = info.data_inicio.slice(0, 10);
         if (info.data_fim == null) {
             lista.querySelector("#dataF").innerHTML = "-";
-            lista.querySelector(".img_icon").src = "../../assets/Mvermelho.png"
+            lista.querySelector(".img_icon").src = "../../assets/Camarelo.png"
 
         } else {
             lista.querySelector("#dataF").innerHTML = info.data_fim.slice(0, 10);
-            lista.querySelector(".img_icon").src = "../../assets/Mverde.png"
+            lista.querySelector(".img_icon").src = "../../assets/Cverde.png"
         }
 
         lista.querySelector("#valor").innerHTML = "R$" + info.valor;
@@ -151,6 +151,200 @@ function contarManutencoesPorMes(listaDeManutencoes, tipoDeVeiculo) {
 
 
     return manutencoesPorMes
+}
+
+
+function abrirModalAcao(e){
+    var modal = document.querySelector('.painel_acao')
+    modal.classList.toggle('model')
+
+    var IdAcao = e.parentNode.parentNode.querySelector('#id').innerHTML
+    document.querySelector('#idAcao').value = IdAcao
+
+    var desc = e.parentNode.parentNode.querySelector('#descricao').innerHTML
+    var valor = e.parentNode.parentNode.querySelector('#valor').innerHTML
+    var status = e.parentNode.parentNode.querySelector('#dataF').innerHTML
+    
+        if(status == '-'){
+            document.querySelector('#data_acao').value = "Veiculo em manutenção"
+
+            document.querySelector('#desc_acao').value = desc
+    
+            document.querySelector('#value_acao').value = valor
+        
+            
+        }else{
+            document.querySelector('#desc_acao').value = desc
+            document.querySelector('#value_acao').value = valor
+            document.querySelector('#data_acao').value = "Manutenção finalizada"
+            let inpStatus = document.querySelector('#data_acao')
+            inpStatus.disabled = true
+        
+    }
+       
+    }
+    
+    function escolher(){
+        var select_items = document.querySelector(".select_items")
+        let seleStatus = select_items.options[select_items.selectedIndex].value;
+        // if (seleStatus == 'finalizar') { var acao = 'finalizar' }
+        // if (seleStatus == 'cancel') { var acao = 'cancel' }
+        // if (seleStatus == 'att') { var acao = 'att' }
+
+        var informacao = document.querySelector('#data_acao').value
+
+        if(seleStatus == 'select_infos'){
+            let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+    
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = true
+    
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = true
+    
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = true
+        }else{
+            if(informacao != 'Manutenção finalizada'){
+                if(seleStatus == 'att'){
+                    let inpStatus = document.querySelector('#data_acao')
+                    inpStatus.disabled = true
+        
+                    let inpDesc = document.querySelector("#desc_acao")
+                    inpDesc.disabled = true
+        
+                    let inpValor = document.querySelector("#value_acao")
+                    inpValor.disabled = true
+        
+                    let botao = document.querySelector(".btnAcao")
+                    botao.disabled = true
+                    var modalAviso = document.querySelector('.aviso')
+                    modalAviso.classList.remove('model')
+                }
+                if(seleStatus == 'cancel'){
+                    let inpStatus = document.querySelector('#data_acao')
+                    inpStatus.disabled = false
+        
+                    let inpDesc = document.querySelector("#desc_acao")
+                    inpDesc.disabled = false
+        
+                    let inpValor = document.querySelector("#value_acao")
+                    inpValor.disabled = false
+        
+                    let botao = document.querySelector(".btnAcao")
+                    botao.disabled = false
+                    var modalAviso = document.querySelector('.aviso')
+                    modalAviso.classList.add('model')
+                  
+                }
+                if(seleStatus == 'finalizar'){
+                    let inpStatus = document.querySelector('#data_acao')
+                    inpStatus.disabled = false
+        
+                    let inpDesc = document.querySelector("#desc_acao")
+                    inpDesc.disabled = false
+        
+                    let inpValor = document.querySelector("#value_acao")
+                    inpValor.disabled = false
+        
+                    let botao = document.querySelector(".btnAcao")
+                    botao.disabled = false
+
+                    var modalAviso = document.querySelector('.aviso')
+                    modalAviso.classList.add('model')
+                  
+                }
+            }
+            if(informacao == 'Manutenção finalizada'){
+                if(seleStatus == 'cancel'){
+                    let inpStatus = document.querySelector('#data_acao')
+                    inpStatus.disabled = true
+        
+                    let inpDesc = document.querySelector("#desc_acao")
+                    inpDesc.disabled = true
+        
+                    let inpValor = document.querySelector("#value_acao")
+                    inpValor.disabled = true
+        
+                    let botao = document.querySelector(".btnAcao")
+                    botao.disabled = true
+                    var modalAviso2 = document.querySelector('.aviso2')
+                    modalAviso2.classList.remove('model')
+                }
+                if(seleStatus == 'finalizar'){
+                    let inpStatus = document.querySelector('#data_acao')
+                    inpStatus.disabled = true
+        
+                    let inpDesc = document.querySelector("#desc_acao")
+                    inpDesc.disabled = true
+        
+                    let inpValor = document.querySelector("#value_acao")
+                    inpValor.disabled = true
+        
+                    let botao = document.querySelector(".btnAcao")
+                    botao.disabled = true
+                    var modalAviso3 = document.querySelector('.aviso3')
+                    modalAviso3.classList.remove('model')
+                }
+                if(seleStatus == 'att'){
+                    let inpStatus = document.querySelector('#data_acao')
+                    inpStatus.disabled = false
+        
+                    let inpDesc = document.querySelector("#desc_acao")
+                    inpDesc.disabled = false
+        
+                    let inpValor = document.querySelector("#value_acao")
+                    inpValor.disabled = false
+        
+                    let botao = document.querySelector(".btnAcao")
+                    botao.disabled = false
+                    var modalAviso3 = document.querySelector('.aviso3')
+                    modalAviso3.classList.add('model')
+                }
+            }
+        }
+        // PODE CANCELAR E FINALIZAR
+      
+      
+       
+      
+       
+    }
+
+function atualizar(){
+    let idManu = document.querySelector('#idAcao').value
+    let inputDesc = document.querySelector('#desc_acao').value
+    let inputValor = document.querySelector('#value_acao').value
+    var select_items = document.querySelector(".select_items")
+    let seleStatus = select_items.options[select_items.selectedIndex].value;
+    
+
+    
+    if(seleStatus == 'att'){
+        console.log("aq")
+        let info = JSON.stringify({
+            "descricao": inputDesc,
+            "valor": parseFloat(inputValor.slice(2)),
+        })
+       
+        fetch('http://localhost:3000/Manutencao/idUp/' + idManu, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+        .then(response => response.json())
+            .then(resp => {
+                window.location.reload()
+             })
+            
+    }
+}
+
+function opcao(){
+   
 }
 
 var search_btn = document.querySelector('#btn-filter')

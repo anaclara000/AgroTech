@@ -35,7 +35,20 @@
                 <input type="text" class="search">
                 <i class='bx bx-search' id="btn-filter"></i>
              </div>
-
+             <div class="legend">
+                <div>
+                    <img src="../../assets/Camarelo.png" alt="">
+                    <span>Em manutenção</span>
+                </div>
+                <div>
+                    <img src="../../assets/Cverde.png" alt="">
+                    <span>Manutenção finalizada</span>
+                </div>
+                <div>
+                    <img src="../../assets/Cvermelho.png" alt="">
+                    <span>Manutenção cancelada</span>
+                </div>
+            </div>
 
             <div class="manitence_list" >
                 <table class="table">
@@ -47,6 +60,7 @@
                             <th>Data Fim</th>
                             <th>Valor</th>
                             <th>Descrição</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody class="tbody_list_manitence">
@@ -57,6 +71,7 @@
                             <td id="dataF"></td>
                             <td id="valor"></td>
                             <td id="descricao"></td>
+                            <td><i class='bx bxs-edit' onclick="abrirModalAcao(this)"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -133,6 +148,44 @@
     
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
+        </div>
+
+
+        <div class="painel_acao model">
+            <div class="items_acao">
+                <div class="objects">
+                    <i class='bx bx-x' onClick="abrirModalAcao()"></i>
+                        <span id="title">Seleciona a ação</span>
+                    <select class="select_items" name="" id="" onclick="escolher()" >
+                        <option value="select_infos">Selecione uma opção</option>
+                        <option value="finalizar">Finalizar</option>
+                        <option value="att">Atualizar</option>
+                        <option value="cancel">Cancelar</option>
+                    </select>
+
+                    <!-- <label for="">Veículo</label>
+                    <select class="select_veiculo" name="" id="veiculo">
+                        
+                    </select> -->
+                    <label for="">Id</label>
+                    <input type="text" id="idAcao">
+
+                    <label for="">Status</label>
+                    <input type="text" id="data_acao">
+
+                    <label for="">Descrição</label>
+                    <input type="text" id="desc_acao">
+
+                    <label for="">Valor</label>
+                    <input id="value_acao" type="text">
+
+                    <span class="aviso model">Não é possível alterar um veiculo em manutenção.</span>
+                    <span class="aviso2 model">Não é possível cancelar uma manutenção finalizada.</span>
+                    <span class="aviso3 model">Não é possível finalizar uma manutenção finalizada.</span>
+                </div>
+                <button onClick="atualizar()" class="btnAcao">Salvar</button>
+            </div>
+
         </div>
     </div>
    

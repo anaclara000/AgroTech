@@ -47,9 +47,9 @@ function listarVeiculos() {
         lista.querySelector('#marca').innerHTML = v.marca;
         lista.querySelector('#tipo').innerHTML = v.tipo;
         if (v.status == 'Indisponível') {
-            lista.querySelector('.img_icon').src = '../../assets/Mvermelho.png'
+            lista.querySelector('.img_icon').src = '../../assets/Cvermelho.png'
         } else {
-            lista.querySelector('.img_icon').src = '../../assets/Mverde.png'
+            lista.querySelector('.img_icon').src = '../../assets/Cverde.png'
         }
 
         tbodyVeiculos.appendChild(lista)
