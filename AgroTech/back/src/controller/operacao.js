@@ -47,7 +47,8 @@ const readOne = async (req, res) => {
             dataFim: true,
             id_Motorista: true,
             idVeiculo: true,
-            descricao: true
+            descricao: true,
+            veiculos: true
         }
     });
 
