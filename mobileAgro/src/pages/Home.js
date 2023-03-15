@@ -5,14 +5,15 @@ import * as React from 'react'
 export default function home({navigation}) { 
     return(
     <View style={styles.container}>
-        {/* <View style={styles.botoes}>
+        <View style={styles.botoes}>
             <Image style={styles.img} source="https://raw.githubusercontent.com/wellifabio/senai2022/master/2des/indmo/aula09/data/assets/arquivo.png"></Image>
             <TouchableOpacity style={styles.text} onPress={() =>{navigation.navigate('Historico')}}>Histórico de Vacinas</TouchableOpacity>
         </View>
         <View style={styles.botoes}>
             <Image style={styles.img} source="https://raw.githubusercontent.com/wellifabio/senai2022/master/2des/indmo/aula09/data/assets/vacinacao.png"></Image>
-        <TouchableOpacity style={styles.text}  onPress={() =>{navigation.navigate('Registro')}}>Registrar Vacina</TouchableOpacity> */}
+        <TouchableOpacity style={styles.text}  onPress={() =>{navigation.navigate('Registro')}}>Registrar Vacina</TouchableOpacity>
         </View>
+    </View>
     );
     
 }
