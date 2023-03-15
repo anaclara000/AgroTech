@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-around;
 }
-.model{
+.model, #situacao{
     display: none;
     visibility: hidden;
 }
@@ -344,4 +344,38 @@ form {
     border-radius: 50%;
     padding:5px;
     margin-bottom: 2%;
+  }
+
+  .veiculoAtual{
+    color: black;
+  }
+
+  .situacao2{
+    background-color: #eeecec;
+    padding: 3%;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 30vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .situacao2 > button{
+    padding:5px 15px;
+    background-color: #da9732;
+    border-radius: 10px;
+    border: none;
+    color: white;
+  }
+
+  .situacao2 > button:hover{
+    cursor: pointer;
+    background-color: #e7b05d;
+  }
+  b{
+    color: red;
   }

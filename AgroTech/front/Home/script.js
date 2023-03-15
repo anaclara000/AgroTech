@@ -263,6 +263,7 @@ function finalizar(e) {
                 "id_Motorista": resp.id_Motorista,
                 "idVeiculo": resp.idVeiculo,
                 "descricao": resp.descricao,
+                "status": "Finalizada"
             })
 
             const options = { method: 'GET' };
@@ -287,7 +288,7 @@ function finalizar(e) {
                         .then(response => response.json())
                         .then(resp => {
 
-                        
+
                         })
 
 
@@ -303,13 +304,9 @@ function finalizar(e) {
                         .then(response => response.json())
                         .then(resp => {
 
-                           
+
 
                         })
-
-
-
-
 
                 })
 
@@ -338,7 +335,7 @@ function finalizar(e) {
                         .then(resp => {
                             window.location.reload()
                         })
-                    
+
 
                 })
 
@@ -346,6 +343,73 @@ function finalizar(e) {
 
         })
 }
+
+
+function finalizarManutencao(e) {
+    var idManu = e.parentNode.parentNode.querySelector('.Idmanitence').innerHTML
+
+
+    const event = new Date();
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/Manutencao/idUm/' + idManu, options)
+        .then(response => response.json())
+        .then(resp => {
+
+            let data = JSON.stringify({
+                "data_inicio": resp.data_inicio,
+                "data_fim": event.toISOString(),
+                "descricao": resp.descricao,
+                "valor": resp.valor,
+                "id_Veiculo": resp.id_Veiculo,
+                "status": "Finalizada",
+            })
+
+            fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, options)
+                .then(response => response.json())
+                .then(vei => {
+
+                    let info = JSON.stringify({
+                        "status": "Disponível"
+                    })
+
+                    
+            
+                    fetch('http://localhost:3000/Veiculos/idUp/' + vei.id, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": info
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+                            
+        
+                        })
+
+                })
+              
+            fetch('http://localhost:3000/Manutencao/idUp/' + idManu, {
+                "method": "PUT",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": data
+            })
+                .then(response => response.json())
+                .then(resp => {
+                    window.location.reload()
+
+                })
+
+
+
+        })
+
+}
+
 
 // FIM DOS MOTORISTAS
 
@@ -366,6 +430,7 @@ function listarManutencao() {
             var lista = listManutencao.cloneNode(true);
             lista.classList.remove('model')
             lista.querySelector('#id').innerHTML = info.id
+            document.querySelector('.Idmanitence').innerHTML = info.id
             lista.querySelector("#dataI").innerHTML = info.data_inicio.slice(0, 10);
             if (info.data_fim != null) {
                 lista.querySelector("#dataF").innerHTML = info.data_fim.slice(0, 10);
@@ -378,7 +443,7 @@ function listarManutencao() {
             tbodyManutencao.appendChild(lista)
         }
 
-      
+
     })
 }
 
@@ -536,35 +601,35 @@ function cad() {
             .then(resp => {
                 const options = { method: 'GET' };
                 fetch('http://localhost:3000/Veiculos/idUm/' + resp.id_Veiculo, options)
-                .then(response => response.json())
-                .then(veiculo => {
-    
-                    let infoVeiculo = JSON.stringify({
-                        "id": veiculo.id,
-                        "placa": veiculo.placa,
-                        "modelo": veiculo.modelo,
-                        "marca": veiculo.marca,
-                        "tipo": veiculo.tipo,
-                        "status": "Indisponível"
-                    })
-    
-                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
-                        "method": "PUT",
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "body": infoVeiculo
-                    })
-                        .then(response => response.json())
-                        .then(resp => {
-                            alert("foi")
-                            window.location.reload()
-                        })
-                    
-    
-                })
+                    .then(response => response.json())
+                    .then(veiculo => {
 
-               
+                        let infoVeiculo = JSON.stringify({
+                            "id": veiculo.id,
+                            "placa": veiculo.placa,
+                            "modelo": veiculo.modelo,
+                            "marca": veiculo.marca,
+                            "tipo": veiculo.tipo,
+                            "status": "Indisponível"
+                        })
+
+                        fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
+                            "method": "PUT",
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "body": infoVeiculo
+                        })
+                            .then(response => response.json())
+                            .then(resp => {
+                                alert("foi")
+                                window.location.reload()
+                            })
+
+
+                    })
+
+
 
             })
 
@@ -573,14 +638,15 @@ function cad() {
 
     }
 
-    
+
     if (seleStatus == 'operation') {
         let data = JSON.stringify({
             "dataInicio": event.toISOString(),
             "dataFim": null,
             "id_Motorista": parseInt(inputMotorista),
             "idVeiculo": parseInt(inputVeiculo),
-            "descricao": inputDesc
+            "descricao": inputDesc,
+            "status": "Em operação"
         })
         fetch('http://localhost:3000/Operacao', {
             "method": "POST",
@@ -593,62 +659,62 @@ function cad() {
             .then(resp => {
                 const options = { method: 'GET' };
                 fetch('http://localhost:3000/Veiculos/idUm/' + resp.idVeiculo, options)
-                .then(response => response.json())
-                .then(veiculo => {
-    
-                    let infoVeiculo = JSON.stringify({
-                        "id": veiculo.id,
-                        "placa": veiculo.placa,
-                        "modelo": veiculo.modelo,
-                        "marca": veiculo.marca,
-                        "tipo": veiculo.tipo,
-                        "status": "Indisponível"
-                    })
-    
-                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
-                        "method": "PUT",
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "body": infoVeiculo
-                    })
-                        .then(response => response.json())
-                        .then(resp => {
-                            
+                    .then(response => response.json())
+                    .then(veiculo => {
+
+                        let infoVeiculo = JSON.stringify({
+                            "id": veiculo.id,
+                            "placa": veiculo.placa,
+                            "modelo": veiculo.modelo,
+                            "marca": veiculo.marca,
+                            "tipo": veiculo.tipo,
+                            "status": "Indisponível"
                         })
-                    
-    
-                })
-    
+
+                        fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                            "method": "PUT",
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "body": infoVeiculo
+                        })
+                            .then(response => response.json())
+                            .then(resp => {
+
+                            })
+
+
+                    })
+
                 fetch('http://localhost:3000/Motorista/idUm/' + resp.id_Motorista, options)
-                .then(response => response.json())
-                .then(motorista => {
+                    .then(response => response.json())
+                    .then(motorista => {
 
-                    let info = JSON.stringify({
-                        "nome": motorista.nome,
-                        "CNH": motorista.CNH,
-                        "disponivel": "Indisponível"
-                    })
-
-                    fetch('http://localhost:3000/Motorista/idUp/' + resp.id_Motorista, {
-                        "method": "PUT",
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "body": info
-                    })
-                        .then(response => response.json())
-                        .then(resp => {
-
-                            alert("foi")
-                            window.location.reload()
+                        let info = JSON.stringify({
+                            "nome": motorista.nome,
+                            "CNH": motorista.CNH,
+                            "disponivel": "Indisponível"
                         })
+
+                        fetch('http://localhost:3000/Motorista/idUp/' + resp.id_Motorista, {
+                            "method": "PUT",
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "body": info
+                        })
+                            .then(response => response.json())
+                            .then(resp => {
+
+                                alert("foi")
+                                window.location.reload()
+                            })
 
                     })
 
             })
 
-           
+
     }
 
 

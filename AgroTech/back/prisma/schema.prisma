@@ -58,4 +58,5 @@ model Operacao{
   idVeiculo Int
   veiculos Veiculos @relation(fields: [idVeiculo], references: [id])
   descricao String
+  status String
 }

@@ -61,7 +61,7 @@
                             <th>Descrição</th>
                             <th>Data Inicio</th>
                             <th>Data Fim</th>
-
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody class="tbody_list_operation">
@@ -69,11 +69,12 @@
                             <td><img class="img_icon" src="" alt=""></td>
                             <td id="id"></td>
                             <td id="idMotorista"></td>
+                            <td id="situacao"></td>
                             <td id="veiculos"></td>
                             <td id="desc"></td>
                             <td id="dataInicio"></td>
                             <td id="dataFim"></td>
-
+                            <td><i class='bx bxs-edit' onclick="abrirModalAcao(this)"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -146,6 +147,57 @@
     
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
+        </div>
+
+        <div class="painel_acao model">
+            <div class="items_acao">
+                <div class="objects">
+                    <i class='bx bx-x' onClick="abrirModalAcao()"></i>
+                    <span id="title">Seleciona a ação</span>
+                    <select class="select_items" name="" id="" onclick="escolher()">
+                        <option value="select_infos">Selecione uma opção</option>
+                        <option value="finalizar">Finalizar</option>
+                        <option value="att">Atualizar</option>
+                        <option value="cancel">Cancelar</option>
+                    </select>
+
+
+                    <form action="">
+                        <label for="">Id</label>
+                        <input type="text" id="idAcao">
+
+                        <label for="">Status</label>
+                        <input type="text" id="data_acao">
+
+                        <label for="">Veiculo</label>
+                        <input type="text" id="veiculo_acao">
+
+<!-- 
+                        <select class="select_veiculo2 model" name="">
+                            <option class="veiculoAtual"></option>
+                        </select> -->
+
+
+
+
+
+                        <label for="">Descrição</label>
+                        <input type="text" id="desc_acao">
+
+                        <label for="">Motorista</label>
+                        <input id="value_acao" type="text">
+                        <span class="aviso model">Não é possível alterar um veiculo em manutenção.</span>
+                        <span class="aviso2 model">Não é possível cancelar uma manutenção finalizada.</span>
+                        <span class="aviso3 model">Não é possível finalizar uma manutenção finalizada.</span>
+                    </form>
+
+
+
+                    <button onClick="atualizar()" class="btnAcao">Salvar</button>
+                </div>
+
+            </div>
+
         </div>
 
     </div>

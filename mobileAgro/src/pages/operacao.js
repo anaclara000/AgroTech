@@ -1,159 +1,212 @@
-import * as React from 'react'
-import { ImageBackground, Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { ImageBackground, Text, View, Image, TouchableOpacity, StyleSheet, Picker, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import * as React from 'react'
 import { useState, useEffect } from 'react';
 
-export default function home({ navigation }) {
-    const [manutencao, setManutencao] = useState([]);
+export default function Operacao({ navigation }) {
+    const [motorista, setmotorista] = useState([]);
+    const [Operacao, setOperacao] = useState([]);
+    const [OperacaoFiltrada, setOperacaoFiltrada] = useState([]);
+    const [tipoSelecionado, setTipoSelecionado] = useState('');
+    const [statusSelecionado, setStatusSelecionado] = useState('');
+    const [tipoFinalizar, setFinalizar] = useState([]);
+
+
     useEffect(() => {
         const options = { method: 'GET' };
-        fetch('http://localhost:3000/Manutencao', options)
-            .then(res => { return res.json() })
+        fetch('http://localhost:3000/Operacao', options)
+            .then(res => res.json())
             .then(data => {
-                setManutencao(data);
-            })
+                setOperacao(data);
+                setOperacaoFiltrada(data);
+            });
     }, []);
 
-    useEffect(() => {
-    }, [manutencao]);
-
-    const [veiculo, setVeiculo] = useState([]);
-    useEffect(() => {
-        const options = { method: 'GET' };
-        fetch('http://localhost:3000/Veiculos', options)
-            .then(res => { return res.json() })
-            .then(data => {
-                setVeiculo(data);
-            })
-    }, []);
-
-    useEffect(() => {
-    }, [veiculo]);
 
 
-    // var img = require('');
-    const dataFim = "-"
+
+
+
+
+    const datafim = "-";
+
+    const handleStatusChange = (status) => {
+        setStatusSelecionado(status);
+        let operacoesFiltradas = Operacao;
+        if (status) {
+            operacoesFiltradas = operacoesFiltradas.filter(m => m.status === status);
+        }
+        if (tipoSelecionado) {
+            operacoesFiltradas = operacoesFiltradas.filter(m => m.veiculos.tipo === tipoSelecionado);
+        }
+        setOperacaoFiltrada(operacoesFiltradas);
+    };
+
     return (
+        <View >
+            <View style={styles.nome}>
+                <Text style={styles.color_name}>AgroTech</Text>
+            </View>
+            <View style={styles.subtitle}>
+                <View style={styles.subtitle_imgs}>
+                    <Image source={require('../../assets/Camarelo.png')} style={{ width: 15, height: 15 }} />
+                    <Text style={{ marginLeft: '4px' }}>Em manutenção</Text>
+                </View>
 
-        <View>
-            
-               <View style={styles.nome}>
-                            <Text style={styles.color_name}>AgroTech</Text>
-                        </View>
-                        <Text>Em manutenção</Text>
-                            <Text>Cancelada</Text>
-                            <Text>Finalizada</Text>
-            {
-                manutencao.map((m, index) => {
-                    if (m.data_fim == null) {
-                        m.data_fim = dataFim
+                <View style={styles.subtitle_imgs}>
+                    <Image source={require('../../assets/Cvermelho.png')} style={{ width: 15, height: 15 }} />
+                    <Text style={{ marginLeft: '4px' }}>Cancelada</Text>
+                </View>
+
+                <View style={styles.subtitle_imgs}>
+                    <Image source={require('../../assets/Cverde.png')} style={{ width: 15, height: 15 }} />
+                    <Text style={{ marginLeft: '4px' }}>Finalizada</Text>
+                </View>
+
+            </View>
+
+            <View style={styles.select}>
+                <View style={{ marginRight: '10px' }}>
+                    <Picker style={{
+                        borderColor: '#da9732'
+                    }}
+                        selectedValue={statusSelecionado}
+                        onValueChange={(itemValue) => handleStatusChange(itemValue)}
+
+                    >
+                        <Picker.Item label="Selecione o status" value="" />
+                        <Picker.Item label="Em operação" value="Em operação" />
+                        <Picker.Item label="Finalizada" value="Finalizada" />
+                        <Picker.Item label="Cancelada" value="Cancelada" />
+                    </Picker>
+                </View>
+            </View>
+           
+            {OperacaoFiltrada.length > 0 ? (
+                OperacaoFiltrada.map((m, index) => {
+                    if (m.dataFim == null) {
+                        m.dataFim = datafim
 
                     } else {
-                        m.data_fim.slice(0, 10)
+                        m.dataFim.slice(0, 10)
                     }
-
-
                     return (
                         <View style={styles.container} key={index}>
-                            {/* <ImageBackground style={{ width: '100%', height: '100vh' }} source={{ uri: 'https://mobimg.b-cdn.net/v3/fetch/4c/4ccef9c7a63cb6dc60439866a79c1f56.jpeg?h=900&r=0.5' }}> */}
-                     
-                           
-                            <View style={styles.card_general}>
-                                <View style={styles.title}>
-                                    <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 15, height: 15 }} />
-                                    <Text style={styles.id}>ID: {m.id}</Text>
-                                </View>
+                            <View style={styles.card}>
+                                <Text style={{
+                                    color: 'white',
+                                    textAlign: 'center',
+                                    backgroundColor: '#da9732',
+                                    padding: '10px'
+                                }}>{m.descricao}</Text>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                }}>
+                                    {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
 
-                                <View style={styles.card}>
                                     <View>
-
-                                        <Text >Data Inicio: {m.data_inicio.slice(0, 10)}</Text>
-                                        <Text >Data fim: {m.data_fim}</Text>
-                                        <Text >Descrição: {m.descricao}</Text>
-                                        <Text >Veiculo: {m.veiculos.tipo} | {m.veiculos.placa}</Text>
+                                        <Text>Motorista: {m.id}</Text>
+                                        <Text>Veiculo: {m.idVeiculo}</Text>
                                     </View>
 
-                                    <View style={styles.infos}>
-
-                                        {/* <Text>Status: {m.status}</Text> */}
-
-                                        <Text style={styles.valor}>Valor: R${m.valor}</Text>
+                                    <View>
+                                        <Text>Data Inicio: {m.dataInicio.slice(0, 10)}</Text>
+                                        <Text>Data fim: {m.dataFim.slice(0, 10)}</Text>
                                     </View>
+                                </View>
+                                <View style={{
+                                    justifyContent: 'space-around',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                }}>
+                                    <Picker style={{
+                                        textAlign: 'center',
+                                        borderColor: '#da9732',
+                                        width: '50%'
+                                    }}
+                                    // selectedValue={statusSelecionado}
+                                    // onValueChange={(itemValue) => handleStatusChange(itemValue)}
+
+                                    >
+                                        <Picker.Item label="Selecione a ação" value="" />
+                                        <Picker.Item label="Finalizar" value="Cancelar" />
+                                        <Picker.Item label="Cancelar" value="Cancelada" />
+                                    </Picker>
+
+                                    <TouchableOpacity style={{
+                                        backgroundColor: '#da9732',
+                                        padding: '3px',
+                                        width: '100px',
+                                        fontFamily: 'Arial',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}>Salvar</TouchableOpacity>
                                 </View>
 
                             </View>
-                            {/* </ImageBackground> */}
                         </View>
-
-
-                    )
-
-
-
+                    );
                 })
-
-            }
-
+            ) : (
+                <Text>Nenhuma operação encontrada.</Text>
+            )}
 
         </View>
+    );
 
-    )
+
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-
+        padding: 5,
     },
-    card: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        width: '100%',
+    pickerContainer: {
+        marginBottom: 10,
     },
-
-    infos: {
-        marginLeft: '10%'
+    filterContainer: {
+        marginBottom: 10,
     },
-    valor: {
-        textAlign: 'center',
-        backgroundColor: 'green',
-        padding: '5px',
-        color: '#fff',
-        borderRadius: '10px',
-    },
-    card_general: {
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        margin: '10px',
-        padding: '10px',
-        borderRadius: '10px'
-    },
-    title: {
-        backgroundColor: '#da9732',
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        margin: '2px',
-        padding: '2%',
-
-    },
-    id: {
-        marginLeft: '10px',
+    OperacaoContainer: {
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 10,
     },
     nome: {
-        backgroundColor: '#da9732',
         width: '100%',
         textAlign: 'center',
         padding: '5px'
-       
+
     },
     color_name: {
-        color: '#fff',
-        fontSize : '25px'
+        color: '#da9732',
+        fontSize: '25px',
+        fontWeight: 'bold',
+    },
+    subtitle: {
+        flexDirection: 'row'
+    },
+    subtitle_imgs: {
+        alignItems: 'center',
+        textAlign: 'center',
+        margin: '10px',
+        flexDirection: 'row'
+    },
+    card: {
+
+        borderRadius: '10px',
+        width: '100%',
+        borderColor: '#da9732',
+        borderWidth: 1,
+        padding: '10px'
+    },
+    select: {
+        justifyContent: 'center',
+        flexDirection: 'row'
     }
-
 });
-

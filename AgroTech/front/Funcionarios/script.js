@@ -51,6 +51,7 @@ function carregar() {
 
     function listarMotorista() {
         Motorista.forEach(m => {
+
             
                 var lista = listMotorista.cloneNode(true);
                 lista.classList.remove('model')
@@ -59,9 +60,9 @@ function carregar() {
                 lista.querySelector('#cnh').innerHTML = m.CNH;
 
                 if(m.disponivel == "Disponível"){
-                    lista.querySelector('.img_icon').src = "../../assets/Mverde.png";
+                    lista.querySelector('.img_icon').src = "../../assets/Cverde.png";
                 }else{
-                    lista.querySelector('.img_icon').src = "../../assets/Mvermelho.png";
+                    lista.querySelector('.img_icon').src = "../../assets/Cvermelho.png";
                 }
     
 
@@ -82,6 +83,7 @@ function carregar() {
                 })
     
         })
+
     }
 
     var search_btn = document.querySelector('#btn-filter')

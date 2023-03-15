@@ -11,7 +11,7 @@
     font-family: 'Poppins';
 }
 
-#id, #idOperacao{
+#id, #idOperacao, .Idmanitence{
     display:none;
     visibility: hidden;
 }

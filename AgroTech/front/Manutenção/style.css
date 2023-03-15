@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-around;
 }
-.model, #placa, #situacao{
+.model, #situacao{
     display: none;
     visibility: hidden;
 }

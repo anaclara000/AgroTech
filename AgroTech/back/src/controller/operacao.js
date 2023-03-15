@@ -17,16 +17,19 @@ const createItems = async (req, res) => {
                 id_Motorista: 1, 
                 idVeiculo: 2,
                 descricao: "Levando trigo em Sorocaba",  
+                status: "Em operação",
             },
             {
                 id_Motorista: 2, 
                 idVeiculo: 4,
-                descricao: "Visita a empresa",  
+                descricao: "Visita a empresa",
+                status: "Em operação",   
             },
             {
                 id_Motorista: 3, 
                 idVeiculo: 3,
                 descricao: "Levando milho em Jundiaí",  
+                status: "Em operação",
             },
 
         ],
@@ -48,7 +51,7 @@ const readOne = async (req, res) => {
             id_Motorista: true,
             idVeiculo: true,
             descricao: true,
-            veiculos: true
+            status: true
         }
     });
 

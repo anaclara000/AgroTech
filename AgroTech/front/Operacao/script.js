@@ -8,13 +8,13 @@ function carregar() {
             listarOperacao();
         });
 
-        const options3 = { method: 'GET' };
-        fetch('http://localhost:3000/Motorista', options3)
-            .then(response => response.json())
-            .then(resp => {
-                motorista = resp;
-                listarMotorista();
-            });
+        // const options3 = { method: 'GET' };
+        // fetch('http://localhost:3000/Motorista', options3)
+        //     .then(response => response.json())
+        //     .then(resp => {
+        //         motorista = resp;
+        //         listarMotorista();
+        //     });
         const options4 = { method: 'GET' };
         fetch('http://localhost:3000/Veiculos', options4)
             .then(response => response.json())
@@ -43,10 +43,11 @@ var operacao = []
 function listarOperacao() {
 
     operacao.forEach(info => {
-       console.log(info)
+      
             var lista = listOperacao.cloneNode(true);
             lista.classList.remove('model')
 
+            document.querySelector("#situacao").innerHTML = info.status
             lista.querySelector("#id").innerHTML = info.id
             lista.querySelector("#desc").innerHTML = info.descricao
             lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
@@ -184,6 +185,47 @@ function listarVeiculo() {
             document.querySelector(".select_veiculo").appendChild(op)
         }
     })
+
+}
+
+function abrirModalAcao(e) {
+    var modal = document.querySelector('.painel_acao')
+    modal.classList.toggle('model')
+
+    var IdAcao = e.parentNode.parentNode.querySelector('#id').innerHTML
+    document.querySelector('#idAcao').value = IdAcao
+
+    var desc = e.parentNode.parentNode.querySelector('#desc').innerHTML
+    // var status = e.parentNode.parentNode.querySelector('#dataFim').innerHTML
+    var veiculo = e.parentNode.parentNode.querySelector('#veiculos').innerHTML
+    var motorista = e.parentNode.parentNode.querySelector('#idMotorista').innerHTML
+
+    var situacao = e.parentNode.parentNode.querySelector('#situacao').innerHTML
+    console.log(situacao)
+    if (situacao == 'Em operacao') {
+        document.querySelector('#data_acao').value = "Veiculo em operação"
+
+        document.querySelector('#desc_acao').value = desc
+
+        document.querySelector('#veiculo_acao').value = veiculo
+        document.querySelector('.veiculoAtual').value = veiculo
+        document.querySelector('#value_acao').value = motorista
+
+    } else if(situacao == 'Finalizada'){
+        document.querySelector('#desc_acao').value = desc
+        document.querySelector('#data_acao').value = "Operação finalizada"
+        document.querySelector('#veiculo_acao').value = veiculo
+        document.querySelector('#value_acao').value = motorista
+        console.log(veiculo)
+        let inpStatus = document.querySelector('#data_acao')
+        inpStatus.disabled = true
+
+    }else{
+        var modal = document.querySelector('.painel_acao')
+        modal.classList.add('model')
+
+     
+    }
 
 }
 
