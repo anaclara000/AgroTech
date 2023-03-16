@@ -1,28 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>AgroTech | Login</title>
+    <script>
+        var ifuser = window.localStorage.getItem('ifuser')
+        if (ifuser !== null) {
+            console.log(ifuser);
+            ifuser = JSON.parse(ifuser)
+            const options = {
+                method: 'POST',
+                headers: {
+                    Authorization: `${ifuser.token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: `{"id":${ifuser.uid}}`
+            };
+
+            fetch('http://localhost:3000/validarAcesso', options)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    if (!response.validation) {
+                        window.localStorage.removeItem('ifuser')
+                    } else {
+
+                        window.location.href = '../Home/index.html'
+                    }
+
+
+                }
+                )
+                .catch(err => console.error(err));
+        }
+    </script>
 </head>
+
 <body>
     <div class="container">
         <div class="login">
             <div class="items">
                 <img class="logo" src="../../assets/logo.png" alt="">
                 <input type="text" placeholder="Email" id="user">
-                <input type="password" placeholder="Senha" id="senha">  
+                <input type="password" placeholder="Senha" id="senha">
                 <button onClick="logar()">Entrar</button>
             </div>
             <div class="image">
-                <img src="https://www.produzindocerto.com.br/wp-content/uploads/2022/01/blog-IG-produzirconservar-S14-01-07-1024x576.jpg" alt="">
+                <img src="https://www.produzindocerto.com.br/wp-content/uploads/2022/01/blog-IG-produzirconservar-S14-01-07-1024x576.jpg"
+                    alt="">
             </div>
-            
+
         </div>
     </div>
-   
+
 </body>
 <script src="script.js"></script>
+
 </html>

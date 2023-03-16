@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Button , Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as React from 'react'
+import CryptoJS from "react-native-crypto-js";
+var AES = require("react-native-crypto-js").AES;
 
 export default function login({navigation}) { 
     const [email, setEmail] = useState();

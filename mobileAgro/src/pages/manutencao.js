@@ -3,15 +3,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as React from 'react'
 import { useState, useEffect } from 'react';
 
+
 export default function Manutencao({ navigation }) {
   const [Manutencao, setManutencao] = useState([]);
-
+  const [yipo, setTiposManutencao] = useState([]);
   const [ManutencaoFiltrada, setManutencaoFiltrada] = useState([]);
   const [tipoSelecionado, setTipoSelecionado] = useState('');
   const [statusSelecionado, setStatusSelecionado] = useState('');
   const [tipoFinalizar, setFinalizar] = useState([]);
 
-  
+
+
   useEffect(() => {
     const options = { method: 'GET' };
     fetch('http://localhost:3000/Manutencao', options)

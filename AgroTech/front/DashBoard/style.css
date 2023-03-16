@@ -21,7 +21,8 @@
     justify-content: space-around;
 }
 
-.model {
+.model,
+#situacao {
     display: none;
     visibility: hidden;
 }
@@ -170,82 +171,21 @@ footer,
     margin-top: 2%;
 }
 
-/* CONTAINER COM AS INFORMAÇÕES */
+/* GRAFICOS */
 
-
-/* TABELA */
-.motorista_list,
-.usuario_list {
-    height: 40vh;
-
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.motorista_list {
-    margin-top: 2%;
-}
-
-.table {
-    width: 100%;
-    border: 1px solid #C0C0C0;
-    border-collapse: collapse;
-    padding: 10px;
-    margin: 1%;
-    background-color: white;
-}
-
-.table th {
-    border-bottom: 1px solid #C0C0C0;
-    padding: 10px;
-    overflow: auto;
-    font-weight: 400;
-
-}
-
-.table td {
-    text-align: center;
-    align-items: center;
-    border-bottom: 1px solid #C0C0C0;
-    padding: 10px 5px;
-}
-
-th {
-    padding: 10px;
-}
-
-.img_icon {
-    width: 1vw;
-}
-
-.manitence_list {
-    height: 40vh;
-}
-
-/* FIM DA TABELA */
-
-
-/* FILTRO */
-.filter {
-    margin-left: 8%;
-    width: 50vw;
-    border: 2px solid #da9732;
-    align-items: center;
-    justify-content: center;
+.graf-container {
     display: flex;
-    border-radius: 10px;
-
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.search {
-    padding: 7px;
-    outline: none;
-    border: none;
-    width: 100%;
-    background-color: transparent;
+.grafic1 {
+    width: 30vw;
 }
 
-.bx-search {
-    color: #da9732;
-    font-size: 25px;
+.grafic2,
+.graftic2,
+.grafic3,
+.grafic4 {
+    width: 18vw;
 }

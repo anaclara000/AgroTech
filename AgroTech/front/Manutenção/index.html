@@ -83,8 +83,8 @@
 
 
             </div>
-            <div class="grafico">
-               
+            <!-- <div class="grafico">
+
                 <div class="graf-container">
                     <div class="grafic1">
                         <canvas id="myChart"></canvas>
@@ -96,7 +96,7 @@
 
 
                 </div>
-            </div>
+            </div> -->
         </main>
 
 
@@ -110,7 +110,8 @@
                 </div>
             </div>
             <div class="valorTotal">
-                <span>Valor total de gastos: R$ 3450,00</span>
+                <span id="total"></span>
+                <!-- <span>Valor total de gastos: R$ 3450,00</span> -->
             </div>
             <!-- <div class="subtitle">
                     <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
@@ -164,8 +165,8 @@
                     <select class="select_items" name="" id="" onclick="escolher()">
                         <option value="select_infos">Selecione uma opção</option>
                         <option value="finalizar">Finalizar</option>
-                        <option value="att">Atualizar</option>
-                        <option value="cancel">Cancelar</option>
+                        <option id="atualizar" value="att">Atualizar</option>
+                        <option id="cancelar" value="cancel">Cancelar</option>
                     </select>
 
 
@@ -207,12 +208,12 @@
 
         </div>
 
-      <div class="situacao2 model">
-        <span>Esta manutenção está <b>cancelada </b>, não é possível realizar nenhuma mudança</span>
-        <button onclick="fecharModalAviso()">Voltar</button>
-      </div>
-            
-        
+        <div class="situacao2 model">
+            <span>Esta manutenção está <b>cancelada </b>, não é possível realizar nenhuma mudança</span>
+            <button onclick="fecharModalAviso()">Voltar</button>
+        </div>
+
+
     </div>
 
 </body>

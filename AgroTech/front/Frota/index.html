@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <title>FROTA</title>
 </head>
+
 <body onLoad="carregar()">
     <div class="general_container">
         <header>
@@ -18,7 +20,7 @@
                 <div class="topics items">
                     <a href="../Home/index.html"><span class="menu">Home</span></a>
                     <a href="../Manutenção/index.html"><span class="menu">Manutenção</span></a>
-                    <a href="../Frota/index.html"><span class="menu">Frota</span></a> 
+                    <a href="../Frota/index.html"><span class="menu">Frota</span></a>
                     <a href="../Operacao/index.html"><span class="menu">Operação</span></a>
                     <a href="../Funcionarios/index.html"><span class="menu">Funcionarios</span></a>
                     <a href="../Dashboard/index.html"><span class="menu">DashBoard</span></a>
@@ -31,8 +33,8 @@
 
         <main>
             <div class="filter">
-               <input type="text" class="search">
-               <i class='bx bx-search' id="btn-filter"></i>
+                <input type="text" class="search">
+                <i class='bx bx-search' id="btn-filter"></i>
             </div>
 
             <div class="legend">
@@ -69,9 +71,9 @@
                     </tbody>
                 </table>
 
-                
+
             </div>
-            <div class="grafico">
+            <!-- <div class="grafico">
 
                 <div class="graf-container">
                     <div class="grafic1">
@@ -79,7 +81,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </main>
 
 
@@ -93,8 +95,8 @@
                 </div>
             </div>
             <div class="subtitle">
-                    <span>Veiculos cadastrados no sistema: <span class="qtd_veiculo"></span> 
-                </div>
+                <span>Veiculos cadastrados no sistema: <span class="qtd_veiculo"></span>
+            </div>
 
             <div>
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
@@ -104,23 +106,23 @@
 
         <div class="painel model">
             <div class="items_painel">
-                
+
                 <div class="objects">
                     <i class='bx bx-x' onClick="abrirModalCreate()"></i>
-                        <span id="title">Cadastro de veiculo</span>
+                    <span id="title">Cadastro de veiculo</span>
 
-    
+
                     <form>
                         <label for="">Placa</label>
                         <input type="text" id="placaCad">
-    
+
                         <label for="">Modelo</label>
                         <input type="text" id="modeloCad">
-    
-    
+
+
                         <label for="">Marca</label>
                         <input type="text" id="marcaCad">
-    
+
                         <span class="msg model">Campo obrigatório</span>
                         <select class="tipoCad" name="" id="">
                             <option value="select_infos">Selecione o tipo</option>
@@ -128,12 +130,12 @@
                             <option value="visita">Visita</option>
                             <option value="venda">Venda</option>
                         </select>
-    
+
                     </form>
                     <button onClick="cad()">Cadastrar</button>
-    
+
                 </div>
-    
+
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
         </div>
@@ -143,4 +145,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script src="script.js"></script>
+
 </html>

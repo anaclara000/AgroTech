@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
-    <title>Funcionarios</title>
+    <title>Operação</title>
 </head>
 
 <body onLoad="carregar()">
@@ -31,86 +31,37 @@
             </div>
         </header>
 
+
         <main>
-            <div class="filter">
-                <input type="text" class="search">
-                <i class='bx bx-search' id="btn-filter"></i>
-            </div>
-            <div class="usuario_list">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>email</th>
-                            <th>CPF</th>
-                            <th>Nível</th>
-                            <th>Ativo</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody_list_Usuarios">
-                        <tr class="list_Usuarios model">
-                            <!-- <td> <img class="img_icon" src="" alt=""></td> -->
-                            <td id="id"></td>
-                            <td id="nome"></td>
-                            <td id="email"></td>
-                            <td id="cpf"></td>
-                            <td id="nivel"></td>
-                            <td class="ativo"></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="grafico">
 
-
-            </div>
-
-            <div class="motorista_list">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Status</th>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>CPF</th>
-                            <th>CNH</th>
-                            <th>Ativo</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody_list_Motorista">
-                        <tr class="list_Motorista model">
-                            <td> <img class="img_icon" src="" alt=""></td>
-                            <td id="id"></td>
-                            <td id="nome"></td>
-                            <td id="email"></td>
-                            <td id="cpf"></td>
-                            <td id="cnh"></td>
-                            <td id="ativo"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-            </div>
-
-            <!-- <div class="grafico">
-                <span>Gráficos</span>
                 <div class="graf-container">
                     <div class="grafic1">
+                        <span>Manutenções por mês</span>
                         <canvas id="myChart"></canvas>
                     </div>
                     <div class="grafic2">
+                        <span>Veiculos em manutenção</span>
                         <canvas id="myGrafic"></canvas>
                     </div>
-                    
-                   
-                   
+                    <div class="grafic3">
+                        <span>Veiculos disponiveis</span>
+                        <canvas id="myGraficFrota"></canvas>
+                    </div>
+                    <div class="grafic4">
+                        <span>Veiculos em operação</span>
+                        <canvas id="myGraficOp"></canvas>
+                    </div>
+
+
+
                 </div>
-            </div> -->
+            </div>
         </main>
 
+        <footer>
 
-
+        </footer>
 
         <div class="last_container">
             <div class="items_last">
@@ -127,7 +78,6 @@
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
             </div>
         </div>
-
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

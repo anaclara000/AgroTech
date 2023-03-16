@@ -81,7 +81,7 @@
 
             </div>
 
-            <div class="grafico">
+            <!-- <div class="grafico">
                 <span>Gráficos</span>
                 <div class="graf-container">
                     <div class="grafic1">
@@ -94,7 +94,7 @@
 
 
                 </div>
-            </div>
+            </div> -->
         </main>
 
 
@@ -118,33 +118,33 @@
 
         <div class="painel model">
             <div class="items_painel">
-                
+
                 <div class="objects">
                     <i class='bx bx-x' onClick="abrirModalCreate()"></i>
-    
+
                     <form>
                         <span>Cadastrar operação</span>
                         <label for="">Data</label>
                         <input type="text" id="data">
-    
+
                         <label for="">Veículo</label>
                         <select class="select_veiculo" name="" id="veiculo">
-                            
+
                         </select>
-    
+
                         <label for="">Descrição</label>
                         <input type="text" id="desc">
-    
+
                         <label for="">Motorista</label>
                         <select class="painel_driver" name="" id="select_driver">
-                            
+
                         </select>
-    
+
                     </form>
                     <button onClick="cad()">Cadastrar</button>
-    
+
                 </div>
-    
+
                 <!-- <button onClick="abrirModalCreate()">fechar</button> -->
             </div>
         </div>
@@ -157,8 +157,8 @@
                     <select class="select_items" name="" id="" onclick="escolher()">
                         <option value="select_infos">Selecione uma opção</option>
                         <option value="finalizar">Finalizar</option>
-                        <option value="att">Atualizar</option>
-                        <option value="cancel">Cancelar</option>
+                        <option id="atualizar" value="att">Atualizar</option>
+                        <option id="cancelar" value="cancel">Cancelar</option>
                     </select>
 
 
@@ -171,24 +171,25 @@
 
                         <label for="">Veiculo</label>
                         <input type="text" id="veiculo_acao">
-
-<!-- 
                         <select class="select_veiculo2 model" name="">
                             <option class="veiculoAtual"></option>
-                        </select> -->
-
-
-
-
+                        </select>
 
                         <label for="">Descrição</label>
                         <input type="text" id="desc_acao">
 
                         <label for="">Motorista</label>
                         <input id="value_acao" type="text">
-                        <span class="aviso model">Não é possível alterar um veiculo em manutenção.</span>
-                        <span class="aviso2 model">Não é possível cancelar uma manutenção finalizada.</span>
-                        <span class="aviso3 model">Não é possível finalizar uma manutenção finalizada.</span>
+
+                        <select class="select_mo2 model" name="">
+                            <option class="moAtual"></option>
+                        </select>
+
+
+
+                        <span class="aviso model">Não é possível alterar um veiculo em operação.</span>
+                        <span class="aviso2 model">Não é possível cancelar uma operação finalizada.</span>
+                        <span class="aviso3 model">Não é possível finalizar uma operação finalizada.</span>
                     </form>
 
 

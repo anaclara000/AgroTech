@@ -34,21 +34,24 @@ const createItems = async (req, res) => {
         email: "jade@agrotech.com",
         senha: "jadelinda",
         CPF: "123.117.416-16",
-        nivel: "funcionario"
+        nivel: "funcionario",
+        ativo: "sim"
       },
       {
         nome: "Leo Santana",
         email: "leo@agrotech.com",
         senha: "leozinho",
         CPF: "401.338.217-22",
-        nivel: "funcionario"
+        nivel: "funcionario",
+        ativo: "sim"
       },
       {
         nome: "Reenye Fulano",
         email: "reenye@agrotech.com",
         senha: "renas",
         CPF: "407.766.614-77",
-        nivel: "gerente"
+        nivel: "gerente",
+        ativo: "sim"
       },
 
     ],
@@ -121,10 +124,10 @@ const login = async (req, res) => {
     bcrypt.compare(req.body.senha, usuario.senha).then((value) => {
       if (value) {
         let data = { "uid": usuario.id, "role": usuario.tipo }
-        jwt.sign(data, process.env.KEY, { expiresIn: '1m' }, function (err2, token) {
+        jwt.sign(data, process.env.KEY, { expiresIn: '8h' }, function (err2, token) {
           if (err2 == null) {
 
-            res.status(200).json({ "token": token, "uid": usuario.id, "univel" : usuario.nivel, "uname": usuario.nome, "email": usuario.email, "validation": true }).end()
+            res.status(200).json({ "token": token, "uid": usuario.id, "univel": usuario.nivel, "uname": usuario.nome, "email": usuario.email, "validation": true }).end()
           } else {
             res.status(500).json(err2).end()
             console.log("erro")

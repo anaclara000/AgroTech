@@ -8,31 +8,35 @@ function carregar() {
             listarOperacao();
         });
 
-        // const options3 = { method: 'GET' };
-        // fetch('http://localhost:3000/Motorista', options3)
-        //     .then(response => response.json())
-        //     .then(resp => {
-        //         motorista = resp;
-        //         listarMotorista();
-        //     });
-        const options4 = { method: 'GET' };
-        fetch('http://localhost:3000/Veiculos', options4)
-            .then(response => response.json())
-            .then(resp => {
-                veiculo = resp;
-                listarVeiculo();
-            });
+    // const options3 = { method: 'GET' };
+    // fetch('http://localhost:3000/Motorista', options3)
+    //     .then(response => response.json())
+    //     .then(resp => {
+    //         motorista = resp;
+    //         listarMotorista();
+    //     });
+    const options4 = { method: 'GET' };
+    fetch('http://localhost:3000/Veiculos', options4)
+        .then(response => response.json())
+        .then(resp => {
+            veiculo = resp;
+            listarVeiculo();
+        });
 
-        var hoje = new Date();
-        var hora = hoje.getHours();
-        var minutos = hoje.getMinutes();
-        var segundos = hoje.getSeconds();
-        horaAtual = hora + ':' + minutos + ":" + segundos;
-        document.querySelector('#data').value = horaAtual
-    
-        let inptData = document.querySelector('#data')
-        inptData.disabled = true
-    }
+
+
+    var hoje = new Date();
+    var hora = hoje.getHours();
+    var minutos = hoje.getMinutes();
+    var segundos = hoje.getSeconds();
+    horaAtual = hora + ':' + minutos + ":" + segundos;
+    document.querySelector('#data').value = horaAtual
+
+    let inptData = document.querySelector('#data')
+    inptData.disabled = true
+
+    escolher()
+}
 
 
 const listOperacao = document.querySelector(".list_operation");
@@ -43,26 +47,26 @@ var operacao = []
 function listarOperacao() {
 
     operacao.forEach(info => {
-      
-            var lista = listOperacao.cloneNode(true);
-            lista.classList.remove('model')
 
-            document.querySelector("#situacao").innerHTML = info.status
-            lista.querySelector("#id").innerHTML = info.id
-            lista.querySelector("#desc").innerHTML = info.descricao
-            lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
+        var lista = listOperacao.cloneNode(true);
+        lista.classList.remove('model')
 
-            if (info.dataFim != null) {
-                lista.querySelector("#dataFim").innerHTML = info.dataFim.slice(0, 10);
-                lista.querySelector(".img_icon").src = "../../assets/Cverde.png"
-            
+        lista.querySelector("#situacao").innerHTML = info.status
+        lista.querySelector("#id").innerHTML = info.id
+        lista.querySelector("#desc").innerHTML = info.descricao
+        lista.querySelector("#dataInicio").innerHTML = info.dataInicio.slice(0, 10);
 
-            } else if (info.dataFim == null) {
-                lista.querySelector("#dataFim").innerHTML = "-";
-                lista.querySelector(".img_icon").src = "../../assets/Camarelo.png"
-            }
-            tbodyOperacao.appendChild(lista)
-        
+        if (info.dataFim != null) {
+            lista.querySelector("#dataFim").innerHTML = info.dataFim.slice(0, 10);
+            lista.querySelector(".img_icon").src = "../../assets/Cverde.png"
+
+
+        } else if (info.dataFim == null) {
+            lista.querySelector("#dataFim").innerHTML = "-";
+            lista.querySelector(".img_icon").src = "../../assets/Camarelo.png"
+        }
+        tbodyOperacao.appendChild(lista)
+
 
         const options = { method: 'GET' };
 
@@ -73,13 +77,13 @@ function listarOperacao() {
             })
 
 
-            const options2 = { method: 'GET' };
+        const options2 = { method: 'GET' };
 
-            fetch('http://localhost:3000/Veiculos/idUm/' + info.idVeiculo, options2)
-                .then(response => response.json())
-                .then(v => {
-                    lista.querySelector('#veiculos').innerHTML = v.placa + ' | ' + v.tipo;
-                })
+        fetch('http://localhost:3000/Veiculos/idUm/' + info.idVeiculo, options2)
+            .then(response => response.json())
+            .then(v => {
+                lista.querySelector('#veiculos').innerHTML = v.placa + ' | ' + v.tipo;
+            })
 
 
     })
@@ -93,7 +97,7 @@ function abrirModalCreate() {
 
 }
 
-function cad(){
+function cad() {
 
     let inputVeiculo = document.querySelector('#veiculo').value
     let inputDesc = document.querySelector('#desc').value
@@ -118,56 +122,56 @@ function cad(){
         .then(resp => {
             const options = { method: 'GET' };
             fetch('http://localhost:3000/Veiculos/idUm/' + resp.idVeiculo, options)
-            .then(response => response.json())
-            .then(veiculo => {
+                .then(response => response.json())
+                .then(veiculo => {
 
-                let infoVeiculo = JSON.stringify({
-                    "id": veiculo.id,
-                    "placa": veiculo.placa,
-                    "modelo": veiculo.modelo,
-                    "marca": veiculo.marca,
-                    "tipo": veiculo.tipo,
-                    "status": "Indisponível"
-                })
-
-                fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
-                    "method": "PUT",
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": infoVeiculo
-                })
-                    .then(response => response.json())
-                    .then(resp => {
-                        
+                    let infoVeiculo = JSON.stringify({
+                        "id": veiculo.id,
+                        "placa": veiculo.placa,
+                        "modelo": veiculo.modelo,
+                        "marca": veiculo.marca,
+                        "tipo": veiculo.tipo,
+                        "status": "Indisponível"
                     })
-                
 
-            })
+                    fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": infoVeiculo
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+
+                        })
+
+
+                })
 
             fetch('http://localhost:3000/Motorista/idUm/' + resp.id_Motorista, options)
-            .then(response => response.json())
-            .then(motorista => {
+                .then(response => response.json())
+                .then(motorista => {
 
-                let info = JSON.stringify({
-                    "nome": motorista.nome,
-                    "CNH": motorista.CNH,
-                    "disponivel": "Indisponível"
-                })
-
-                fetch('http://localhost:3000/Motorista/idUp/' + resp.id_Motorista, {
-                    "method": "PUT",
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": info
-                })
-                    .then(response => response.json())
-                    .then(resp => {
-
-                        alert("foi")
-                        window.location.reload()
+                    let info = JSON.stringify({
+                        "nome": motorista.nome,
+                        "CNH": motorista.CNH,
+                        "disponivel": "Indisponível"
                     })
+
+                    fetch('http://localhost:3000/Motorista/idUp/' + resp.id_Motorista, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": info
+                    })
+                        .then(response => response.json())
+                        .then(resp => {
+
+                            alert("foi")
+                            window.location.reload()
+                        })
 
                 })
 
@@ -183,52 +187,372 @@ function listarVeiculo() {
             op.innerHTML = v.tipo + " | " + v.placa
             op.value = v.id
             document.querySelector(".select_veiculo").appendChild(op)
+            document.querySelector(".select_veiculo2").appendChild(op.cloneNode(true))
         }
     })
 
 }
 
 function abrirModalAcao(e) {
+    let opcaoCancelar = document.querySelector("#cancelar");
+    let opcaoAtualizar = document.querySelector("#atualizar");
     var modal = document.querySelector('.painel_acao')
     modal.classList.toggle('model')
+    if (!modal.classList.contains('model')) {
+        var IdAcao = e.parentNode.parentNode.querySelector('#id').innerHTML
+        document.querySelector('#idAcao').value = IdAcao
 
-    var IdAcao = e.parentNode.parentNode.querySelector('#id').innerHTML
-    document.querySelector('#idAcao').value = IdAcao
+        var desc = e.parentNode.parentNode.querySelector('#desc').innerHTML
+        var veiculo = e.parentNode.parentNode.querySelector('#veiculos').innerHTML
+        var motorista = e.parentNode.parentNode.querySelector('#idMotorista').innerHTML
 
-    var desc = e.parentNode.parentNode.querySelector('#desc').innerHTML
-    // var status = e.parentNode.parentNode.querySelector('#dataFim').innerHTML
-    var veiculo = e.parentNode.parentNode.querySelector('#veiculos').innerHTML
-    var motorista = e.parentNode.parentNode.querySelector('#idMotorista').innerHTML
+        var situacao = e.parentNode.parentNode.querySelector('#situacao').innerHTML
+        console.log(situacao)
+        if (situacao == 'Em operação') {
+            document.querySelector('#data_acao').value = "Veiculo em operação"
 
-    var situacao = e.parentNode.parentNode.querySelector('#situacao').innerHTML
-    console.log(situacao)
-    if (situacao == 'Em operacao') {
-        document.querySelector('#data_acao').value = "Veiculo em operação"
+            document.querySelector('#desc_acao').value = desc
 
-        document.querySelector('#desc_acao').value = desc
+            document.querySelector('#veiculo_acao').value = veiculo
+            document.querySelector('.veiculoAtual').value = veiculo
+            document.querySelector('#value_acao').value = motorista
+            opcaoAtualizar.disabled = true;
+            opcaoCancelar.disabled = false;
 
-        document.querySelector('#veiculo_acao').value = veiculo
-        document.querySelector('.veiculoAtual').value = veiculo
-        document.querySelector('#value_acao').value = motorista
+        } else if (situacao == 'Finalizada') {
+            document.querySelector('#desc_acao').value = desc
+            document.querySelector('#data_acao').value = "Operação finalizada"
+            document.querySelector('#veiculo_acao').value = veiculo
+            document.querySelector('.veiculoAtual').value = veiculo
+            document.querySelector('.veiculoAtual').innerHTML = veiculo
+            document.querySelector('#value_acao').value = motorista
+            console.log(veiculo)
+            let inpStatus = document.querySelector('#data_acao')
+            inpStatus.disabled = true
+            opcaoAtualizar.disabled = false;
+            opcaoCancelar.disabled = true;
 
-    } else if(situacao == 'Finalizada'){
-        document.querySelector('#desc_acao').value = desc
-        document.querySelector('#data_acao').value = "Operação finalizada"
-        document.querySelector('#veiculo_acao').value = veiculo
-        document.querySelector('#value_acao').value = motorista
-        console.log(veiculo)
-        let inpStatus = document.querySelector('#data_acao')
-        inpStatus.disabled = true
+        } else {
+            var modal = document.querySelector('.painel_acao')
+            modal.classList.add('model')
 
-    }else{
-        var modal = document.querySelector('.painel_acao')
-        modal.classList.add('model')
 
-     
+        }
     }
 
 }
 
+function escolher() {
+    var select_items = document.querySelector(".select_items")
+    let seleStatus = select_items.options[select_items.selectedIndex].value;
+    // if (seleStatus == 'finalizar') { var acao = 'finalizar' }
+    // if (seleStatus == 'cancel') { var acao = 'cancel' }
+    // if (seleStatus == 'att') { var acao = 'att' }
+
+    var informacao = document.querySelector('#data_acao').value
+
+    if (seleStatus == 'select_infos') {
+        let inpStatus = document.querySelector('#data_acao')
+        inpStatus.disabled = true
+
+        let inpDesc = document.querySelector("#desc_acao")
+        inpDesc.disabled = true
+
+        let inpValor = document.querySelector("#value_acao")
+        inpValor.disabled = true
+
+        let inpVeiculo = document.querySelector("#veiculo_acao")
+        inpVeiculo.disabled = true
+
+
+        var modalveiculo = document.querySelector('#veiculo_acao')
+        modalveiculo.classList.remove('model')
+
+        let inpId = document.querySelector("#idAcao")
+        inpId.disabled = true
+
+        let botao = document.querySelector(".btnAcao")
+        botao.disabled = true
+
+        var modalAviso = document.querySelector('.aviso')
+        modalAviso.classList.add('model')
+
+        var modalAviso3 = document.querySelector('.aviso3')
+        modalAviso3.classList.add('model')
+
+        var modalAviso2 = document.querySelector('.aviso2')
+        modalAviso2.classList.add('model')
+
+    } else {
+        if (informacao != 'Operação finalizada') {
+            if (seleStatus == 'att') {
+                let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = true
+
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = true
+
+                let inpId = document.querySelector("#idAcao")
+                inpId.disabled = true
+
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = true
+                var modalAviso = document.querySelector('.aviso')
+                modalAviso.classList.remove('model')
+
+                let inpVeiculo2 = document.querySelector(".select_veiculo2")
+                inpVeiculo2.disabled = true
+
+
+                var modalveiculo = document.querySelector('#veiculo_acao')
+                modalveiculo.classList.remove('model')
+                var modalinpVeiculo2 = document.querySelector('.select_veiculo2')
+                modalinpVeiculo2.classList.add('model')
+            }
+            if (seleStatus == 'cancel') {
+                let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = true
+
+                let inpId = document.querySelector("#idAcao")
+                inpId.disabled = true
+
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = true
+
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = false
+                var modalAviso = document.querySelector('.aviso')
+                modalAviso.classList.add('model')
+
+                // let inpVeiculo2 = document.querySelector(".select_veiculo2")
+                // inpVeiculo2.disabled = true
+
+
+                var modalveiculo = document.querySelector('#veiculo_acao')
+                modalveiculo.classList.remove('model')
+                // var modalinpVeiculo2 = document.querySelector('.select_veiculo2')
+                // modalinpVeiculo2.classList.add('model')
+            }
+            if (seleStatus == 'finalizar') {
+                let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = true
+
+                let inpId = document.querySelector("#idAcao")
+                inpId.disabled = true
+
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = true
+
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = false
+
+                var modalAviso = document.querySelector('.aviso')
+                modalAviso.classList.add('model')
+
+                // let inpVeiculo2 = document.querySelector(".select_veiculo2")
+                // inpVeiculo2.disabled = true
+
+                var modalveiculo = document.querySelector('#veiculo_acao')
+                modalveiculo.classList.remove('model')
+
+                // var modalinpVeiculo2 = document.querySelector('.select_veiculo2')
+                // modalinpVeiculo2.classList.add('model')
+
+            }
+        }
+        if (informacao == 'Operação finalizada') {
+            if (seleStatus == 'cancel') {
+                let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = true
+
+                let inpId = document.querySelector("#idAcao")
+                inpId.disabled = true
+
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = true
+
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = true
+                var modalAviso = document.querySelector('.aviso')
+                modalAviso.classList.add('model')
+
+                var modalAviso3 = document.querySelector('.aviso3')
+                modalAviso3.classList.add('model')
+
+                var modalAviso2 = document.querySelector('.aviso2')
+                modalAviso2.classList.remove('model')
+
+                let inpVeiculo2 = document.querySelector(".select_veiculo2")
+                inpVeiculo2.disabled = true
+
+                var modalinpVeiculo = document.querySelector('.veiculo_acao')
+                modalinpVeiculo.classList.remove('model')
+
+
+                var modalinpVeiculo2 = document.querySelector('.select_veiculo2')
+                modalinpVeiculo2.classList.add('model')
+            }
+            if (seleStatus == 'finalizar') {
+                let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = true
+
+                let inpId = document.querySelector("#idAcao")
+                inpId.disabled = true
+
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = true
+
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = true
+
+                var modalAviso3 = document.querySelector('.aviso3')
+                modalAviso3.classList.remove('model')
+
+                var modalAviso2 = document.querySelector('.aviso2')
+                modalAviso2.classList.add('model')
+
+                let inpVeiculo2 = document.querySelector(".select_veiculo2")
+                inpVeiculo2.disabled = true
+
+
+                var modalveiculo = document.querySelector('#veiculo_acao')
+                modalveiculo.classList.remove('model')
+                var modalinpVeiculo2 = document.querySelector('.select_veiculo2')
+                modalinpVeiculo2.classList.add('model')
+
+
+            }
+            if (seleStatus == 'att') {
+
+
+                let inpStatus = document.querySelector('#data_acao')
+                inpStatus.disabled = true
+
+                let inpDesc = document.querySelector("#desc_acao")
+                inpDesc.disabled = false
+
+                let inpId = document.querySelector("#idAcao")
+                inpId.disabled = true
+
+                let inpValor = document.querySelector("#value_acao")
+                inpValor.disabled = false
+
+                let botao = document.querySelector(".btnAcao")
+                botao.disabled = false
+
+                let inpVeiculo2 = document.querySelector(".select_veiculo2")
+                inpVeiculo2.disabled = false
+
+                var modalveiculo = document.querySelector('#veiculo_acao')
+                modalveiculo.classList.add('model')
+
+                var modalveiculo2 = document.querySelector('.select_veiculo2')
+                modalveiculo2.classList.remove('model')
+
+                var modalAviso3 = document.querySelector('.aviso3')
+                modalAviso3.classList.add('model')
+
+                var modalAviso2 = document.querySelector('.aviso2')
+                modalAviso2.classList.add('model')
+
+                var modalAviso = document.querySelector('.aviso')
+                modalAviso.classList.add('model')
+
+
+            }
+        }
+    }
+
+
+
+
+
+
+}
+
+function atualizar() {
+    let idManu = document.querySelector('#idAcao').value
+    let inputDesc = document.querySelector('#desc_acao').value
+    let inputmotorista = document.querySelector('#value_acao').value
+    var select_items = document.querySelector(".select_items")
+    let seleStatus = select_items.options[select_items.selectedIndex].value;
+
+
+    if (seleStatus == 'att') {
+        console.log("aq")
+        let info = JSON.stringify({
+            "descricao": inputDesc,
+            "Motorista": inputmotorista,
+        })
+
+        fetch('http://localhost:3000/Operacao/idUp/' + idManu, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+            .then(response => response.json())
+            .then(resp => {
+                window.location.reload()
+            })
+
+    }
+    if (seleStatus == 'cancel') {
+
+        const event = new Date()
+        let info = JSON.stringify({
+            "dataFim": event.toISOString(),
+            "status": "Cancelada",
+        })
+
+        fetch('http://localhost:3000/Operacao/idUp/' + idManu, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+            .then(response => response.json())
+            .then(resp => {
+                window.location.reload()
+            })
+    }
+    if (seleStatus == 'finalizar') {
+        const event = new Date()
+        let info = JSON.stringify({
+            "dataFim": event.toISOString(),
+            "status": "Finalizada",
+        })
+
+        fetch('http://localhost:3000/Operacao/idUp/' + idManu, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+            .then(response => response.json())
+            .then(resp => {
+                window.location.reload()
+            })
+    }
+}
 
 // function listarMotorista(){
 //     var op = document.createElement("option")

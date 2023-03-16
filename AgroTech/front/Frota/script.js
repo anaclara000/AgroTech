@@ -9,24 +9,24 @@ function carregar() {
         });
 
 
-        var ctx = document.getElementById('myGrafic').getContext('2d');
-        var myDoughnutChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Disponível', 'Indisponível'],
-                datasets: [{
-                    data: disponivel,
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)'
-                    
-                    ]
-                }]
-            },
-            options: {
-                cutoutPercentage: 50
-            }
-        });
+    // var ctx = document.getElementById('myGrafic').getContext('2d');
+    // var myDoughnutChart = new Chart(ctx, {
+    //     type: 'doughnut',
+    //     data: {
+    //         labels: ['Disponível', 'Indisponível'],
+    //         datasets: [{
+    //             data: disponivel,
+    //             backgroundColor: [
+    //                 'rgb(255, 99, 132)',
+    //                 'rgb(54, 162, 235)'
+
+    //             ]
+    //         }]
+    //     },
+    //     options: {
+    //         cutoutPercentage: 50
+    //     }
+    // });
 }
 
 
@@ -62,7 +62,7 @@ function listarVeiculos() {
         }
     })
 
-    document.querySelector('.qtd_veiculo').innerHTML = soma 
+    document.querySelector('.qtd_veiculo').innerHTML = soma
 }
 
 
@@ -77,7 +77,7 @@ function cad() {
     let inputPlaca = document.querySelector('#placaCad').value
     let inputModelo = document.querySelector('#modeloCad').value
     let inputMarca = document.querySelector('#marcaCad').value
-    
+
     var select_tipo = document.querySelector(".tipoCad")
     let seleStatus = select_tipo.options[select_tipo.selectedIndex].value;
 
@@ -94,10 +94,10 @@ function cad() {
         "status": "Disponível"
     })
 
-    if(tipo == 'Vazio'){
+    if (tipo == 'Vazio') {
         var modalMsg = document.querySelector('.msg')
         modalMsg.classList.remove('model')
-    }else{
+    } else {
         console.log(info)
         fetch('http://localhost:3000/Veiculos', {
             "method": "POST",
@@ -106,13 +106,13 @@ function cad() {
             },
             "body": info
         })
-        .then(response => response.json())
-        .then(resp => { 
-           window.location.reload()
-            
-        })
+            .then(response => response.json())
+            .then(resp => {
+                window.location.reload()
+
+            })
     }
-   
+
 
 }
 

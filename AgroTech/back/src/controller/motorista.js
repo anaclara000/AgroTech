@@ -16,22 +16,26 @@ const createItems = async (req, res) => {
             {
                 nome: "Fiuk Carlos",
                 CNH: 17663523146,
-                disponivel: "Indisponível",    
+                disponivel: "Indisponível",
+                ativo: "sim"
             },
             {
                 nome: "Selena Gomes",
                 CNH: 46293543404,
                 disponivel: "Indisponível",
+                ativo: "sim"
             },
             {
                 nome: "Luciano Hulk",
                 CNH: 08279424413,
                 disponivel: "Indisponível",
+                ativo: "sim"
             },
             {
                 nome: "Robert Pertenson",
                 CNH: 05354335223,
                 disponivel: "Indisponível",
+                ativo: "nao"
             },
 
         ],
@@ -97,5 +101,5 @@ module.exports = {
     update,
     remove,
     createItems
-    
+
 }

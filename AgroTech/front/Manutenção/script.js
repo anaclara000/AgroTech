@@ -21,7 +21,7 @@ function carregar() {
             listarVeiculo();
         });
 
-
+    somarValores()
 
     var hoje = new Date();
     var hora = hoje.getHours();
@@ -58,14 +58,26 @@ function carregar() {
 }
 
 
+function somarValores() {
+    const tabela = document.querySelector('.table');
+    let soma = 0;
 
+    // Percorre cada linha da tabela, excluindo a primeira e a última
+    for (let i = 1; i < tabela.rows.length - 1; i++) {
+        const valorCelula = tabela.rows[i].cells[1].innerText; // Assume que o valor a ser somado está na segunda célula
+        soma += parseFloat(valorCelula);
+    }
+
+    // Exibe o valor total em um elemento div com o ID "total"
+    document.getElementById('total').innerText = soma;
+}
 
 
 const listManutencao = document.querySelector(".list_manitence");
 const tbodyManutencao = document.querySelector(".tbody_list_manitence");
 var manutencao = []
 
-var resultado = [0,0,0];
+var resultado = [0, 0, 0];
 function listarManutencao() {
     const freqManMesCarga = contarManutencoesPorMes(manutencao, 'Carga')
     const freqManMesVendas = contarManutencoesPorMes(manutencao, 'Venda')
@@ -82,19 +94,19 @@ function listarManutencao() {
         if (info.data_fim == null) {
             lista.querySelector("#dataF").innerHTML = "-";
 
-        } else{
+        } else {
             lista.querySelector("#dataF").innerHTML = info.data_fim.slice(0, 10);
         }
 
 
-        if(info.status == "Cancelada"){
+        if (info.status == "Cancelada") {
             resultado[0]++
             lista.querySelector(".img_icon").src = "../../assets/Cvermelho.png"
 
-        }else if(info.status == "Finalizada"){
+        } else if (info.status == "Finalizada") {
             resultado[1]++
             lista.querySelector(".img_icon").src = "../../assets/Cverde.png"
-        }else{
+        } else {
             resultado[2]++
             lista.querySelector(".img_icon").src = "../../assets/Camarelo.png"
         }
@@ -170,49 +182,61 @@ function contarManutencoesPorMes(listaDeManutencoes, tipoDeVeiculo) {
     return manutencoesPorMes
 }
 
-function fecharModalAviso(){
+function fecharModalAviso() {
     var situacao2 = document.querySelector('.situacao2')
     situacao2.classList.add('model')
 }
 
 function abrirModalAcao(e) {
+    let opcaoCancelar = document.querySelector("#cancelar");
+    let opcaoAtualizar = document.querySelector("#atualizar");
     var modal = document.querySelector('.painel_acao')
     modal.classList.toggle('model')
 
-    var IdAcao = e.parentNode.parentNode.querySelector('#id').innerHTML
-    document.querySelector('#idAcao').value = IdAcao
+    if (!modal.classList.contains('model')) {
+        var IdAcao = e.parentNode.parentNode.querySelector('#id').innerHTML
+        document.querySelector('#idAcao').value = IdAcao
 
-    var desc = e.parentNode.parentNode.querySelector('#descricao').innerHTML
-    var valor = e.parentNode.parentNode.querySelector('#valor').innerHTML
-    var status = e.parentNode.parentNode.querySelector('#dataF').innerHTML
-    var veiculo = e.parentNode.parentNode.querySelector('#placa').innerHTML
+        // var selectVeiculo = e.parentNode.parentNode.querySelector('.veiculoAtual').innerHTML
+        var valor = e.parentNode.parentNode.querySelector('#valor').innerHTML
+        var status = e.parentNode.parentNode.querySelector('#dataF').innerHTML
+        var veiculo = e.parentNode.parentNode.querySelector('#placa').innerHTML
+        var desc = e.parentNode.parentNode.querySelector('#descricao').innerHTML
 
-    var situacao = e.parentNode.parentNode.querySelector('#situacao').innerHTML
-    if (situacao == 'Em manutenção') {
-        document.querySelector('#data_acao').value = "Veiculo em manutenção"
+        var situacao = e.parentNode.parentNode.querySelector('#situacao').innerHTML
+        if (situacao == 'Em manutenção') {
+            document.querySelector('#data_acao').value = "Veiculo em manutenção"
 
-        document.querySelector('#desc_acao').value = desc
+            document.querySelector('#desc_acao').value = desc
 
-        document.querySelector('#value_acao').value = valor
+            document.querySelector('#value_acao').value = valor
 
-        document.querySelector('#veiculo_acao').value = veiculo
-        document.querySelector('.veiculoAtual').value = veiculo
+            document.querySelector('#veiculo_acao').value = veiculo
+            document.querySelector('.veiculoAtual').value = veiculo
 
-    } else if(situacao == 'Finalizada'){
-        document.querySelector('#desc_acao').value = desc
-        document.querySelector('#value_acao').value = valor
-        document.querySelector('#data_acao').value = "Manutenção finalizada"
-        document.querySelector('.veiculoAtual').value = veiculo
-        console.log(veiculo)
-        let inpStatus = document.querySelector('#data_acao')
-        inpStatus.disabled = true
+            opcaoAtualizar.disabled = true;
+            opcaoCancelar.disabled = false;
 
-    }else{
-        var modal = document.querySelector('.painel_acao')
-        modal.classList.add('model')
+        } else if (situacao == 'Finalizada') {
+            document.querySelector('#desc_acao').value = desc
+            document.querySelector('#value_acao').value = valor
+            document.querySelector('#data_acao').value = "Manutenção finalizada"
+            document.querySelector('.veiculoAtual').value = veiculo
+            document.querySelector('.veiculoAtual').innerHTML = veiculo
+            console.log(veiculo)
+            let inpStatus = document.querySelector('#data_acao')
+            inpStatus.disabled = true
 
-        var situacao2 = document.querySelector('.situacao2')
-        situacao2.classList.remove('model')
+            opcaoAtualizar.disabled = false;
+            opcaoCancelar.disabled = true;
+
+        } else {
+            var modal = document.querySelector('.painel_acao')
+            modal.classList.add('model')
+
+            var situacao2 = document.querySelector('.situacao2')
+            situacao2.classList.remove('model')
+        }
     }
 
 }
@@ -255,7 +279,7 @@ function escolher() {
 
         let botao = document.querySelector(".btnAcao")
         botao.disabled = true
-        
+
         var modalAviso = document.querySelector('.aviso')
         modalAviso.classList.add('model')
 
@@ -382,7 +406,7 @@ function escolher() {
                 var modalinpVeiculo = document.querySelector('.veiculo_acao')
                 modalinpVeiculo.classList.remove('model')
 
-                
+
                 var modalinpVeiculo2 = document.querySelector('.select_veiculo2')
                 modalinpVeiculo2.classList.add('model')
             }
@@ -459,7 +483,7 @@ function escolher() {
             }
         }
     }
-    
+
 
 
 
@@ -495,8 +519,8 @@ function atualizar() {
             })
 
     }
-    if(seleStatus == 'cancel'){
-      
+    if (seleStatus == 'cancel') {
+
         const event = new Date()
         let info = JSON.stringify({
             "data_fim": event.toISOString(),
@@ -512,10 +536,26 @@ function atualizar() {
         })
             .then(response => response.json())
             .then(resp => {
-                window.location.reload()
+                let data = JSON.stringify({
+                    "status": "Disponível",
+                })
+
+
+                fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": data
+                })
+                    .then(response => response.json())
+                    .then(resp => {
+                        window.location.reload()
+                    })
+
             })
     }
-    if(seleStatus == 'finalizar'){
+    if (seleStatus == 'finalizar') {
         const event = new Date()
         let info = JSON.stringify({
             "data_fim": event.toISOString(),
@@ -531,7 +571,23 @@ function atualizar() {
         })
             .then(response => response.json())
             .then(resp => {
-                window.location.reload()
+                let data = JSON.stringify({
+                    "status": "Disponível",
+                })
+
+
+                fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": data
+                })
+                    .then(response => response.json())
+                    .then(resp => {
+                        window.location.reload()
+                    })
+
             })
     }
 }
@@ -576,19 +632,13 @@ function listarVeiculo() {
     veiculo.forEach(veiculo => {
         if (veiculo.status == "Disponível") {
             var op = document.createElement("option")
+
             op.innerHTML = veiculo.tipo + " | " + veiculo.placa
             op.value = veiculo.id
+
             document.querySelector(".select_veiculo").appendChild(op)
-
-            // var op2 = document.createElement("option")
-            // op2.innerHTML = veiculo.tipo + " | " + veiculo.placa
-            // op2.value = veiculo.id
-            // document.querySelector(".select_veiculo2").appendChild(op)
-
-
+            document.querySelector(".select_veiculo2").appendChild(op.cloneNode(true))
         }
-
-
     })
 
 }
@@ -607,7 +657,7 @@ function cad() {
         "descricao": inputDesc,
         "valor": parseFloat(inputValor),
         "id_Veiculo": parseInt(inputVeiculo),
-        "status":"Em manutenção"
+        "status": "Em manutenção"
     })
 
     fetch('http://localhost:3000/Manutencao', {
@@ -664,7 +714,7 @@ function cad() {
 
 
 
-// INFOS DO USUARIO 
+// INFOS DO USUARIO
 // const nome = document.querySelector(".nameUser");
 // var userinfo = JSON.parse(localStorage.getItem("info"));
 

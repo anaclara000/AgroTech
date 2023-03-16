@@ -3,8 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 const Usuario = require('../controller/Usuario');
+const middle = require('../middleware/middleware')
 
 router.post('/Login', Usuario.login);
+router.post('/validarAcesso', middle.permitir);
 router.post('/Usuario/criar', Usuario.createItems);
 router.post('/Usuario', Usuario.create);
 router.get('/Usuario/idUm/:id', Usuario.readOne);
