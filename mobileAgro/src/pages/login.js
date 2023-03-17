@@ -1,35 +1,101 @@
 import { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, Button , Image, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Text, TextInput, Button, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as React from 'react'
 import CryptoJS from "react-native-crypto-js";
 var AES = require("react-native-crypto-js").AES;
 
-export default function login({navigation}) { 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
 
-    const users = [
-        {
-            "email":"fulano@gmail.com",
-            "senha":"umdoistresquatro",
-        },
-        {
-            "email":"beltrano@ig.com.br",
-            "senha":"s3nh4",
+
+// import Home from '../Home/Home'
+import MyTabs from '../../components/tab'
+
+var uriCard_Usuarios = 'http://localhost:3000/Usuario'
+
+var usuarios = []
+
+const options = { method: 'GET' };
+
+fetch(uriCard_Usuarios, options)
+    .then(res => res.json())
+    .then(res => {
+        usuarios = res;
+
+    }
+    )
+    .catch(err => console.error(err));
+
+
+var userInfo = JSON.parse(localStorage.getItem("info"))
+
+export default function login({ navigation }) {
+
+
+    if (userInfo != null) {
+        navigation.navigate("MyTabs")
+
+    }
+
+    const [input, setInput] = useState('')
+    const [hidePass, sideHidePass] = useState(true);
+
+
+    const [usuario, setUsuario] = useState("");
+    const [password, setPassword] = useState("");
+
+
+    function logar() {
+
+        console.log('logando');
+
+        let data = {
+            "email": usuario,
+            "senha": input
         }
-    ];
 
-    return(
+
+        console.log(data);
+
+        fetch("http://localhost:3000/Login", {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": JSON.stringify(data)
+        })
+            .then(res => { return res.json() })
+            .then(data => {
+
+                console.log(data.erro);
+
+                if (data.erro === undefined) {
+                    console.log(data)
+                    localStorage.setItem("info", JSON.stringify({ "id_user": data.uid, "nome": data.uname, "token": data.token }));
+
+
+                    navigation.navigate("MyTabs")
+
+                }
+            })
+    }
+
+
+
+
+    return (
         <View style={styles.container}>
-            <Image style={styles.img}  source="https://www.emojiall.com/images/animations/joypixels/128px/cow_face.gif"  />
-            <TextInput style={styles.input} placeholder="Informe o email" onChangeText={(value) => {setEmail(value)}} />
-            <TextInput style={styles.input} placeholder="Informe a senha" onChangeText={(value) => {setPassword(value)}} />
-            <TouchableOpacity style={styles.btn} onPress={() => {
+            <Image style={styles.img} source="https://www.emojiall.com/images/animations/joypixels/128px/cow_face.gif" />
+            <TextInput style={styles.input} placeholder="Informe o email" onChangeText={(value) => { setUsuario(value) }} />
+            <TextInput style={styles.input} placeholder="Informe a senha" value={input} onChangeText={(texto) => { setInput(texto) }} secureTextEntry={hidePass} />
+            {/* <TouchableOpacity style={styles.btn} onPress={() => {
                 users.forEach(user => {
-                    if(user.email === email && user.senha === password) navigation.navigate("Home", {"id": user.id - 1});
-                 })
-            }}>Login</TouchableOpacity>
+                    if (user.email === email && user.senha === password) navigation.navigate("Home", { "id": user.id - 1 });
+                })
+            }}>Login</TouchableOpacity> */}
+
+            <TouchableOpacity style={styles.btn} onPress={logar}>
+                <Text style={{ color: 'white', fontSize: '15px' }}>Logar</Text>
+            </TouchableOpacity>
         </View>
     )
 
@@ -70,7 +136,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         width: 250,
         border: 'none',
-        backgroundColor :'#da8510',
+        backgroundColor: '#da8510',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -80,7 +146,7 @@ const styles = StyleSheet.create({
         shadowRadius: 16.00,
         elevation: 24,
     },
-    img : {
+    img: {
         marginTop: '100px',
         width: 200,
         height: 200,
@@ -93,4 +159,4 @@ const styles = StyleSheet.create({
         shadowRadius: 16.00,
         elevation: 24,
     }
-  });
+});

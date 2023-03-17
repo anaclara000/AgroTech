@@ -63,7 +63,7 @@
                             <th>Veiculo</th>
                             <th>Data Inicio</th>
                             <th>Data Fim</th>
-                            <th>Ações</th>
+                            <th class="bb">Ações</th>
                         </tr>
                     </thead>
                     <tbody class="tbody_list_manitence">
@@ -76,7 +76,7 @@
                             <td id="placa"></td>
                             <td id="dataI"></td>
                             <td id="dataF"></td>
-                            <td><i class='bx bxs-edit' onclick="abrirModalAcao(this)"></i></td>
+                            <td class="aa"><i class='bx bxs-edit' onclick="abrirModalAcao(this)"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -106,19 +106,23 @@
             <div class="items_last">
                 <div class="user">
                     <i class='bx bxs-user-circle'></i>
+                    <span class="nivelUser"></span>
                     <div class="cont_user_name"><span class="nameUser"></span><span>, bem vindo de volta!</span></div>
                 </div>
             </div>
-            <div class="valorTotal">
-                <span id="total"></span>
-                <!-- <span>Valor total de gastos: R$ 3450,00</span> -->
+            <!-- <div class="valorTotal">
+                <span id="total"></span> -->
+            <!-- <span>Valor total de gastos: R$ 3450,00</span> -->
+            <!-- </div> -->
+            <div class="subtitle">
+                <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
             </div>
-            <!-- <div class="subtitle">
-                    <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
-                </div> -->
 
-            <div>
+            <div class="criarCoisas">
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
+            </div>
+            <div class="funcionarioPainel">
+                <i class='bx bxs-florist'></i>
             </div>
         </div>
 

@@ -1,4 +1,40 @@
+// INFOS DO USUARIO 
+const nome = document.querySelector(".nameUser");
+const nivel = document.querySelector(".nivelUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
+
+nome.innerHTML = userinfo.name;
+nivel.innerHTML = userinfo.nivel;
+
+function verificarNivel() {
+    if (document.querySelector(".nivelUser").innerHTML == "funcionario") {
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.add('model')
+
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.remove('model')
+
+
+    } else {
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.add('model')
+
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.remove('model')
+
+    }
+
+}
+function logOut() {
+    window.localStorage.removeItem("info")
+    window.location.href = "../Login"
+}
+
+
 function carregar() {
+
+    verificarNivel()
+
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Usuario', options2)
         .then(response => response.json())
@@ -34,7 +70,12 @@ function listarUsuarios() {
             lista.querySelector('#email').innerHTML = u.email;
             lista.querySelector('#cpf').innerHTML = u.CPF;
             lista.querySelector('#nivel').innerHTML = u.nivel;
-            lista.querySelector('.ativo').innerHTML = u.ativo;
+            if (u.ativoUser == 'nao') {
+                lista.querySelector('#ativoU').src = "../../assets/Cazul.png";
+            } else {
+                lista.querySelector('#ativoU').src = "../../assets/Cverde.png";
+            }
+
 
         }
 
@@ -59,7 +100,13 @@ function listarMotorista() {
         lista.querySelector('#id').innerHTML = m.id;
         lista.querySelector('#nome').innerHTML = m.nome;
         lista.querySelector('#cnh').innerHTML = m.CNH;
-        lista.querySelector('#ativo').innerHTML = m.ativo;
+
+        if (m.statusMotorista == "nao") {
+            lista.querySelector('#ativo').src = "../../assets/Cazul.png";
+        } else {
+            lista.querySelector('#ativo').src = "../../assets/Cverde.png";
+        }
+
 
         if (m.disponivel == "Disponível") {
             lista.querySelector('.img_icon').src = "../../assets/Cverde.png";
@@ -111,8 +158,3 @@ search_btn.addEventListener('click', () => {
         }
     }
 })
-// INFOS DO USUARIO 
-const nome = document.querySelector(".nameUser");
-var userinfo = JSON.parse(localStorage.getItem("info"));
-
-nome.innerHTML = userinfo.name;

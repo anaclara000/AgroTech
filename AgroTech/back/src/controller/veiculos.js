@@ -48,6 +48,56 @@ const createItems = async (req, res) => {
                 tipo: "Visita",
                 status: "Disponível",
             },
+            {
+                placa: "YIO-5323",
+                modelo: "Carro",
+                marca: "Honda",
+                tipo: "Venda",
+                status: "Disponível",
+            },
+            {
+                placa: "ABC-1234",
+                modelo: "Carro",
+                marca: "Yamaha",
+                tipo: "Venda",
+                status: "Disponível",
+            },
+            {
+                placa: "DEF-5678",
+                modelo: "Carro",
+                marca: "Ford",
+                tipo: "Visita",
+                status: "Disponível",
+            },
+            {
+                placa: "GHI-9101",
+                modelo: "Caminhão",
+                marca: "Volvo",
+                tipo: "Carga",
+                status: "Disponível",
+            },
+            {
+                placa: "JKL-2345",
+                modelo: "Carro",
+                marca: "Fiat",
+                tipo: "Venda",
+                status: "Disponível",
+            },
+            {
+                placa: "MNO-6789",
+                modelo: "Caminhão",
+                marca: "Honda",
+                tipo: "Carga",
+                status: "Disponível",
+            },
+            {
+                placa: "PQR-1112",
+                modelo: "Carro",
+                marca: "Chevrolet",
+                tipo: "Venda",
+                status: "Disponível",
+            },
+
 
         ],
         skipDuplicates: true, // Skip 'Bobo'

@@ -1,5 +1,36 @@
+const nome = document.querySelector(".nameUser");
+const nivel = document.querySelector(".nivelUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
 
+nome.innerHTML = userinfo.name;
+nivel.innerHTML = userinfo.nivel;
+
+function verificarNivel() {
+    if (document.querySelector(".nivelUser").innerHTML == "funcionario") {
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.add('model')
+
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.remove('model')
+
+
+    } else {
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.add('model')
+
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.remove('model')
+
+    }
+
+}
+function logOut() {
+    window.localStorage.removeItem("info")
+    window.location.href = "../Login"
+}
 function carregar() {
+    verificarNivel()
+
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Veiculos', options2)
         .then(response => response.json())
@@ -140,8 +171,3 @@ search_btn.addEventListener('click', () => {
         }
     }
 })
-// INFOS DO USUARIO 
-const nome = document.querySelector(".nameUser");
-var userinfo = JSON.parse(localStorage.getItem("info"));
-
-nome.innerHTML = userinfo.name;

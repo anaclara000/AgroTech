@@ -4,6 +4,16 @@
     --main-color: white;
 }
 
+.bx {
+    color: #da9732;
+    cursor: pointer;
+}
+
+.nivelUser {
+    display: none;
+    visibility: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -186,6 +196,12 @@ footer,
 .grafic2,
 .graftic2,
 .grafic3,
-.grafic4 {
+.grafic4,
+.grafic5 {
     width: 18vw;
+}
+
+.grafic6 {
+    width: 25vw;
+    height: 45vh;
 }

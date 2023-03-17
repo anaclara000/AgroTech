@@ -35,7 +35,7 @@ const createItems = async (req, res) => {
         senha: "jadelinda",
         CPF: "123.117.416-16",
         nivel: "funcionario",
-        ativo: "sim"
+        ativoUser: "sim",
       },
       {
         nome: "Leo Santana",
@@ -43,7 +43,7 @@ const createItems = async (req, res) => {
         senha: "leozinho",
         CPF: "401.338.217-22",
         nivel: "funcionario",
-        ativo: "sim"
+        ativoUser: "sim",
       },
       {
         nome: "Reenye Fulano",
@@ -51,7 +51,7 @@ const createItems = async (req, res) => {
         senha: "renas",
         CPF: "407.766.614-77",
         nivel: "gerente",
-        ativo: "sim"
+        ativoUser: "sim",
       },
 
     ],

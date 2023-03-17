@@ -11,22 +11,22 @@ datasource db {
 }
 
 model Usuario {
-  id    Int    @id @default(autoincrement())
-  nome  String
-  email String @unique
-  senha String
-  CPF   String @unique
-  nivel String
-  ativo String
+  id        Int    @id @default(autoincrement())
+  nome      String
+  email     String @unique
+  senha     String
+  CPF       String @unique
+  nivel     String
+  ativoUser String
 }
 
 model Motorista {
-  id         Int        @id @default(autoincrement())
-  nome       String
-  CNH        Int
-  disponivel String
-  ativo      String
-  operacao   Operacao[]
+  id              Int        @id @default(autoincrement())
+  nome            String
+  CNH             Int
+  disponivel      String
+  statusMotorista String
+  operacao        Operacao[]
 }
 
 model Veiculos {

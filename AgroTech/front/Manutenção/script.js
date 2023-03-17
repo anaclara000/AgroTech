@@ -1,10 +1,51 @@
 
 var veiculo = []
 
+const nome = document.querySelector(".nameUser");
+const nivel = document.querySelector(".nivelUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
 
+nome.innerHTML = userinfo.name;
+nivel.innerHTML = userinfo.nivel;
+
+function verificarNivel() {
+    if (document.querySelector(".nivelUser").innerHTML == "funcionario") {
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.add('model')
+
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.remove('model')
+
+        var aa = document.querySelector('.aa')
+        aa.classList.add('model')
+
+        var bb = document.querySelector('.bb')
+        bb.classList.add('model')
+
+    } else {
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.add('model')
+
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.remove('model')
+
+        var aa = document.querySelector('.aa')
+        aa.classList.remove('model')
+
+        var bb = document.querySelector('.bb')
+        bb.classList.remove('model')
+
+    }
+
+}
+function logOut() {
+    window.localStorage.removeItem("info")
+    window.location.href = "../Login"
+}
 
 
 function carregar() {
+    verificarNivel()
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Manutencao', options2)
         .then(response => response.json())

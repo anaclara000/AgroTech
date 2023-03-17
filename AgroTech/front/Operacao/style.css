@@ -4,6 +4,16 @@
     --main-color: white;
 }
 
+.bx {
+    color: #da9732;
+    cursor: pointer;
+}
+
+.nivelUser {
+    display: none;
+    visibility: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;

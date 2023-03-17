@@ -4,8 +4,9 @@ import * as React from 'react'
 import { useState, useEffect } from 'react';
 
 export default function Operacao({ navigation }) {
-    const [motorista, setmotorista] = useState([]);
     const [Operacao, setOperacao] = useState([]);
+    const [Motorista, setMotorista] = useState([]);
+    const [Veiculo, setVeiculo] = useState([]);
     const [OperacaoFiltrada, setOperacaoFiltrada] = useState([]);
     const [tipoSelecionado, setTipoSelecionado] = useState('');
     const [statusSelecionado, setStatusSelecionado] = useState('');
@@ -23,11 +24,70 @@ export default function Operacao({ navigation }) {
     }, []);
 
 
+    useEffect(() => {
+        const options = { method: 'GET' };
+        fetch('http://localhost:3000/Motorista', options)
+            .then(res => res.json())
+            .then(data => {
+                setMotorista(data);
+
+            });
+    }, []);
+
+    useEffect(() => {
+        const options = { method: 'GET' };
+        fetch('http://localhost:3000/Veiculos', options)
+            .then(res => res.json())
+            .then(data => {
+                setVeiculo(data);
+
+            });
+    }, []);
 
 
+    const finalizar = (id) => {
+
+        const event = new Date()
+        let info = JSON.stringify({
+            "dataFim": event.toISOString(),
+            "status": "Finalizada",
+        })
+
+        fetch('http://localhost:3000/Operacao/idUp/' + id, {
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": info
+        })
+            .then(response => response.json())
+            .then(resp => {
+                let data = JSON.stringify({
+                    "status": "Disponível",
+                })
+
+                fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": data
+                })
+                    .then(response => response.json())
+                    .then(resp => {
+                        window.location.reload()
+                    })
+            })
+    }
+
+    function voltar() {
+        window.localStorage.removeItem('info')
+        navigation.navigate("Login")
+    }
 
 
-
+    var veiculo = ''
+    var nome = ''
     const datafim = "-";
 
     const handleStatusChange = (status) => {
@@ -45,7 +105,12 @@ export default function Operacao({ navigation }) {
     return (
         <View >
             <View style={styles.nome}>
+                <TouchableOpacity onPress={() => { voltar() }}>
+                    <Text style={{ color: '#da9732', backgroundColor: '#fafafa', width: '100%', textAlign: 'center', justifyContent: 'center', }}>Sair</Text>
+                </TouchableOpacity>
+
                 <Text style={styles.color_name}>AgroTech</Text>
+
             </View>
             <View style={styles.subtitle}>
                 <View style={styles.subtitle_imgs}>
@@ -81,7 +146,7 @@ export default function Operacao({ navigation }) {
                     </Picker>
                 </View>
             </View>
-           
+
             {OperacaoFiltrada.length > 0 ? (
                 OperacaoFiltrada.map((m, index) => {
                     if (m.dataFim == null) {
@@ -90,70 +155,120 @@ export default function Operacao({ navigation }) {
                     } else {
                         m.dataFim.slice(0, 10)
                     }
-                    return (
-                        <View style={styles.container} key={index}>
-                            <View style={styles.card}>
-                                <Text style={{
-                                    color: 'white',
-                                    textAlign: 'center',
-                                    backgroundColor: '#da9732',
-                                    padding: '10px'
-                                }}>{m.descricao}</Text>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center'
-                                }}>
-                                    {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
+                    Motorista.map((moto, index) => {
+                        if (moto.id == m.id_Motorista) {
+                            nome = moto.nome
 
-                                    <View>
-                                        <Text>Motorista: {m.id}</Text>
-                                        <Text>Veiculo: {m.idVeiculo}</Text>
-                                    </View>
+                        }
+                    })
+                    Veiculo.map((vei, index) => {
+                        if (vei.id == m.idVeiculo) {
+                            veiculo = vei.tipo + " | " + vei.placa
 
-                                    <View>
-                                        <Text>Data Inicio: {m.dataInicio.slice(0, 10)}</Text>
-                                        <Text>Data fim: {m.dataFim.slice(0, 10)}</Text>
-                                    </View>
-                                </View>
-                                <View style={{
-                                    justifyContent: 'space-around',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}>
-                                    <Picker style={{
+                        }
+
+
+                    })
+                    if (m.dataFim == "-") {
+                        return (
+                            <View style={styles.container} key={index}>
+                                <View style={styles.card}>
+                                    <Text style={{
+                                        color: 'white',
                                         textAlign: 'center',
-                                        borderColor: '#da9732',
-                                        width: '50%'
-                                    }}
-                                    // selectedValue={statusSelecionado}
-                                    // onValueChange={(itemValue) => handleStatusChange(itemValue)}
-
-                                    >
-                                        <Picker.Item label="Selecione a ação" value="" />
-                                        <Picker.Item label="Finalizar" value="Cancelar" />
-                                        <Picker.Item label="Cancelar" value="Cancelada" />
-                                    </Picker>
-
-                                    <TouchableOpacity style={{
                                         backgroundColor: '#da9732',
-                                        padding: '3px',
-                                        width: '100px',
-                                        fontFamily: 'Arial',
+                                        padding: '10px',
+                                        alignItems: 'center',
                                         textAlign: 'center',
-                                        color: 'white'
-                                    }}>Salvar</TouchableOpacity>
-                                </View>
+                                    }}>{m.descricao}<Image source={m.status == "Em operação" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '10px' }} /></Text>
+                                    <View style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center'
+                                    }}>
 
+                                        <View>
+                                            <Text>Motorista:{nome}</Text>
+                                            <Text>Veiculo: {veiculo}</Text>
+                                        </View>
+
+                                        <View>
+                                            <Text>Data Inicio: {m.dataInicio.slice(0, 10)}</Text>
+                                            <Text>Data fim: {m.dataFim.slice(0, 10)}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{
+                                        justifyContent: 'space-around',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                    }}>
+
+                                        <TouchableOpacity onPress={() => { finalizar(m.id) }} style={{
+                                            backgroundColor: '#da9732',
+                                            padding: '3px',
+                                            width: '100px',
+                                            fontFamily: 'Arial',
+                                            textAlign: 'center',
+                                            color: 'white'
+
+                                        }}><Text style={{ color: 'white' }}>Finalizar</Text></TouchableOpacity>
+                                    </View>
+
+                                </View>
                             </View>
-                        </View>
-                    );
+                        );
+                    } else {
+                        return (
+
+
+                            <View style={styles.container} key={index}>
+                                <View style={styles.card}>
+                                    <Text style={{
+                                        color: 'white',
+                                        textAlign: 'center',
+                                        backgroundColor: '#da9732',
+                                        padding: '10px',
+                                        alignItems: 'center',
+                                        textAlign: 'center',
+
+                                    }}>{m.descricao}<Image source={m.status == "Em operação" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '10px' }} />
+                                    </Text>
+                                    <View style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center'
+                                    }}>
+                                        {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
+
+                                        <View>
+                                            <Text>Motorista: {nome}</Text>
+                                            <Text>Veiculo: {veiculo}</Text>
+                                        </View>
+
+                                        <View>
+                                            <Text>Data Inicio: {m.dataInicio.slice(0, 10)}</Text>
+                                            <Text>Data fim: {m.dataFim.slice(0, 10)}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{
+                                        justifyContent: 'space-around',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                    }}>
+
+                                    </View>
+
+                                </View>
+                            </View>
+                        );
+                    }
                 })
             ) : (
                 <Text>Nenhuma operação encontrada.</Text>
             )}
 
         </View>
+
     );
 
 

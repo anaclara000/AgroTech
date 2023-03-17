@@ -54,7 +54,7 @@
                     <a href="../Dashboard/index.html"><span class="menu">DashBoard</span></a>
                 </div>
                 <div class="logOut items">
-                    <i class='bx bxs-log-out-circle'></i><span>Sair </span>
+                    <i class='bx bxs-log-out-circle' onClick="logOut()"></i><span>Sair </span>
                 </div>
             </div>
         </header>
@@ -202,7 +202,8 @@
                         <span class="descManitance"></span>
 
                         <div class="btn_manitence model">
-                            <button class="done" onClick="finalizarManutencao(this)">Finalizar manutenção</button>
+                            <button id="done" class="done" onClick="finalizarManutencao(this)">Finalizar
+                                manutenção</button>
                         </div>
 
                     </div>
@@ -220,6 +221,7 @@
             <div class="items_last">
                 <div class="user">
                     <i class='bx bxs-user-circle'></i>
+                    <span class="nivelUser"></span>
                     <div class="cont_user_name"><span class="nameUser"></span><span>, bem vindo de volta!</span></div>
                 </div>
             </div>
@@ -227,9 +229,13 @@
                 <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
             </div>
 
-            <div>
+            <div class="criarCoisas">
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
             </div>
+            <div class="funcionarioPainel">
+                <i class='bx bxs-florist'></i>
+            </div>
+
         </div>
     </div>
 

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
-    <title>Operação</title>
+    <title>Dashboard</title>
 </head>
 
 <body onLoad="carregar()">
@@ -40,6 +40,10 @@
                         <span>Manutenções por mês</span>
                         <canvas id="myChart"></canvas>
                     </div>
+                    <div class="grafic6">
+                        <span>Funcionários ativos</span>
+                        <canvas id="myGraficUser"></canvas>
+                    </div>
                     <div class="grafic2">
                         <span>Veiculos em manutenção</span>
                         <canvas id="myGrafic"></canvas>
@@ -52,6 +56,10 @@
                         <span>Veiculos em operação</span>
                         <canvas id="myGraficOp"></canvas>
                     </div>
+                    <!-- <div class="grafic5">
+                        <span>Motoristas em operação</span>
+                        <canvas id="myGraficMoto"></canvas>
+                    </div> -->
 
 
 
@@ -67,6 +75,7 @@
             <div class="items_last">
                 <div class="user">
                     <i class='bx bxs-user-circle'></i>
+                    <span class="nivelUser"></span>
                     <div class="cont_user_name"><span class="nameUser"></span><span>, bem vindo de volta!</span></div>
                 </div>
             </div>
@@ -74,8 +83,11 @@
                     <span>Se não puder fazer tudo, faça tudo que puder </span> <i class='bx bxs-heart-circle'></i>
                 </div> -->
 
-            <div>
+            <div class="criarCoisas">
                 <i class='bx bxs-plus-circle' onClick="abrirModalCreate()"></i>
+            </div>
+            <div class="funcionarioPainel">
+                <i class='bx bxs-florist'></i>
             </div>
         </div>
     </div>

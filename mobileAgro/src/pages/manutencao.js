@@ -33,9 +33,51 @@ export default function Manutencao({ navigation }) {
       });
   }, []);
 
+  function voltar() {
+    window.localStorage.removeItem('info')
+    navigation.navigate("Login")
+  }
+
+
+  const finalizar = (id) => {
+
+    const event = new Date()
+    let info = JSON.stringify({
+      "data_fim": event.toISOString(),
+      "status": "Finalizada",
+    })
+
+    fetch('http://localhost:3000/Manutencao/idUp/' + id, {
+      "method": "PUT",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": info
+    })
+      .then(response => response.json())
+      .then(resp => {
+        let data = JSON.stringify({
+          "status": "Disponível",
+        })
+
+        fetch('http://localhost:3000/Veiculos/idUp/' + resp.id_Veiculo, {
+          "method": "PUT",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": data
+        })
+          .then(response => response.json())
+          .then(resp => {
+            window.location.reload()
+          })
+      })
+  }
+
+
   const tipos = ["Carga", "Visita", "Venda"];
   const dataFim = "-";
-const veri = ""
+  const veri = ""
   const handleTipoChange = (tipo) => {
     setTipoSelecionado(tipo);
     let manutencoesFiltradas = Manutencao;
@@ -63,7 +105,12 @@ const veri = ""
   return (
     <View >
       <View style={styles.nome}>
+        <TouchableOpacity onPress={() => { voltar() }}>
+          <Text style={{ color: '#da9732', backgroundColor: '#fafafa', width: '100%', textAlign: 'center', justifyContent: 'center', }}>Sair</Text>
+        </TouchableOpacity>
+
         <Text style={styles.color_name}>AgroTech</Text>
+
       </View>
       <View style={styles.subtitle}>
         <View style={styles.subtitle_imgs}>
@@ -121,64 +168,98 @@ const veri = ""
           } else {
             m.data_fim.slice(0, 10)
           }
-         
-          return (
-            <View style={styles.container} key={index}>
-              <View style={styles.card}>
-                <Text style={{
-                  color: 'white',
-                  textAlign: 'center',
-                  backgroundColor: 'green'
-                }}>Valor: R${m.valor}</Text>
-                <View style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                  {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
 
-                  <View>
-                    <Text>Descrição: {m.descricao}</Text>
-                    <Text>Veiculo: {m.veiculos.tipo + " | " + m.veiculos.placa}</Text>
+
+
+          if (m.data_fim == "-") {
+
+
+            return (
+              <View style={styles.container} key={index}>
+                <View style={styles.card}>
+                  <Text style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    backgroundColor: 'green'
+                  }}>Valor: R${m.valor}</Text>
+                  <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
+
+                    <View>
+                      <Text>Descrição: {m.descricao} <Image source={m.status == "Em operação" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '10px' }} /></Text>
+                      <Text>Veiculo: {m.veiculos.tipo + " | " + m.veiculos.placa}</Text>
+                    </View>
+
+                    <View>
+                      <Text>Data Inicio: {m.data_inicio.slice(0, 10)}</Text>
+                      <Text>Data fim: {m.data_fim.slice(0, 10)}</Text>
+                    </View>
+                  </View>
+                  <View style={{
+                    justifyContent: 'space-around',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+
+
+                    <TouchableOpacity onPress={() => { finalizar(m.id) }} style={{
+                      backgroundColor: '#da9732',
+                      padding: '3px',
+                      width: '100px',
+                      fontFamily: 'Arial',
+                      textAlign: 'center',
+                      color: 'white'
+
+                    }}><Text>Finalizar</Text></TouchableOpacity>
                   </View>
 
-                  <View>
-                    <Text>Data Inicio: {m.data_inicio.slice(0, 10)}</Text>
-                    <Text>Data fim: {m.data_fim.slice(0, 10)}</Text>
-                  </View>
                 </View>
-                <View style={{
-                  justifyContent: 'space-around',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                  <Picker style={{
-                    textAlign: 'center',
-                    borderColor: '#da9732',
-                    width: '50%'
-                  }}
-                  // selectedValue={statusSelecionado}
-                  // onValueChange={(itemValue) => handleStatusChange(itemValue)}
-
-                  >
-                    <Picker.Item label="Selecione a ação" value="" />
-                    <Picker.Item label="Finalizar" value="Cancelar" />
-                    <Picker.Item label="Cancelar" value="Cancelada" />
-                  </Picker>
-
-                  <TouchableOpacity style={{
-                    backgroundColor: '#da9732',
-                    padding: '3px',
-                    width: '100px',
-                    fontFamily: 'Arial',
-                    textAlign: 'center',
-                    color: 'white'
-                  }}>Salvar</TouchableOpacity>
-                </View>
-
               </View>
-            </View>
-          );
+            );
+          } else {
+            return (
+              <View style={styles.container} key={index}>
+                <View style={styles.card}>
+                  <Text style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    backgroundColor: 'green'
+                  }}>Valor: R${m.valor}</Text>
+                  <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
+
+                    <View>
+                      <Text>Descrição: {m.descricao}<Image source={m.status == "Em operação" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '5px' }} /></Text>
+                      <Text>Veiculo: {m.veiculos.tipo + " | " + m.veiculos.placa}</Text>
+                    </View>
+
+                    <View>
+                      <Text>Data Inicio: {m.data_inicio.slice(0, 10)}</Text>
+                      <Text>Data fim: {m.data_fim.slice(0, 10)}</Text>
+                    </View>
+                  </View>
+                  <View style={{
+                    justifyContent: 'space-around',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+
+
+
+                  </View>
+
+                </View>
+              </View>
+            );
+          }
         })
       ) : (
         <Text>Nenhuma manutenção encontrada.</Text>
@@ -210,7 +291,7 @@ const styles = StyleSheet.create({
   nome: {
     width: '100%',
     textAlign: 'center',
-    padding: '5px'
+    padding: '5px',
 
   },
   color_name: {

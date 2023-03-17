@@ -14,23 +14,24 @@ const createItems = async (req, res) => {
     let operacao = await prisma.operacao.createMany({
         data: [
             {
-                id_Motorista: 1, 
+                id_Motorista: 1,
                 idVeiculo: 2,
-                descricao: "Levando trigo em Sorocaba",  
+                descricao: "Levando trigo em Sorocaba",
                 status: "Em operação",
             },
             {
-                id_Motorista: 2, 
+                id_Motorista: 2,
                 idVeiculo: 4,
                 descricao: "Visita a empresa",
-                status: "Em operação",   
-            },
-            {
-                id_Motorista: 3, 
-                idVeiculo: 3,
-                descricao: "Levando milho em Jundiaí",  
                 status: "Em operação",
             },
+            {
+                id_Motorista: 3,
+                idVeiculo: 3,
+                descricao: "Levando milho em Jundiaí",
+                status: "Em operação",
+            },
+
 
         ],
         skipDuplicates: true, // Skip 'Bobo'
@@ -97,5 +98,5 @@ module.exports = {
     update,
     remove,
     createItems
-    
+
 }

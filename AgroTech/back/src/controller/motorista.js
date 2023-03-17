@@ -17,25 +17,91 @@ const createItems = async (req, res) => {
                 nome: "Fiuk Carlos",
                 CNH: 17663523146,
                 disponivel: "Indisponível",
-                ativo: "sim"
+                statusMotorista: "sim"
             },
             {
                 nome: "Selena Gomes",
                 CNH: 46293543404,
                 disponivel: "Indisponível",
-                ativo: "sim"
+                statusMotorista: "sim"
             },
             {
                 nome: "Luciano Hulk",
                 CNH: 08279424413,
                 disponivel: "Indisponível",
-                ativo: "sim"
+                statusMotorista: "sim"
             },
             {
                 nome: "Robert Pertenson",
                 CNH: 05354335223,
-                disponivel: "Indisponível",
-                ativo: "nao"
+                disponivel: "Disponível",
+                statusMotorista: "nao"
+            },
+            {
+                nome: "Maria Fernanda",
+                CNH: 93828373212,
+                disponivel: "Disponível",
+                statusMotorista: "sim"
+            },
+            {
+                nome: "José da Silva",
+                CNH: 87364846283,
+                disponivel: "Disponível",
+                statusMotorista: "nao"
+            },
+            {
+                nome: "Carla Souza",
+                CNH: 72636482930,
+                disponivel: "Disponível",
+                statusMotorista: "sim"
+            },
+            {
+                nome: "Lucas Oliveira",
+                CNH: 21938463829,
+                disponivel: "Disponível",
+                statusMotorista: "nao"
+            },
+            {
+                nome: "Mariana Santos",
+                CNH: 36573892733,
+                disponivel: "Disponível",
+                statusMotorista: "sim"
+            },
+            {
+                nome: "Pedro Henrique",
+                CNH: 29485736288,
+                disponivel: "Disponível",
+                statusMotorista: "nao"
+            },
+            {
+                nome: "Fernanda Silva",
+                CNH: 73629384723,
+                disponivel: "Disponível",
+                statusMotorista: "sim"
+            },
+            {
+                nome: "Roberto Souza",
+                CNH: 19483726372,
+                disponivel: "Disponível",
+                statusMotorista: "nao"
+            },
+            {
+                nome: "Luana Oliveira",
+                CNH: 36283746371,
+                disponivel: "Disponível",
+                statusMotorista: "sim"
+            },
+            {
+                nome: "Ricardo Nunes",
+                CNH: 85739273621,
+                disponivel: "Disponível",
+                statusMotorista: "nao"
+            },
+            {
+                nome: "Mariana Costa",
+                CNH: 93287465263,
+                disponivel: "Disponível",
+                statusMotorista: "sim"
             },
 
         ],

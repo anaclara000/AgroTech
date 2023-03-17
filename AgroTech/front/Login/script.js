@@ -27,7 +27,7 @@ function logar() {
             if (data.erro === undefined) {
                 localStorage.setItem('ifuser', JSON.stringify(data))
                 console.log(data)
-                localStorage.setItem("info", JSON.stringify({ "email": data.email, "id": data.uid, "nivel": data.univel, "name": data.uname }));
+                localStorage.setItem("info", JSON.stringify({ "email": data.email, "id": data.uid, "nivel": data.univel, "name": data.uname, }));
 
                 window.location.href = '../Home/index.html'
             } else {

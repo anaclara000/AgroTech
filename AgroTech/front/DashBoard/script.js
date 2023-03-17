@@ -1,4 +1,40 @@
+// INFOS DO USUARIO 
+const nome = document.querySelector(".nameUser");
+const nivel = document.querySelector(".nivelUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
+
+nome.innerHTML = userinfo.name;
+nivel.innerHTML = userinfo.nivel;
+
+function verificarNivel() {
+    if (document.querySelector(".nivelUser").innerHTML == "funcionario") {
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.add('model')
+
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.remove('model')
+
+
+    } else {
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.add('model')
+
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.remove('model')
+
+    }
+
+}
+function logOut() {
+    window.localStorage.removeItem("info")
+    window.location.href = "../Login"
+}
+
+
+
 function carregar() {
+
+    verificarNivel()
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Manutencao', options2)
         .then(response => response.json())
@@ -43,8 +79,8 @@ function carregar() {
                     datasets: [{
                         data: disponivel,
                         backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)'
+                            'rgb(0, 128, 0)',
+                            'rgb(215, 17, 17)'
 
                         ]
                     }]
@@ -69,6 +105,60 @@ function carregar() {
                     labels: ['Cancelado', 'Finalizado', 'Em operação'],
                     datasets: [{
                         data: resultado2,
+                        backgroundColor: [
+                            'rgb(215, 17, 17)',
+                            'rgb(0, 128, 0)',
+                            'rgb(255, 226, 0)'
+                        ]
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 50
+                }
+            });
+
+        });
+
+    const options5 = { method: 'GET' };
+    fetch('http://localhost:3000/Motorista', options5)
+        .then(response => response.json())
+        .then(resp => {
+            motorista = resp;
+            listarUsers();
+            var ctx = document.getElementById('myGraficMoto').getContext('2d');
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Disponível', 'Indiponível'],
+                    datasets: [{
+                        data: resultado3,
+                        backgroundColor: [
+                            'rgb(215, 17, 17)',
+                            'rgb(0, 128, 0)',
+                            'rgb(255, 226, 0)'
+                        ]
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 50
+                }
+            });
+
+        });
+
+    const options6 = { method: 'GET' };
+    fetch('http://localhost:3000/Usuario', options6)
+        .then(response => response.json())
+        .then(resp => {
+            usuario = resp;
+            listarUsers();
+            var ctx = document.getElementById('myGraficUser').getContext('2d');
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ativos', 'Inativos'],
+                    datasets: [{
+                        data: resultado4,
                         backgroundColor: [
                             'rgb(215, 17, 17)',
                             'rgb(0, 128, 0)',
@@ -199,4 +289,45 @@ function listarOperacao() {
         }
     })
 
+}
+
+
+var usuario = []
+var motorista = []
+var resultado3 = [0, 0];
+var resultado4 = [0, 0];
+function listarUsers() {
+
+    motorista.forEach(info => {
+
+        if (info.disponivel == "Disponível") {
+            resultado3[0]++
+
+        } else {
+            resultado3[1]++
+
+
+        }
+
+        if (info.statusMotorista == "sim") {
+            resultado4[0]++
+        } else {
+            resultado4[1]++
+
+        }
+
+    })
+
+    usuario.forEach(info => {
+
+        if (info.ativoUser == "sim") {
+            resultado4[0]++
+
+        } else {
+            resultado4[1]++
+
+
+        }
+
+    })
 }

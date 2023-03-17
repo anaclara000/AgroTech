@@ -1,5 +1,50 @@
 
+var veiculo = []
+
+const nome = document.querySelector(".nameUser");
+const nivel = document.querySelector(".nivelUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
+
+nome.innerHTML = userinfo.name;
+nivel.innerHTML = userinfo.nivel;
+
+function verificarNivel() {
+    if (document.querySelector(".nivelUser").innerHTML == "funcionario") {
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.add('model')
+
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.remove('model')
+
+        var aa = document.querySelector('.aa')
+        aa.classList.add('model')
+
+        var bb = document.querySelector('.bb')
+        bb.classList.add('model')
+
+    } else {
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.add('model')
+
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.remove('model')
+
+        var aa = document.querySelector('.aa')
+        aa.classList.remove('model')
+
+        var bb = document.querySelector('.bb')
+        bb.classList.remove('model')
+
+    }
+
+}
+function logOut() {
+    window.localStorage.removeItem("info")
+    window.location.href = "../Login"
+}
+
 function carregar() {
+    verificarNivel()
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Operacao', options2)
         .then(response => response.json())
@@ -509,7 +554,22 @@ function atualizar() {
         })
             .then(response => response.json())
             .then(resp => {
-                window.location.reload()
+                let data = JSON.stringify({
+                    "status": "Disponível",
+                })
+
+
+                fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": data
+                })
+                    .then(response => response.json())
+                    .then(resp => {
+                        window.location.reload()
+                    })
             })
 
     }
@@ -549,7 +609,22 @@ function atualizar() {
         })
             .then(response => response.json())
             .then(resp => {
-                window.location.reload()
+                let data = JSON.stringify({
+                    "status": "Disponível",
+                })
+
+
+                fetch('http://localhost:3000/Veiculos/idUp/' + resp.idVeiculo, {
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": data
+                })
+                    .then(response => response.json())
+                    .then(resp => {
+                        window.location.reload()
+                    })
             })
     }
 }
@@ -584,8 +659,3 @@ search_btn.addEventListener('click', () => {
         }
     }
 })
-// INFOS DO USUARIO 
-const nome = document.querySelector(".nameUser");
-var userinfo = JSON.parse(localStorage.getItem("info"));
-
-nome.innerHTML = userinfo.name;

@@ -1,4 +1,49 @@
+// INFOS DO USUARIO 
+const nome = document.querySelector(".nameUser");
+const nivel = document.querySelector(".nivelUser");
+var userinfo = JSON.parse(localStorage.getItem("info"));
+
+nome.innerHTML = userinfo.name;
+nivel.innerHTML = userinfo.nivel;
+
+function verificarNivel() {
+    if (document.querySelector(".nivelUser").innerHTML == "funcionario") {
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.add('model')
+
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.remove('model')
+
+        var done = document.querySelector('.done')
+        done.classList.add('model')
+
+        var done2 = document.querySelector('#done')
+        done2.classList.add('model')
+
+
+
+    } else {
+        var fun = document.querySelector('.funcionarioPainel')
+        fun.classList.add('model')
+
+        var nivelUser = document.querySelector('.criarCoisas')
+        nivelUser.classList.remove('model')
+
+        var done = document.querySelector('.done')
+        done.classList.remove('model')
+
+        var done2 = document.querySelector('#done')
+        done2.classList.remove('model')
+    }
+
+}
+function logOut() {
+    window.localStorage.removeItem("info")
+    window.location.href = "../Login"
+}
 function carregar() {
+
+    verificarNivel()
 
     const options1 = { method: 'GET' };
     fetch('http://localhost:3000/Operacao', options1)
@@ -374,8 +419,8 @@ function finalizarManutencao(e) {
                         "status": "Disponível"
                     })
 
-                    
-            
+
+
                     fetch('http://localhost:3000/Veiculos/idUp/' + vei.id, {
                         "method": "PUT",
                         "headers": {
@@ -385,12 +430,12 @@ function finalizarManutencao(e) {
                     })
                         .then(response => response.json())
                         .then(resp => {
-                            
-        
+
+
                         })
 
                 })
-              
+
             fetch('http://localhost:3000/Manutencao/idUp/' + idManu, {
                 "method": "PUT",
                 "headers": {
@@ -723,11 +768,7 @@ function cad() {
 }
 
 
-// INFOS DO USUARIO 
-const nome = document.querySelector(".nameUser");
-var userinfo = JSON.parse(localStorage.getItem("info"));
 
-nome.innerHTML = userinfo.name;
 
 
 
