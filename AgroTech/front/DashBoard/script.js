@@ -158,6 +158,7 @@ function carregar() {
                 data: {
                     labels: ['Ativos', 'Inativos'],
                     datasets: [{
+                        label: ['Funcionários'],
                         data: resultado4,
                         backgroundColor: [
                             'rgb(215, 17, 17)',

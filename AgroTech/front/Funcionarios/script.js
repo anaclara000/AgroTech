@@ -97,8 +97,8 @@ function listarMotorista() {
 
         var lista = listMotorista.cloneNode(true);
         lista.classList.remove('model')
-        lista.querySelector('#id').innerHTML = m.id;
-        lista.querySelector('#nome').innerHTML = m.nome;
+        lista.querySelector('#idMoto').innerHTML = m.id;
+        lista.querySelector('#nomemoto').innerHTML = m.nome;
         lista.querySelector('#cnh').innerHTML = m.CNH;
 
         if (m.statusMotorista == "nao") {
@@ -121,15 +121,6 @@ function listarMotorista() {
 
 
         tbodyMotorista.appendChild(lista)
-
-        const options = { method: 'GET' };
-
-        fetch('http://localhost:3000/Usuario/idUm/' + m.id, options)
-            .then(response => response.json())
-            .then(response => {
-                lista.querySelector('#email').innerHTML = response.email;
-                lista.querySelector('#cpf').innerHTML = response.CPF;
-            })
 
     })
 

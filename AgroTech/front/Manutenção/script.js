@@ -45,6 +45,16 @@ function logOut() {
 
 
 function carregar() {
+    var hoje = new Date();
+    var hora = hoje.getHours();
+    var minutos = hoje.getMinutes();
+    var segundos = hoje.getSeconds();
+    horaAtual = hora + ':' + minutos + ":" + segundos;
+    document.querySelector('#data').value = horaAtual
+
+    let inptData = document.querySelector('#data')
+    inptData.disabled = true
+
     verificarNivel()
     const options2 = { method: 'GET' };
     fetch('http://localhost:3000/Manutencao', options2)
@@ -64,15 +74,6 @@ function carregar() {
 
     somarValores()
 
-    var hoje = new Date();
-    var hora = hoje.getHours();
-    var minutos = hoje.getMinutes();
-    var segundos = hoje.getSeconds();
-    horaAtual = hora + ':' + minutos + ":" + segundos;
-    document.querySelector('#data').value = horaAtual
-
-    let inptData = document.querySelector('#data')
-    inptData.disabled = true
 
 
     var ctx = document.getElementById('myGrafic').getContext('2d');

@@ -1,5 +1,6 @@
 
 var veiculo = []
+var motorista = []
 
 const nome = document.querySelector(".nameUser");
 const nivel = document.querySelector(".nivelUser");
@@ -53,13 +54,13 @@ function carregar() {
             listarOperacao();
         });
 
-    // const options3 = { method: 'GET' };
-    // fetch('http://localhost:3000/Motorista', options3)
-    //     .then(response => response.json())
-    //     .then(resp => {
-    //         motorista = resp;
-    //         listarMotorista();
-    //     });
+    const options3 = { method: 'GET' };
+    fetch('http://localhost:3000/Motorista', options3)
+        .then(response => response.json())
+        .then(resp => {
+            motorista = resp;
+            listarMotorista();
+        });
     const options4 = { method: 'GET' };
     fetch('http://localhost:3000/Veiculos', options4)
         .then(response => response.json())
@@ -233,6 +234,19 @@ function listarVeiculo() {
             op.value = v.id
             document.querySelector(".select_veiculo").appendChild(op)
             document.querySelector(".select_veiculo2").appendChild(op.cloneNode(true))
+        }
+    })
+
+}
+function listarMotorista() {
+
+    motorista.forEach(m => {
+        if (m.disponivel == "Disponível") {
+            var op2 = document.createElement("option")
+            op2.innerHTML = m.nome
+            op2.value = m.id
+            document.querySelector("#select_driver").appendChild(op2)
+
         }
     })
 
