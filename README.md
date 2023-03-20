@@ -17,7 +17,6 @@ instalar as bibliotecas, Async Storage, CryptoJS, NavigationContainer, createNat
 expo start --web
 
 Estrutura de pastas
-./back
+./back e frot
 ./docs
-./front
 ./app
