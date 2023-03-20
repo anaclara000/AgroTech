@@ -111,6 +111,9 @@ function listarOperacao() {
             lista.querySelector("#dataFim").innerHTML = "-";
             lista.querySelector(".img_icon").src = "../../assets/Camarelo.png"
         }
+        if (info.status == 'Cancelada') {
+            lista.querySelector(".img_icon").src = "../../assets/Cvermelho.png"
+        }
         tbodyOperacao.appendChild(lista)
 
 
@@ -133,6 +136,12 @@ function listarOperacao() {
 
 
     })
+}
+
+
+function fecharModalAviso() {
+    var situacao2 = document.querySelector('.situacao2')
+    situacao2.classList.add('model')
 }
 
 

@@ -667,7 +667,7 @@ function cad() {
                         })
                             .then(response => response.json())
                             .then(resp => {
-                                alert("foi")
+
                                 window.location.reload()
                             })
 
@@ -751,7 +751,7 @@ function cad() {
                             .then(response => response.json())
                             .then(resp => {
 
-                                alert("foi")
+
                                 window.location.reload()
                             })
 

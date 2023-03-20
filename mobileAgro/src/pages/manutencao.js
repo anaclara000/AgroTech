@@ -190,7 +190,7 @@ export default function Manutencao({ navigation }) {
                     {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
 
                     <View>
-                      <Text>Descrição: {m.descricao} <Image source={m.status == "Em operação" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '10px' }} /></Text>
+                      <Text>Descrição: {m.descricao} <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '10px' }} /></Text>
                       <Text>Veiculo: {m.veiculos.tipo + " | " + m.veiculos.placa}</Text>
                     </View>
 
@@ -214,7 +214,7 @@ export default function Manutencao({ navigation }) {
                       textAlign: 'center',
                       color: 'white'
 
-                    }}><Text>Finalizar</Text></TouchableOpacity>
+                    }}><Text style={{ color: 'white' }}>Finalizar</Text></TouchableOpacity>
                   </View>
 
                 </View>
@@ -237,7 +237,7 @@ export default function Manutencao({ navigation }) {
                     {/* <Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 20, height: 20 }} /> */}
 
                     <View>
-                      <Text>Descrição: {m.descricao}<Image source={m.status == "Em operação" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '5px' }} /></Text>
+                      <Text>Descrição: {m.descricao}<Image source={m.status == "Em manutenção" ? require('../../assets/Camarelo.png') : (m.status == "Cancelada" ? require('../../assets/Cvermelho.png') : require('../../assets/Cverde.png'))} style={{ width: 13, height: 13, marginLeft: '5px' }} /></Text>
                       <Text>Veiculo: {m.veiculos.tipo + " | " + m.veiculos.placa}</Text>
                     </View>
 
@@ -309,8 +309,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   card: {
-
-    borderRadius: '10px',
     width: '100%',
     borderColor: '#da9732',
     borderWidth: 1,

@@ -68,13 +68,15 @@ export default function login({ navigation }) {
 
                 console.log(data.erro);
 
-                if (data.erro === undefined) {
+                if (data.erro === undefined && data.status != "funcionario") {
                     console.log(data)
                     localStorage.setItem("info", JSON.stringify({ "id_user": data.uid, "nome": data.uname, "token": data.token }));
 
 
                     navigation.navigate("MyTabs")
 
+                } else {
+                    console.log("Não permitido")
                 }
             })
     }
